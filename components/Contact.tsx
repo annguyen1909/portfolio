@@ -66,7 +66,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-800/50">
+    <section id="contact" className="py-20 bg-black">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -93,7 +93,7 @@ const Contact = () => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="glass-effect rounded-2xl p-8 card-glow">
+            <div className="bg-[#1b1b1b] rounded-none p-8 card-glow">
               <h3 className="text-2xl font-bold mb-6 gradient-text">Contact Information</h3>
               
               <div className="space-y-6">
@@ -105,14 +105,14 @@ const Contact = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ scale: 1.02 }}
-                    className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-xl hover:bg-gray-700/50 transition-all duration-300 group"
+                    className="flex items-center space-x-4 p-4 bg-[#131313]/90 border border-[#3d3d3d] hover:border-[#6b6b6b] rounded-none hover:bg-[#020202] transition-all duration-300 group"
                   >
-                    <div className={`p-3 bg-gradient-to-r ${info.color} rounded-lg`}>
+                    <div className={`p-2 rounded-none`}>
                       <info.icon className="text-white" size={24} />
                     </div>
                     <div>
                       <p className="text-sm text-gray-400 group-hover:text-gray-300">{info.label}</p>
-                      <p className="text-white font-medium group-hover:text-blue-400 transition-colors">
+                      <p className="text-white font-medium group-hover:text-white transition-colors">
                         {info.value}
                       </p>
                     </div>
@@ -127,7 +127,7 @@ const Contact = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
               viewport={{ once: true }}
-              className="glass-effect rounded-2xl p-8 card-glow"
+              className="bg-[#1b1b1b] rounded-none p-8 card-glow"
             >
               <h3 className="text-xl font-bold mb-6 gradient-text">Connect With Me</h3>
               <div className="flex space-x-4">
@@ -141,7 +141,7 @@ const Contact = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.4 + index * 0.1 }}
                     whileHover={{ scale: 1.1 }}
-                    className={`p-4 bg-gray-800 rounded-xl ${social.color} transition-all duration-300 border border-gray-700 hover:border-blue-400`}
+                    className={`p-4 bg-[#131313] hover:bg-[#020202] rounded-none transition-all duration-300 border border-[#3d3d3d] hover:border-[#6b6b6b]`}
                   >
                     <social.icon size={24} />
                   </motion.a>
@@ -155,24 +155,24 @@ const Contact = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
               viewport={{ once: true }}
-              className="glass-effect rounded-2xl p-8 card-glow"
+              className="bg-[#1b1b1b] rounded-none p-8 card-glow"
             >
               <h3 className="text-xl font-bold mb-4 gradient-text">Why Work With Me?</h3>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
                   <span>Fast and reliable delivery</span>
                 </li>
                 <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
                   <span>Modern tech stack expertise</span>
                 </li>
                 <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
                   <span>User-focused solutions</span>
                 </li>
                 <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
                   <span>Excellent communication</span>
                 </li>
               </ul>
@@ -185,7 +185,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="glass-effect rounded-2xl p-8 card-glow"
+            className="bg-[#1b1b1b] rounded-none p-8 card-glow"
           >
             <h3 className="text-2xl font-bold mb-6 gradient-text">Send Message</h3>
             
@@ -207,7 +207,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
+                    className="w-full px-4 py-3 bg-[#131313] border border-[#3d3d3d] rounded-none text-white placeholder-gray-400 focus:outline-none focus:border-[#3d3d3d] transition-colors"
                     placeholder="Your full name"
                   />
                 </motion.div>
@@ -228,7 +228,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
+                    className="w-full px-4 py-3 bg-[#131313] border border-[#3d3d3d] rounded-none text-white placeholder-gray-400 focus:outline-none focus:border-[#3d3d3d] transition-colors"
                     placeholder="your.email@example.com"
                   />
                 </motion.div>
@@ -250,7 +250,7 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
+                  className="w-full px-4 py-3 bg-[#131313] border border-[#3d3d3d] rounded-none text-white placeholder-gray-400 focus:outline-none focus:border-[#3d3d3d] transition-colors"
                   placeholder="Project inquiry, collaboration, etc."
                 />
               </motion.div>
@@ -271,7 +271,7 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-[#131313] border border-[#3d3d3d] rounded-none text-white placeholder-gray-400 focus:outline-none focus:border-[#3d3d3d] transition-colors resize-none"
                   placeholder="Tell me about your project, ideas, or any questions you have..."
                 />
               </motion.div>
@@ -283,9 +283,8 @@ const Contact = () => {
                 transition={{ delay: 0.6 }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full flex items-center justify-center space-x-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                className="w-full flex items-center justify-center space-x-2 px-8 py-4 bg-[#3d3d3d] cursor-pointer text-white font-semibold rounded-none shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                <Send size={20} />
                 <span>Send Message</span>
               </motion.button>
             </form>

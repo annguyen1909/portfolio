@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 
@@ -33,64 +34,50 @@ const Header = () => {
 
   return (
     <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
-        scrolled 
-          ? 'glass-effect backdrop-blur-lg bg-slate-900/80 border-b border-blue-500/20 py-3' 
-          : 'bg-transparent py-6'
+      initial={{ y: -16, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-[100] border-none ${
+        scrolled ? 'bg-[var(--surface)] border-[var(--border)] py-3' : 'bg-black border-[var(--border)] py-6'
       }`}
-      style={{ 
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100 
-      }}
+      style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100 }}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-2xl font-bold gradient-text"
+          transition={{ delay: 0.1 }}
+          className="text-xl md:text-2xl font-heading font-semibold text-[var(--text-strong)] tracking-wide"
         >
-          AN
+          An Nguyen
         </motion.div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8">
-          {navItems.map((item, index) => (
-            <motion.div
-              key={item.name}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * index }}
-            >
-              {item.href.startsWith('#') ? (
-                <a
-                  href={item.href}
-                  className="text-gray-300 hover:text-white transition-colors duration-300 relative group"
-                >
-                  {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"></span>
-                </a>
-              ) : (
+        <nav className="hidden md:flex space-x-6">
+          {navItems.map((item, index) => {
+            const pathname = usePathname();
+            const resolvedHref = item.href.startsWith('#') && pathname !== '/' ? `/${item.href}` : item.href;
+            return (
+              <motion.div
+                key={item.name}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * index }}
+              >
                 <Link
-                  href={item.href}
-                  className="text-gray-300 hover:text-white transition-colors duration-300 relative group"
+                  href={resolvedHref}
+                  className="font-body text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors duration-200"
                 >
                   {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"></span>
                 </Link>
-              )}
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </nav>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-white"
+          className="md:hidden text-[var(--text-strong)]"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -99,33 +86,28 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            className="absolute top-full left-0 right-0 glass-effect backdrop-blur-lg bg-slate-900/90 border-b border-blue-500/20 md:hidden z-[99]"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="absolute top-full left-0 right-0 md:hidden z-[99] bg-[var(--surface)] border-b border-[var(--border)]"
           >
             <nav className="flex flex-col p-6 space-y-4">
-              {navItems.map((item) => (
-                <div key={item.name}>
-                  {item.href.startsWith('#') ? (
-                    <a
-                      href={item.href}
-                      className="text-gray-300 hover:text-white transition-colors duration-300"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {item.name}
-                    </a>
-                  ) : (
+              {navItems.map((item) => {
+                const pathname = usePathname();
+                const resolvedHref = item.href.startsWith('#') && pathname !== '/' ? `/${item.href}` : item.href;
+                return (
+                  <div key={item.name}>
                     <Link
-                      href={item.href}
-                      className="text-gray-300 hover:text-white transition-colors duration-300"
+                      href={resolvedHref}
+                      className="font-body text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors duration-200"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
                     </Link>
-                  )}
-                </div>
-              ))}
+                  </div>
+                );
+              })}
             </nav>
           </motion.div>
         )}

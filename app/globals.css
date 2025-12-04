@@ -1,18 +1,18 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500&family=Montserrat+Alternates:wght@600&display=swap');
 
 :root {
-  --background: #0a0f1c;
-  --foreground: #ffffff;
-  
-  /* Blue/Navy/Purple Color Palette */
-  --primary-blue: #1e40af;
-  --primary-navy: #1e3a8a;
-  --primary-purple: #4c1d95;
-  --accent-cyan: #0891b2;
-  --accent-indigo: #4338ca;
-  --gradient-primary: linear-gradient(135deg, #1e40af 0%, #4c1d95 50%, #1e3a8a 100%);
-  --gradient-secondary: linear-gradient(135deg, #0891b2 0%, #4338ca 100%);
-  --gradient-accent: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #1d4ed8 100%);
+  /* Palette */
+  --background: black; /* dark-blue-900 */
+  --surface: #000000;    /* dark-gray-800 */
+  --text-strong: #E5E7EB; /* neutral-200 */
+  --text-muted: #9CA3AF;  /* neutral-400 */
+  --accent: #3B82F6;      /* bright-blue-500 */
+  --border: none;      /* blue-700 */
+
+  /* Fonts */
+  --font-heading: 'Montserrat Alternates', ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+  --font-body: 'Be Vietnam Pro', ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
 }
 
 /* Performance optimizations */
@@ -36,73 +36,47 @@ header {
 }
 
 body {
-  background: linear-gradient(135deg, #0a0f1c 0%, #1e293b 25%, #1e3a8a 50%, #1e293b 75%, #0a0f1c 100%);
-  background-attachment: fixed;
+  background: var(--background);
   min-height: 100vh;
-  color: var(--foreground);
-  font-family: var(--font-source-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif);
+  color: var(--text-strong);
+  font-family: var(--font-body);
   font-weight: 400;
   line-height: 1.7;
   letter-spacing: 0.01em;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   text-rendering: optimizeLegibility;
-  /* Reduce paint complexity */
   contain: layout style paint;
 }
 
+/* Disable previous gradient text styles to meet rules */
 .gradient-text {
-  background: var(--gradient-accent);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 200%;
-  animation: gradient-shift 3s ease-in-out infinite;
-  /* GPU acceleration */
-  will-change: background-position;
-  transform: translateZ(0);
+  color: var(--text-strong);
+  background: none !important;
 }
 
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
+/* No gradient animations per rules */
 
-.card-glow {
-  box-shadow: 0 0 20px rgba(30, 64, 175, 0.15);
-  transition: box-shadow 0.3s ease;
-  /* GPU acceleration for hover effects */
-  will-change: box-shadow, transform;
-  transform: translateZ(0);
-}
+/* No shadows per rules */
+.card-glow { box-shadow: none; }
 
-.card-glow:hover {
-  box-shadow: 0 0 30px rgba(30, 64, 175, 0.25), 0 0 60px rgba(76, 29, 149, 0.1);
-}
-
+/* No glass/blur. Use solid surfaces and borders */
 .glass-effect {
-  backdrop-filter: blur(12px);
-  background: rgba(10, 15, 28, 0.85);
-  border: 1px solid rgba(30, 64, 175, 0.2);
-  /* Optimize backdrop-filter performance */
-  will-change: backdrop-filter;
-  transform: translateZ(0);
+  backdrop-filter: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
 }
 
 /* Typography Classes */
 .font-heading {
-  font-family: var(--font-poppins);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  text-rendering: optimizeLegibility;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 .font-display {
-  font-family: var(--font-playfair);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
-  text-rendering: optimizeLegibility;
+  font-family: var(--font-heading);
+  font-weight: 600;
 }
 
 .font-creative {
@@ -120,7 +94,7 @@ body {
 }
 
 .font-body {
-  font-family: var(--font-source-sans);
+  font-family: var(--font-body);
   font-weight: 400;
   letter-spacing: 0.01em;
   line-height: 1.7;
@@ -146,40 +120,18 @@ body {
 
 /* Enhanced headings with creative fonts */
 h1 {
-  font-family: var(--font-playfair);
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  line-height: 1.05;
-}
-
-h2 {
-  font-family: var(--font-space-grotesk);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-}
-
-h3 {
-  font-family: var(--font-poppins);
+  font-family: var(--font-heading);
   font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.3;
 }
 
-h4, h5, h6 {
-  font-family: var(--font-poppins);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.4;
-}
+h2 { font-family: var(--font-heading); font-weight: 600; }
+
+h3 { font-family: var(--font-heading); font-weight: 600; }
+
+h4, h5, h6 { font-family: var(--font-heading); font-weight: 600; }
 
 /* Body text with Source Sans Pro */
-p, li, span {
-  font-family: var(--font-source-sans);
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  line-height: 1.7;
-}
+p, li, span { font-family: var(--font-body); }
 
 /* Code elements with Fira Code */
 code, pre, .tech-tag {
@@ -196,9 +148,7 @@ button, .button {
 }
 
 /* Modern Creative Effects */
-.text-glow {
-  text-shadow: 0 0 20px rgba(30, 64, 175, 0.5);
-}
+.text-glow { text-shadow: none; }
 
 .floating-animation {
   animation: floating 6s ease-in-out infinite;
@@ -219,24 +169,15 @@ button, .button {
 }
 
 .morphing-border {
-  border: 2px solid transparent;
-  background: linear-gradient(var(--background), var(--background)) padding-box,
-              var(--gradient-primary) border-box;
+  border: 1px solid var(--border);
+  background: var(--surface);
   border-radius: 12px;
 }
 
 .text-shimmer {
-  background: linear-gradient(
-    90deg,
-    #64748b 0%,
-    #f1f5f9 50%,
-    #64748b 100%
-  );
-  background-size: 200% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 2s ease-in-out infinite;
+  background: none;
+  -webkit-text-fill-color: initial;
+  animation: none;
 }
 
 @keyframes shimmer {
@@ -245,16 +186,8 @@ button, .button {
 }
 
 .holographic-effect {
-  background: linear-gradient(
-    45deg,
-    #1e40af,
-    #4c1d95,
-    #0891b2,
-    #4338ca,
-    #1e40af
-  );
-  background-size: 300% 300%;
-  animation: holographic 4s ease-in-out infinite;
+  background: var(--surface);
+  animation: none;
 }
 
 @keyframes holographic {
@@ -292,12 +225,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #1e40af, #4c1d95);
+  background: var(--border);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #2563eb, #7c3aed);
+  background: var(--accent);
 }
 
 /* Responsive text sizing */
@@ -331,22 +264,20 @@ html {
 
 /* Enhanced gradient animation */
 .gradient-text-animated {
-  background: linear-gradient(
-    45deg,
-    #2563eb,
-    #7c3aed,
-    #0891b2,
-    #4338ca,
-    #2563eb
-  );
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-flow 4s ease-in-out infinite;
+  background: none !important;
+  -webkit-text-fill-color: initial;
+  animation: none !important;
 }
 
 @keyframes gradient-flow {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0% { }
+}
+
+/* Sitewide: neutralize Tailwind gradient utilities to solid surfaces */
+[class*="bg-gradient-to-"],
+[class*="from-"],
+[class*="to-"],
+[class*="via-"] {
+  background-image: none !important;
+  background-color: var(--surface) !important;
 }

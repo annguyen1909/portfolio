@@ -22,14 +22,14 @@ const ResumeSection = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <div className="glass-effect rounded-2xl p-12 card-glow max-w-4xl mx-auto">
+          <div className="glass-effect rounded-none p-12 card-glow max-w-4xl mx-auto">
             <div className="flex justify-center mb-6">
-              <div className="p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl">
+              <div className="p-4 bg-[var(--surface-2)] rounded-none border border-[var(--border)]">
                 <FileText className="text-white" size={48} />
               </div>
             </div>
             
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 gradient-text">
+            <h2 className="text-3xl md:text-4xl font-heading font-semibold mb-6 text-[var(--text-strong)]">
               Download My Resume
             </h2>
             
@@ -44,7 +44,7 @@ const ResumeSection = () => {
                 onClick={handleDownloadResume}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                className="flex items-center space-x-3 px-6 py-3 bg-[var(--surface-1)] text-[var(--text-strong)] rounded-none font-body border border-[var(--border)] transition-colors duration-200 hover:opacity-90"
               >
                 <Download size={20} />
                 <span>Download Resume (PDF)</span>

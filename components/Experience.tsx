@@ -86,7 +86,7 @@ const Experience = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="glass-effect rounded-2xl p-8 card-glow relative overflow-hidden"
+              className="glass-effect rounded-none p-8 card-glow relative overflow-hidden"
             >
               {/* Background Gradient */}
               <div className={`absolute top-0 left-0 w-2 h-full bg-gradient-to-b ${exp.color}`}></div>

@@ -28,8 +28,8 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative bg-gray-900/90 border-t border-gray-800">
-      <div className="container mx-auto px-6 py-12">
+    <footer className="relative bg-[var(--surface)] border-t border-[var(--border)]">
+      <div className="max-w-5xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand & Description */}
           <motion.div
@@ -39,16 +39,11 @@ const Footer = () => {
             viewport={{ once: true }}
             className="space-y-4"
           >
-            <h3 className="text-2xl font-bold gradient-text">An Nguyen</h3>
-            <p className="text-gray-400 leading-relaxed">
+            <h3 className="text-2xl font-heading font-semibold text-[var(--text-strong)]">An Nguyen</h3>
+            <p className="font-body text-[var(--text-muted)] leading-relaxed">
               Full Stack Developer passionate about creating innovative web applications 
               and immersive digital experiences with modern technologies.
             </p>
-            <div className="flex items-center space-x-2 text-gray-400">
-              <span>Made with</span>
-              <Heart className="text-red-400" size={16} />
-              <span>using Next.js & TailwindCSS</span>
-            </div>
           </motion.div>
 
           {/* Quick Links */}
@@ -59,13 +54,13 @@ const Footer = () => {
             viewport={{ once: true }}
             className="space-y-4"
           >
-            <h4 className="text-lg font-semibold text-white">Quick Links</h4>
+            <h4 className="text-lg font-heading font-semibold text-[var(--text-strong)]">Quick Links</h4>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors duration-300 hover:underline"
+                    className="font-body text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors duration-200"
                   >
                     {link.name}
                   </a>
@@ -82,8 +77,8 @@ const Footer = () => {
             viewport={{ once: true }}
             className="space-y-4"
           >
-            <h4 className="text-lg font-semibold text-white">Get In Touch</h4>
-            <div className="space-y-2 text-gray-400">
+            <h4 className="text-lg font-heading font-semibold text-[var(--text-strong)]">Get In Touch</h4>
+            <div className="space-y-2 font-body text-[var(--text-muted)]">
               <p>nguyentruongan0919@gmail.com</p>
               <p>+84 905 941 752</p>
               <p>District 7, Ho Chi Minh City</p>
@@ -91,15 +86,15 @@ const Footer = () => {
             <div className="flex space-x-4 mt-4">
               <motion.a
                 href="#"
-                whileHover={{ scale: 1.1 }}
-                className="text-gray-400 hover:text-white transition-colors"
+                whileHover={{ scale: 1.02 }}
+                className="font-body text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors duration-200"
               >
                 GitHub
               </motion.a>
               <motion.a
                 href="#"
-                whileHover={{ scale: 1.1 }}
-                className="text-gray-400 hover:text-blue-400 transition-colors"
+                whileHover={{ scale: 1.02 }}
+                className="font-body text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors duration-200"
               >
                 LinkedIn
               </motion.a>
@@ -113,9 +108,9 @@ const Footer = () => {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           viewport={{ once: true }}
-          className="border-t border-gray-800 pt-8 mt-8 text-center"
+          className="border-t border-[var(--border)] pt-8 mt-8 text-center"
         >
-          <p className="text-gray-400">
+          <p className="font-body text-[var(--text-muted)]">
             © {new Date().getFullYear()} An Nguyen. All rights reserved.
           </p>
         </motion.div>
@@ -124,13 +119,14 @@ const Footer = () => {
       {/* Scroll to Top Button */}
       {showScrollTop && (
         <motion.button
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          className="fixed bottom-12 right-12 px-4 py-2 rounded-none border border-[var(--border)] bg-[var(--surface)] text-[var(--text-strong)] transition-colors duration-200 z-50"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          aria-label="Scroll to top"
         >
           <ArrowUp size={20} />
         </motion.button>

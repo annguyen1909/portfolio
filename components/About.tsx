@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { User, MapPin, Calendar } from 'lucide-react';
+import { motion } from "framer-motion";
+import { User, MapPin, Calendar, Check, Phone, Mail } from "lucide-react";
 
 const About = () => {
   return (
-    <section id="about" className="py-20 bg-gray-800/50">
+    <section id="about" className="py-20 bg-black">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -15,9 +15,9 @@ const About = () => {
           className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-6xl font-creative mb-8 text-balance tracking-tight">
-            About <span className="gradient-text">Me</span>
+            About <span className="text-[var(--text-strong)]">Me</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto"></div>
+          <div className="w-24 h-1 bg-[var(--accent-blue)]/60 mx-auto"></div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
@@ -29,25 +29,29 @@ const About = () => {
             viewport={{ once: true }}
             className="lg:col-span-2 space-y-6"
           >
-            <div className="glass-effect rounded-2xl p-8 card-glow">
-              <h3 className="text-3xl font-subheading mb-6 gradient-text tracking-wide">Personal Profile</h3>
+            <div className="bg-[#1b1b1b] rounded-none p-8 card-glow">
+              <h3 className="text-3xl font-heading mb-6 text-[var(--text-strong)] tracking-wide">
+                Personal Profile
+              </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <p className="text-gray-300 leading-relaxed mb-4 font-body text-lg">
-                    Full Stack Developer with a strong foundation in React, TypeScript, and C++, 
-                    experienced in building scalable web applications, interactive 3D websites, and 
-                    AI-integrated platforms.
+                    Full Stack Developer with a strong foundation in React,
+                    TypeScript, and C++, experienced in building scalable web
+                    applications, service websites, interactive 3D websites, and AI-integrated
+                    platforms.
                   </p>
                   <p className="text-gray-300 leading-relaxed font-body text-lg">
-                    Proven ability to deliver user-centric solutions using Next.js, Vite.js, 
-                    TailwindCSS, and RESTful APIs.
+                    Proven ability to deliver user-centric solutions using
+                    Next.js, Vite.js, TailwindCSS, RESTful APIs, and Database Integration.
                   </p>
                 </div>
                 <div>
                   <p className="text-gray-300 leading-relaxed font-body text-lg">
-                    Skilled in both frontend design and backend logic, with a passion for performance, 
-                    automation, and immersive digital experiences. Currently focused on AI integration 
-                    and WebGL/Three.js development.
+                    Skilled in both frontend design and backend logic, with a
+                    passion for performance, automation, and immersive digital
+                    experiences. Currently focused on Web Services, AI integration, WebGL/Three.js development, and
+                    Database Management.
                   </p>
                 </div>
               </div>
@@ -57,38 +61,46 @@ const About = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <motion.div
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="glass-effect rounded-xl p-4 card-glow text-center"
+                className="bg-[#1b1b1b] rounded-none p-4 card-glow text-center"
               >
-                <User className="text-blue-400 mx-auto mb-2" size={24} />
+                <User className="text-white mx-auto mb-2" size={24} />
                 <p className="text-xs text-gray-400 mb-1">Role</p>
-                <p className="text-white font-creative font-semibold text-sm">Full Stack Developer</p>
+                <p className="text-white font-creative font-semibold text-sm">
+                  Full Stack Developer
+                </p>
               </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="glass-effect rounded-xl p-4 card-glow text-center"
+                className="bg-[#1b1b1b] rounded-none p-4 card-glow text-center"
               >
-                <MapPin className="text-green-400 mx-auto mb-2" size={24} />
+                <MapPin className="text-white mx-auto mb-2" size={24} />
                 <p className="text-xs text-gray-400 mb-1">Location</p>
-                <p className="text-white font-creative font-semibold text-sm">Ho Chi Minh City</p>
+                <p className="text-white font-creative font-semibold text-sm">
+                  Ho Chi Minh City
+                </p>
               </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="glass-effect rounded-xl p-4 card-glow text-center"
+                className="bg-[#1b1b1b] rounded-none p-4 card-glow text-center"
               >
-                <Calendar className="text-purple-400 mx-auto mb-2" size={24} />
+                <Calendar className="text-white mx-auto mb-2" size={24} />
                 <p className="text-xs text-gray-400 mb-1">Education</p>
-                <p className="text-white font-creative font-semibold text-sm">RMIT - IT 2025</p>
+                <p className="text-white font-creative font-semibold text-sm">
+                  RMIT - IT 2025
+                </p>
               </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="glass-effect rounded-xl p-4 card-glow text-center"
+                className="bg-[#1b1b1b] rounded-none p-4 card-glow text-center"
               >
-                <div className="w-6 h-6 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full mx-auto mb-2"></div>
+                <Check className="text-white mx-auto mb-2" size={24} />
                 <p className="text-xs text-gray-400 mb-1">Status</p>
-                <p className="text-white font-creative font-semibold text-sm">Available</p>
+                <p className="text-white font-creative font-semibold text-sm">
+                  Available
+                </p>
               </motion.div>
             </div>
 
@@ -96,46 +108,37 @@ const About = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <motion.div
                 whileHover={{ scale: 1.02, y: -5 }}
-                className="glass-effect rounded-xl p-6 card-glow"
+                className="bg-[#1b1b1b] rounded-none p-6 card-glow"
               >
-                <h4 className="text-lg font-subheading mb-4 gradient-text">Let's Connect</h4>
+                <h4 className="text-lg font-heading mb-4 text-[var(--text-strong)]">
+                  Let's Connect
+                </h4>
                 <div className="space-y-3">
                   <motion.a
                     href="mailto:nguyentruongan0919@gmail.com"
                     whileHover={{ scale: 1.05 }}
-                    className="flex items-center space-x-3 p-3 bg-blue-600/20 rounded-lg border border-blue-500/30 hover:bg-blue-600/30 transition-all duration-300"
+                    className="flex items-center space-x-3 p-3 bg-[#131313] rounded-none border-none transition-all duration-300"
                   >
-                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-sm">📧</span>
+                    <div className="w-8 h-8 bg-none rounded-full flex items-center justify-center">
+                      <Mail className="text-white mx-auto" size={24} />
                     </div>
-                    <span className="text-blue-200 font-body text-sm">Send Email</span>
+                    <span className="text-white font-body text-sm">
+                      Send Email
+                    </span>
                   </motion.a>
-                  
+
                   <motion.a
                     href="tel:+84905941752"
                     whileHover={{ scale: 1.05 }}
-                    className="flex items-center space-x-3 p-3 bg-green-600/20 rounded-lg border border-green-500/30 hover:bg-green-600/30 transition-all duration-300"
+                    className="flex items-center space-x-3 p-3 bg-[#131313] rounded-none border-none transition-all duration-300"
                   >
-                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-sm">📱</span>
+                    <div className="w-8 h-8 bg-none rounded-full flex items-center justify-center">
+                      <Phone className="text-white mx-auto" size={24} />
                     </div>
-                    <span className="text-green-200 font-body text-sm">Call Me</span>
+                    <span className="text-white font-body text-sm">
+                      Call Me
+                    </span>
                   </motion.a>
-                </div>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.02, y: -5 }}
-                className="glass-effect rounded-xl p-6 card-glow"
-              >
-                <h4 className="text-lg font-subheading mb-3 gradient-text">Fun Fact</h4>
-                <p className="text-gray-300 font-body text-sm leading-relaxed mb-4">
-                  I've built over 15 web applications and love experimenting with cutting-edge tech! 🚀
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-2 py-1 bg-purple-600/20 text-purple-300 rounded text-xs">WebGL</span>
-                  <span className="px-2 py-1 bg-blue-600/20 text-blue-300 rounded text-xs">AI Integration</span>
-                  <span className="px-2 py-1 bg-cyan-600/20 text-cyan-300 rounded text-xs">3D Graphics</span>
                 </div>
               </motion.div>
             </div>
@@ -149,83 +152,92 @@ const About = () => {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <div className="glass-effect rounded-2xl p-6 card-glow">
-              <h3 className="text-2xl font-subheading mb-6 gradient-text text-center">Highlights</h3>
+            <div className="bg-[#1b1b1b] rounded-none p-6 card-glow">
+              <h3 className="text-2xl font-heading mb-6 text-[var(--text-strong)] text-center">
+                Highlights
+              </h3>
               <div className="space-y-4">
                 <div className="text-center">
                   <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
-                    className="text-3xl font-display font-bold text-blue-400 mb-1"
+                    className="text-3xl font-display font-bold text-white mb-1"
                   >
-                    15+
+                    10+
                   </motion.div>
-                  <p className="text-gray-300 font-body text-sm">Projects Completed</p>
+                  <p className="text-gray-300 font-body text-sm">
+                    Projects Completed
+                  </p>
                 </div>
-                
+
                 <div className="text-center">
                   <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
-                    className="text-3xl font-display font-bold text-purple-400 mb-1"
+                    className="text-3xl font-display font-bold text-white mb-1"
                   >
-                    2+
+                    4+
                   </motion.div>
-                  <p className="text-gray-300 font-body text-sm">Years of Experience</p>
+                  <p className="text-gray-300 font-body text-sm">
+                    Years of Experience
+                  </p>
                 </div>
-                
+
                 <div className="text-center">
                   <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-                    className="text-3xl font-display font-bold text-cyan-400 mb-1"
+                    className="text-3xl font-display font-bold text-white mb-1"
                   >
                     10+
                   </motion.div>
-                  <p className="text-gray-300 font-body text-sm">Technologies Mastered</p>
+                  <p className="text-gray-300 font-body text-sm">
+                    Technologies Mastered
+                  </p>
                 </div>
-                
+
                 <div className="text-center">
                   <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
-                    className="text-3xl font-display font-bold text-green-400 mb-1"
+                    className="text-3xl font-display font-bold text-white mb-1"
                   >
                     100%
                   </motion.div>
-                  <p className="text-gray-300 font-body text-sm">Client Satisfaction</p>
+                  <p className="text-gray-300 font-body text-sm">
+                    Client Satisfaction
+                  </p>
                 </div>
               </div>
             </div>
 
-            <motion.div
-              whileHover={{ scale: 1.02, y: -5 }}
-              className="glass-effect rounded-xl p-6 card-glow text-center"
-            >
-              <h4 className="text-xl font-subheading mb-3 gradient-text">Current Focus</h4>
-              <p className="text-gray-300 font-body text-sm leading-relaxed">
-                Building innovative web applications with AI integration and immersive 3D experiences
-              </p>
-            </motion.div>
-
             {/* Skills Preview */}
             <motion.div
               whileHover={{ scale: 1.02, y: -5 }}
-              className="glass-effect rounded-xl p-6 card-glow"
+              className="bg-[#1b1b1b] rounded-none p-6 card-glow"
             >
-              <h4 className="text-lg font-subheading mb-4 text-center gradient-text">Core Technologies</h4>
+              <h4 className="text-lg font-heading mb-4 text-center text-[var(--text-strong)]">
+                Core Technologies
+              </h4>
               <div className="flex flex-wrap gap-2 justify-center">
-                {['React', 'TypeScript', 'Next.js', 'Three.js', 'Node.js', 'C++'].map((tech, index) => (
+                {[
+                  "React",
+                  "TypeScript",
+                  "Next.js",
+                  "Three.js",
+                  "Node.js",
+                  "C++",
+                ].map((tech, index) => (
                   <motion.span
                     key={tech}
                     initial={{ opacity: 0, scale: 0 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.1 * index }}
-                    className="px-3 py-1 bg-blue-600/20 text-blue-300 rounded-full text-xs font-code border border-blue-500/30"
+                    className="px-3 py-1 bg-[#131313] text-white rounded-sm text-xs border border-[#5c5a5a] hover:border-gray-400 hover:text-white transition-all duration-300"
                   >
                     {tech}
                   </motion.span>

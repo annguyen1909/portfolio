@@ -60,9 +60,9 @@ const Achievements = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -10 }}
-              className="glass-effect rounded-2xl p-6 card-glow text-center group"
+              className="glass-effect rounded-none p-6 card-glow text-center group"
             >
-              <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-r ${achievement.color} mb-4 group-hover:scale-110 transition-transform duration-300`}>
+              <div className={`inline-flex p-4 rounded-none bg-gradient-to-r ${achievement.color} mb-4 group-hover:scale-110 transition-transform duration-300`}>
                 <achievement.icon className="text-white" size={32} />
               </div>
               

@@ -15,7 +15,7 @@ const Skills = () => {
         { name: "JavaScript", experience: "3+ years", projects: "15+ projects", description: "ES6+, DOM manipulation, async programming" },
         { name: "HTML/CSS", experience: "3+ years", projects: "20+ projects", description: "Semantic markup, responsive design, animations" }
       ],
-      color: "from-blue-400 to-cyan-400"
+      color: "text-[var(--text-muted)]"
     },
     {
       title: "Backend & Database",
@@ -26,7 +26,7 @@ const Skills = () => {
         { name: "MySQL", experience: "1+ year", projects: "3+ projects", description: "Relational databases and data modeling" },
         { name: "Prisma", experience: "8+ months", projects: "3+ projects", description: "Type-safe database access and migrations" }
       ],
-      color: "from-purple-400 to-pink-400"
+      color: "text-[var(--text-muted)]"
     },
     {
       title: "3D & Interactive Media",
@@ -37,7 +37,7 @@ const Skills = () => {
         { name: "TouchDesigner", experience: "1.5+ years", projects: "3+ installations", description: "Real-time visual effects, live performances" },
         { name: "OSC Protocol", experience: "1+ year", projects: "3+ systems", description: "Real-time communication for interactive systems" }
       ],
-      color: "from-green-400 to-blue-400"
+      color: "text-[var(--text-muted)]"
     },
     {
       title: "Programming & Tools",
@@ -79,7 +79,7 @@ const Skills = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: categoryIndex * 0.1 }}
               viewport={{ once: true }}
-              className="glass-effect rounded-2xl p-8 card-glow"
+              className="glass-effect rounded-none p-8 card-glow"
             >
               <h3 className={`text-2xl font-bold mb-4 bg-gradient-to-r ${category.color} bg-clip-text text-transparent`}>
                 {category.title}
@@ -95,7 +95,7 @@ const Skills = () => {
                     transition={{ duration: 0.6, delay: skillIndex * 0.1 }}
                     viewport={{ once: true }}
                     whileHover={{ scale: 1.02 }}
-                    className="bg-gray-800/50 rounded-xl p-4 border border-gray-700 hover:border-gray-600 transition-all duration-300"
+                    className="bg-gray-800/50 rounded-none p-4 border border-gray-700 hover:border-gray-600 transition-all duration-300"
                   >
                     <div className="flex justify-between items-start mb-2">
                       <h4 className="text-white font-semibold text-lg">{skill.name}</h4>
@@ -120,7 +120,7 @@ const Skills = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
-          className="mt-12 glass-effect rounded-2xl p-8 card-glow"
+          className="mt-12 glass-effect rounded-none p-8 card-glow"
         >
           <h3 className="text-2xl font-bold mb-6 text-center gradient-text">
             Tools & Additional Skills
@@ -145,7 +145,7 @@ const Skills = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-gray-800/50 rounded-xl p-4 border border-gray-700 hover:border-blue-400 transition-all duration-300"
+                className="bg-gray-800/50 rounded-none p-4 border border-gray-700 hover:border-blue-400 transition-all duration-300"
               >
                 <h4 className="text-white font-semibold mb-2">{skill.name}</h4>
                 <p className="text-gray-400 text-sm leading-relaxed">{skill.description}</p>
@@ -162,7 +162,7 @@ const Skills = () => {
           viewport={{ once: true }}
           className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8"
         >
-          <div className="glass-effect rounded-2xl p-8 card-glow text-center">
+          <div className="glass-effect rounded-none p-8 card-glow text-center">
             <div className="text-4xl mb-4">🚀</div>
             <h3 className="text-xl font-bold mb-4 gradient-text">Rapid Learning</h3>
             <p className="text-gray-400 leading-relaxed">
@@ -171,7 +171,7 @@ const Skills = () => {
             </p>
           </div>
 
-          <div className="glass-effect rounded-2xl p-8 card-glow text-center">
+          <div className="glass-effect rounded-none p-8 card-glow text-center">
             <div className="text-4xl mb-4">🔧</div>
             <h3 className="text-xl font-bold mb-4 gradient-text">Practical Focus</h3>
             <p className="text-gray-400 leading-relaxed">
@@ -180,7 +180,7 @@ const Skills = () => {
             </p>
           </div>
 
-          <div className="glass-effect rounded-2xl p-8 card-glow text-center">
+          <div className="glass-effect rounded-none p-8 card-glow text-center">
             <div className="text-4xl mb-4">🎯</div>
             <h3 className="text-xl font-bold mb-4 gradient-text">Quality Driven</h3>
             <p className="text-gray-400 leading-relaxed">

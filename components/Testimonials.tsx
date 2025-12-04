@@ -42,9 +42,9 @@ const Testimonials = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            What Others <span className="gradient-text">Say</span>
+            What Others <span className="text-[var(--text-strong)]">Say</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mb-6"></div>
+          <div className="w-24 h-1 bg-[var(--accent-blue)]/60 mx-auto mb-6"></div>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg">
             Feedback from clients, colleagues, and collaborators I've had the pleasure to work with
           </p>
@@ -59,7 +59,7 @@ const Testimonials = () => {
               transition={{ duration: 0.8, delay: index * 0.2 }}
               viewport={{ once: true }}
               whileHover={{ y: -10 }}
-              className="glass-effect rounded-2xl p-8 card-glow relative"
+              className="glass-effect rounded-none p-8 card-glow relative"
             >
               {/* Quote Icon */}
               <div className="absolute top-6 right-6 text-blue-400/20">
@@ -80,7 +80,7 @@ const Testimonials = () => {
 
               {/* Author */}
               <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                <div className="w-12 h-12 bg-[var(--surface-2)] rounded-none border border-[var(--border)] flex items-center justify-center text-[var(--text-strong)] font-bold text-lg">
                   {testimonial.avatar}
                 </div>
                 <div>

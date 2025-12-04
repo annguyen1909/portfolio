@@ -16,7 +16,7 @@ const Projects = () => {
     : projects.filter(project => project.category === selectedCategory);
 
   return (
-    <section id="projects" className="py-20">
+    <section id="projects" className="py-20 bg-[var(--background)]">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -25,11 +25,11 @@ const Projects = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-creative mb-8 text-balance tracking-tight">
-            Featured <span className="gradient-text">Projects</span>
+          <h2 className="font-heading text-4xl md:text-5xl mb-8 tracking-tight text-[var(--text-strong)]">
+            Featured <span className="text-[var(--text-strong)]">Projects</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto mb-8"></div>
-          <p className="text-gray-400 max-w-2xl mx-auto text-xl font-body leading-relaxed">
+          <div className="w-24 h-1 bg-[var(--accent-blue)]/60 mx-auto mb-8"></div>
+          <p className="text-[var(--text-muted)] max-w-2xl mx-auto text-lg font-body leading-relaxed">
             A showcase of my best work across different technologies and domains
           </p>
         </motion.div>
@@ -46,12 +46,12 @@ const Projects = () => {
             <motion.button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={`px-6 py-3 rounded-full transition-all duration-300 ${
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className={`px-4 py-2 rounded-none border transition-colors duration-200 ${
                 selectedCategory === category
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
-                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                  ? 'bg-[var(--surface-2)] text-[var(--text-strong)] border-[var(--border)]'
+                  : 'bg-[var(--surface-1)] text-[var(--text-muted)] border-[var(--border)] hover:opacity-90'
               }`}
             >
               {category}
@@ -68,17 +68,17 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ y: -10 }}
-              className="glass-effect rounded-2xl overflow-hidden card-glow group flex flex-col h-full perspective-card"
+              whileHover={{ y: -2 }}
+              className="bg-[#1b1b1b] p-6 rounded-none overflow-hidden group flex flex-col h-full"
             >
               {/* Project Image */}
-              <div className="relative h-48 bg-gradient-to-br from-gray-700 to-gray-800 overflow-hidden">
-                <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20`}></div>
+              <div className="relative h-48 bg-[#262626] overflow-hidden">
+                <div className={`absolute inset-0 bg-[#262626] opacity-20`}></div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-4xl font-bold text-white opacity-50">{project.title.split(' ')[0]}</span>
+                  <span className="text-3xl font-heading text-[var(--text-muted)]">{project.title.split(' ')[0]}</span>
                 </div>
                 <div className="absolute top-4 right-4">
-                  <span className="px-3 py-1 bg-black/50 text-white text-xs rounded-full">
+                  <span className="px-2 py-1 bg-[var(--surface-1)] text-[var(--text-muted)] text-xs rounded-none border border-[var(--border)]">
                     {project.category}
                   </span>
                 </div>
@@ -86,21 +86,21 @@ const Projects = () => {
 
               {/* Project Content */}
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-2xl font-subheading text-white mb-4 group-hover:text-blue-400 transition-colors tracking-wide">
+                <h3 className="text-2xl font-heading text-[var(--text-strong)] mb-4 transition-colors tracking-wide">
                   {project.title}
                 </h3>
                 
-                <p className="text-gray-400 mb-5 leading-relaxed font-body line-clamp-3">
+                <p className="text-[var(--text-muted)] mb-5 leading-relaxed font-body line-clamp-3">
                   {project.shortDescription}
                 </p>
 
                 {/* Features */}
                 <div className="mb-5 flex-grow">
-                  <h4 className="text-sm font-poppins font-semibold text-gray-300 mb-3 tracking-wide uppercase">Key Features:</h4>
+                  <h4 className="text-sm font-body font-medium text-[var(--text-muted)] mb-3 tracking-wide uppercase">Key Features:</h4>
                   <ul className="space-y-2">
                     {project.features.slice(0, 3).map((feature, i) => (
-                      <li key={i} className="flex items-start space-x-2 text-sm text-gray-400 font-body">
-                        <ArrowRight size={12} className="text-blue-400 mt-0.5 flex-shrink-0" />
+                      <li key={i} className="flex items-start space-x-2 text-sm text-[var(--text-muted)] font-body">
+                        <ArrowRight size={12} className="text-[var(--accent-blue)] mt-1.5 flex-shrink-0" />
                         <span className="line-clamp-1">{feature}</span>
                       </li>
                     ))}
@@ -112,13 +112,13 @@ const Projects = () => {
                   {project.technologies.slice(0, 6).map((tech) => (
                     <span
                       key={tech}
-                      className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs border border-gray-600 font-code tech-tag"
+                      className="px-2 py-1 bg-[#1d1d1d] text-[var(--text-muted)] rounded-none text-xs border border-[#3d3d3d] font-body"
                     >
                       {tech}
                     </span>
                   ))}
                   {project.technologies.length > 6 && (
-                    <span className="px-2 py-1 bg-gray-700 text-gray-400 rounded text-xs font-code">
+                    <span className="px-2 py-1 bg-[var(--surface-2)] text-[var(--text-muted)] rounded-none text-xs font-body">
                       +{project.technologies.length - 6} more
                     </span>
                   )}
@@ -130,9 +130,8 @@ const Projects = () => {
                     <motion.div
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-lg font-creative font-medium hover:shadow-lg transition-all duration-300 cursor-pointer w-full tracking-wide"
+                      className="flex items-center justify-center space-x-2 px-4 py-3 bg-[#131313] text-[var(--text-strong)] rounded-none font-body border-1 border-[#3d3d3d] transition-colors duration-200 cursor-pointer w-full"
                     >
-                      <Eye size={16} />
                       <span>View Details</span>
                     </motion.div>
                   </Link>
@@ -143,7 +142,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex items-center justify-center space-x-1 px-4 py-3 border border-blue-600 text-blue-300 rounded-lg font-creative font-medium hover:border-blue-400 hover:text-white transition-all duration-300 tracking-wide"
+                    className="flex items-center bg-[#131313] justify-center space-x-1 px-4 py-3 border border-[#3d3d3d] text-[var(--text-strong)] rounded-none font-body transition-colors duration-200"
                   >
                     <ExternalLink size={16} />
                     <span className="hidden sm:inline">Demo</span>
@@ -155,7 +154,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex items-center justify-center space-x-1 px-4 py-3 border border-blue-600 text-blue-300 rounded-lg font-creative font-medium hover:border-blue-400 hover:text-white transition-all duration-300 tracking-wide"
+                    className="flex items-center bg-[#131313] justify-center space-x-1 px-4 py-3 border border-[#3d3d3d] text-[var(--text-strong)] rounded-none font-body transition-colors duration-200"
                   >
                     <Github size={16} />
                     <span className="hidden sm:inline">Code</span>
@@ -177,9 +176,9 @@ const Projects = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link href="/projects">
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center space-x-2 px-6 py-3 bg-[var(--surface-2)] text-[var(--text-strong)] rounded-none font-body border border-[var(--border)] transition-colors duration-200 cursor-pointer"
               >
                 <Eye size={20} />
                 <span>View All Projects</span>
@@ -187,9 +186,9 @@ const Projects = () => {
             </Link>
             <motion.a
               href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center space-x-2 px-8 py-4 border border-gray-600 text-gray-300 rounded-full font-semibold hover:border-blue-400 hover:text-white transition-all duration-300"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center space-x-2 px-6 py-3 border border-[var(--border)] text-[var(--text-strong)] rounded-none font-body transition-colors duration-200"
             >
               <span>Interested in working together?</span>
               <ArrowRight size={20} />

@@ -74,19 +74,9 @@ const AnimatedBackground = () => {
       });
     }
 
-    // Cache gradients to avoid recreation on each frame
-    const gradientCache = new Map<string, CanvasGradient>();
+    // Solid fills only; gradients removed per UI rules
 
-    const getGradient = (shape: typeof shapes[0]) => {
-      const key = `${shape.color}-${Math.round(shape.size)}`;
-      if (!gradientCache.has(key)) {
-        const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, shape.size);
-        gradient.addColorStop(0, shape.color);
-        gradient.addColorStop(1, 'transparent');
-        gradientCache.set(key, gradient);
-      }
-      return gradientCache.get(key)!;
-    };
+    const getFill = (shape: typeof shapes[0]) => shape.color;
 
     const drawShape = (shape: typeof shapes[0]) => {
       ctx.save();
@@ -94,7 +84,7 @@ const AnimatedBackground = () => {
       ctx.rotate(shape.rotation);
       ctx.globalAlpha = shape.opacity;
 
-      ctx.fillStyle = getGradient(shape);
+      ctx.fillStyle = getFill(shape);
 
       switch (shape.type) {
         case 'circle':

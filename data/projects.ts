@@ -30,12 +30,12 @@ export const projects: Project[] = [
     title: 'WorldMaxxing eVisa Platform',
     shortDescription: 'A comprehensive full-stack eVisa application platform with dynamic forms, payment integration, and complex business logic for visa processing.',
     fullDescription: 'WorldMaxxing is a sophisticated eVisa application platform that streamlines the visa application process for travelers worldwide. The platform features a complex multi-step form system that adapts based on destination, nationality, and visa type selections. Built with modern technologies, it handles intricate business logic including canonical visa rules, group processing, and port-of-entry selections.',
-    image: '/api/placeholder/800/500',
+    image: '/projects/worldmaxxing-evisa-platform/hero.jpg',
     gallery: [
-      '/api/placeholder/800/500',
-      '/api/placeholder/600/400',
-      '/api/placeholder/600/400',
-      '/api/placeholder/600/400'
+      '/projects/worldmaxxing-evisa-platform/gallery-1.jpg',
+      '/projects/worldmaxxing-evisa-platform/gallery-2.jpg',
+      '/projects/worldmaxxing-evisa-platform/gallery-3.jpg',
+      '/projects/worldmaxxing-evisa-platform/gallery-4.jpg'
     ],
     technologies: ['Next.js', 'React', 'TypeScript', 'Stripe', 'Node.js', 'PostgreSQL', 'TailwindCSS', 'Prisma'],
     features: [
@@ -76,7 +76,7 @@ export const projects: Project[] = [
     ],
     timeline: 'April 2025 - July 2025 (4 months)',
     role: 'Full Stack Developer',
-    teamSize: '3 developers',
+    teamSize: '1 developer',
     category: 'Full Stack',
     color: 'from-blue-400 to-cyan-400',
     liveUrl: 'https://worldmaxxing.com',
@@ -91,11 +91,11 @@ export const projects: Project[] = [
     title: 'SKIRA Landing Page',
     shortDescription: 'Modern, responsive landing page built with Vite.js and enhanced with AI-generated assets for optimal user experience.',
     fullDescription: 'SKIRA is a cutting-edge landing page project that showcases the power of modern web development combined with AI-enhanced design. Built with Vite.js for optimal performance, the project demonstrates how AI tools can be leveraged to create compelling visual assets and improve the overall user experience.',
-    image: '/api/placeholder/800/500',
+    image: '/projects/skira-landing-page/hero.jpg',
     gallery: [
-      '/api/placeholder/800/500',
-      '/api/placeholder/600/400',
-      '/api/placeholder/600/400'
+      '/projects/skira-landing-page/gallery-1.jpg',
+      '/projects/skira-landing-page/gallery-2.jpg',
+      '/projects/skira-landing-page/gallery-3.jpg'
     ],
     technologies: ['Vite.js', 'JavaScript', 'CSS3', 'HTML5', 'AI Tools', 'Figma'],
     features: [
@@ -145,12 +145,12 @@ export const projects: Project[] = [
     title: 'Advanced Lighting Control System',
     shortDescription: 'Web-based lighting automation system for premium venues including Opus Restaurant and Regent Phu Quoc resort.',
     fullDescription: 'An innovative lighting control system that revolutionizes how premium venues manage their lighting environments. This web-based platform integrates with physical lighting systems through Open Sound Control (OSC) protocol, enabling real-time control and automation for restaurants, hotels, and event spaces.',
-    image: '/api/placeholder/800/500',
+    image: '/projects/lighting-control-system/hero.jpg',
     gallery: [
-      '/api/placeholder/800/500',
-      '/api/placeholder/600/400',
-      '/api/placeholder/600/400',
-      '/api/placeholder/600/400'
+      '/projects/lighting-control-system/gallery-1.jpg',
+      '/projects/lighting-control-system/gallery-2.jpg',
+      '/projects/lighting-control-system/gallery-3.jpg',
+      '/projects/lighting-control-system/gallery-4.jpg'
     ],
     technologies: ['JavaScript', 'WebGL', 'OSC Protocol', 'Node.js', 'Socket.io', 'IoT', 'Hardware Integration'],
     features: [
@@ -201,11 +201,11 @@ export const projects: Project[] = [
     title: '3D Interactive Web Experience',
     shortDescription: 'Immersive 3D web experience using Three.js and WebGL for engaging user interactions and visual storytelling.',
     fullDescription: 'A groundbreaking 3D web experience that pushes the boundaries of what\'s possible in a browser. This project combines cutting-edge WebGL technology with Three.js to create immersive, interactive environments that engage users in unique ways.',
-    image: '/api/placeholder/800/500',
+    image: '/projects/3d-interactive-website/hero.jpg',
     gallery: [
-      '/api/placeholder/800/500',
-      '/api/placeholder/600/400',
-      '/api/placeholder/600/400'
+      '/projects/3d-interactive-website/gallery-1.jpg',
+      '/projects/3d-interactive-website/gallery-2.jpg',
+      '/projects/3d-interactive-website/gallery-3.jpg'
     ],
     technologies: ['Three.js', 'WebGL', 'JavaScript', 'GLSL', 'Blender', 'React Three Fiber'],
     features: [
@@ -255,11 +255,11 @@ export const projects: Project[] = [
     title: 'LLM Vulnerability Detection System',
     shortDescription: 'Academic project integrating Large Language Models for automated software vulnerability detection and analysis.',
     fullDescription: 'An innovative academic research project that explores the application of Large Language Models in cybersecurity. This system automatically analyzes source code to identify potential security vulnerabilities, providing detailed reports and suggestions for remediation.',
-    image: '/api/placeholder/800/500',
+    image: '/projects/llm-vulnerability-detection/hero.jpg',
     gallery: [
-      '/api/placeholder/800/500',
-      '/api/placeholder/600/400',
-      '/api/placeholder/600/400'
+      '/projects/llm-vulnerability-detection/gallery-1.jpg',
+      '/projects/llm-vulnerability-detection/gallery-2.jpg',
+      '/projects/llm-vulnerability-detection/gallery-3.jpg'
     ],
     technologies: ['Python', 'Large Language Models', 'Next.js', 'Machine Learning', 'OpenAI API', 'FastAPI'],
     features: [
@@ -309,12 +309,12 @@ export const projects: Project[] = [
     title: 'Hue Festival of Light Installation',
     shortDescription: 'Large-scale interactive lighting installation combining programming, design, and real-time visual effects for cultural events.',
     fullDescription: 'A spectacular large-scale interactive lighting installation created for the prestigious Hue Festival of Light 2024. This project combines artistic vision with technical expertise to create immersive experiences that celebrate Vietnamese culture through modern technology.',
-    image: '/api/placeholder/800/500',
+    image: '/projects/hue-festival-of-light/hero.jpg',
     gallery: [
-      '/api/placeholder/800/500',
-      '/api/placeholder/600/400',
-      '/api/placeholder/600/400',
-      '/api/placeholder/600/400'
+      '/projects/hue-festival-of-light/gallery-1.jpg',
+      '/projects/hue-festival-of-light/gallery-2.jpg',
+      '/projects/hue-festival-of-light/gallery-3.jpg',
+      '/projects/hue-festival-of-light/gallery-4.jpg'
     ],
     technologies: ['TouchDesigner', 'Python', 'OSC Protocol', 'Real-time Graphics', 'Audio Processing', 'Hardware Integration'],
     features: [

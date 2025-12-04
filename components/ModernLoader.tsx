@@ -23,7 +23,7 @@ const ModernLoader = () => {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="fixed inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-[var(--background)] flex items-center justify-center z-50"
     >
       <div className="text-center">
         {/* Logo Animation */}
@@ -44,7 +44,7 @@ const ModernLoader = () => {
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
               className="absolute inset-1 border-3 border-transparent border-b-cyan-500 border-l-indigo-500 rounded-full"
             />
-            <div className="absolute inset-4 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+            <div className="absolute inset-4 bg-[var(--surface-2)] rounded-none border border-[var(--border)] flex items-center justify-center">
               <span className="text-white font-display font-bold text-lg">A</span>
             </div>
           </div>
@@ -55,7 +55,7 @@ const ModernLoader = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-2xl font-display font-bold mb-2 gradient-text"
+          className="text-2xl font-heading font-semibold mb-2 text-[var(--text-strong)]"
         >
           An Nguyen
         </motion.h2>

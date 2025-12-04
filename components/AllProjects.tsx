@@ -21,7 +21,7 @@ const AllProjects = () => {
   });
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen pt-20 bg-[var(--background)]">
       {/* Header */}
       <section className="container mx-auto px-6 py-16">
         <motion.div
@@ -30,11 +30,11 @@ const AllProjects = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            All <span className="gradient-text">Projects</span>
+          <h1 className="font-heading text-4xl md:text-5xl mb-6 text-[var(--text-strong)]">
+            All <span className="text-[var(--text-strong)]">Projects</span>
           </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mb-6"></div>
-          <p className="text-gray-400 max-w-3xl mx-auto text-lg">
+          <div className="w-24 h-1 bg-[var(--accent-blue)]/60 mx-auto mb-6"></div>
+          <p className="text-[var(--text-muted)] max-w-3xl mx-auto text-lg font-body">
             A comprehensive collection of my work spanning web development, 3D experiences, 
             AI integration, and interactive installations. Each project represents a unique 
             challenge and innovative solution.
@@ -51,30 +51,30 @@ const AllProjects = () => {
           <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
             {/* Search Bar */}
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[var(--text-muted)]" size={20} />
               <input
                 type="text"
                 placeholder="Search projects, technologies..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
+                className="w-full pl-10 pr-4 py-3 bg-[#1d1d1d] border border-[#3d3d3d] rounded-none text-[var(--text-strong)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent-blue)] transition-colors"
               />
             </div>
 
             {/* Category Filter */}
             <div className="flex items-center space-x-3">
-              <Filter className="text-gray-400" size={20} />
+              <Filter className="text-[var(--text-muted)]" size={20} />
               <div className="flex flex-wrap gap-2">
                 {categories.map((category) => (
                   <motion.button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`px-4 py-2 rounded-none text-sm font-medium transition-colors duration-200 ${
                       selectedCategory === category
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
-                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-600'
+                        ? 'bg-[#262626] text-[var(--text-strong)] border border-[#3d3d3d]'
+                        : 'bg-[#1d1d1d] text-[var(--text-muted)] border border-[#3d3d3d] hover:opacity-90'
                     }`}
                   >
                     {category}
@@ -92,7 +92,7 @@ const AllProjects = () => {
           transition={{ delay: 0.5 }}
           className="mb-8"
         >
-          <p className="text-gray-400">
+          <p className="text-[var(--text-muted)] font-body">
             Showing {filteredProjects.length} of {projects.length} projects
             {searchTerm && ` for "${searchTerm}"`}
           </p>
@@ -106,22 +106,22 @@ const AllProjects = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="glass-effect rounded-2xl overflow-hidden card-glow group"
+              whileHover={{ y: -2 }}
+              className="bg-[#1b1b1b] rounded-none overflow-hidden group border border-[#3d3d3d]"
             >
               {/* Project Image */}
-              <div className="relative h-48 bg-gradient-to-br from-gray-700 to-gray-800 overflow-hidden">
-                <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20`}></div>
+              <div className="relative h-48 bg-[#262626] overflow-hidden">
+                <div className={`absolute inset-0 bg-[#262626] opacity-20`}></div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-3xl font-bold text-white opacity-50">{project.title.split(' ')[0]}</span>
+                  <span className="text-3xl font-heading text-[var(--text-muted)]">{project.title.split(' ')[0]}</span>
                 </div>
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-black/50 text-white text-xs rounded-full">
+                  <span className="px-2 py-1 bg-[#1d1d1d] text-[var(--text-muted)] text-xs rounded-none border border-[#3d3d3d]">
                     {project.category}
                   </span>
                 </div>
                 <div className="absolute top-4 right-4">
-                  <span className={`px-3 py-1 text-xs rounded-full font-medium ${
+                  <span className={`px-2 py-1 text-xs rounded-none font-medium ${
                     project.status === 'completed' ? 'bg-green-500/20 text-green-400' :
                     project.status === 'in-progress' ? 'bg-yellow-500/20 text-yellow-400' :
                     'bg-gray-500/20 text-gray-400'
@@ -134,13 +134,13 @@ const AllProjects = () => {
               {/* Project Content */}
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                  <h3 className="text-xl font-heading text-[var(--text-strong)]">
                     {project.title}
                   </h3>
-                  <span className="text-sm text-gray-500">{project.year}</span>
+                  <span className="text-sm text-[var(--text-muted)]">{project.year}</span>
                 </div>
                 
-                <p className="text-gray-400 mb-4 leading-relaxed line-clamp-3">
+                <p className="text-[var(--text-muted)] mb-4 leading-relaxed font-body line-clamp-3">
                   {project.shortDescription}
                 </p>
 
@@ -149,13 +149,13 @@ const AllProjects = () => {
                   {project.technologies.slice(0, 4).map((tech) => (
                     <span
                       key={tech}
-                      className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs border border-gray-600"
+                      className="px-2 py-1 bg-[#1d1d1d] text-[var(--text-muted)] rounded-none text-xs border border-[#3d3d3d] font-body"
                     >
                       {tech}
                     </span>
                   ))}
                   {project.technologies.length > 4 && (
-                    <span className="px-2 py-1 bg-gray-700 text-gray-400 rounded text-xs">
+                    <span className="px-2 py-1 bg-[#262626] text-[var(--text-muted)] rounded-none text-xs font-body">
                       +{project.technologies.length - 4} more
                     </span>
                   )}
@@ -167,7 +167,7 @@ const AllProjects = () => {
                     <motion.div
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex items-center justify-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-300 cursor-pointer"
+                      className="flex items-center justify-center space-x-2 px-4 py-2 bg-[#131313] text-[var(--text-strong)] rounded-none text-sm font-body border border-[#3d3d3d] transition-colors duration-200 cursor-pointer"
                     >
                       <Eye size={16} />
                       <span>Details</span>
@@ -181,7 +181,7 @@ const AllProjects = () => {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex items-center justify-center px-3 py-2 border border-gray-600 text-gray-300 rounded-lg text-sm hover:border-blue-400 hover:text-white transition-all duration-300"
+                      className="flex items-center justify-center px-3 py-2 border border-[#3d3d3d] text-[var(--text-strong)] rounded-none text-sm font-body transition-colors duration-200"
                     >
                       <ExternalLink size={16} />
                     </motion.a>
@@ -194,7 +194,7 @@ const AllProjects = () => {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex items-center justify-center px-3 py-2 border border-gray-600 text-gray-300 rounded-lg text-sm hover:border-blue-400 hover:text-white transition-all duration-300"
+                      className="flex items-center justify-center px-3 py-2 border border-[#3d3d3d] text-[var(--text-strong)] rounded-none text-sm font-body transition-colors duration-200"
                     >
                       <Github size={16} />
                     </motion.a>
@@ -212,9 +212,9 @@ const AllProjects = () => {
             animate={{ opacity: 1 }}
             className="text-center py-16"
           >
-            <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-2xl font-bold mb-4 text-gray-300">No projects found</h3>
-            <p className="text-gray-400 mb-6">
+            <div className="text-6xl mb-4 text-[var(--text-muted)]">No results</div>
+            <h3 className="text-2xl font-heading mb-4 text-[var(--text-strong)]">No projects found</h3>
+            <p className="text-[var(--text-muted)] mb-6 font-body">
               Try adjusting your search terms or category filter
             </p>
             <motion.button
@@ -222,8 +222,8 @@ const AllProjects = () => {
                 setSearchTerm("");
                 setSelectedCategory("All");
               }}
-              whileHover={{ scale: 1.05 }}
-              className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium"
+              whileHover={{ scale: 1.02 }}
+              className="px-6 py-3 bg-[#131313] text-[var(--text-strong)] rounded-none font-body border border-[#3d3d3d]"
             >
               Clear Filters
             </motion.button>
@@ -239,16 +239,16 @@ const AllProjects = () => {
             viewport={{ once: true }}
             className="text-center mt-16"
           >
-            <div className="glass-effect rounded-2xl p-12 card-glow">
-              <h2 className="text-3xl font-bold mb-6 gradient-text">Like What You See?</h2>
-              <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
+            <div className="bg-[#1b1b1b] rounded-none p-12 border border-[#3d3d3d]">
+              <h2 className="text-3xl font-heading mb-6 text-[var(--text-strong)]">Like What You See?</h2>
+              <p className="text-[var(--text-muted)] mb-8 max-w-2xl mx-auto font-body">
                 I'm always excited to take on new challenges and create innovative solutions. 
                 Let's discuss how we can work together on your next project.
               </p>
               <Link href="/#contact">
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+                  whileHover={{ scale: 1.02 }}
+                  className="inline-flex items-center space-x-2 px-6 py-3 bg-[#131313] text-[var(--text-strong)] rounded-none font-body border border-[#3d3d3d] transition-colors duration-200 cursor-pointer"
                 >
                   <span>Start a Conversation</span>
                 </motion.div>
