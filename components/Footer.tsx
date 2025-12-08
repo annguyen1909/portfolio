@@ -21,8 +21,6 @@ const Footer = () => {
 
   const quickLinks = [
     { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
     { name: 'Contact', href: '#contact' }
   ];
@@ -81,7 +79,7 @@ const Footer = () => {
             <div className="space-y-2 font-body text-[var(--text-muted)]">
               <p>nguyentruongan0919@gmail.com</p>
               <p>+84 905 941 752</p>
-              <p>District 7, Ho Chi Minh City</p>
+              <p>District 10, Ho Chi Minh City</p>
             </div>
             <div className="flex space-x-4 mt-4">
               <motion.a

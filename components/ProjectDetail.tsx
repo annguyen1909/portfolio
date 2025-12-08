@@ -210,7 +210,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
                   transition={{ delay: index * 0.1 }}
                   className="group flex items-start gap-3 py-2 transition-transform duration-180 hover:translate-x-[2px]"
                 >
-                  <span className="text-[var(--text-muted)] font-body">{feature}</span>
+                  <span className="text-[var(--text-muted)] font-body">- {feature}</span>
                 </motion.li>
               ))}
             </ul>
@@ -240,7 +240,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
                   transition={{ delay: index * 0.1 }}
                   className="group flex items-start gap-3 py-2 transition-transform duration-180 hover:translate-x-[2px]"
                 >
-                  <span className="text-[var(--text-muted)] font-body">{challenge}</span>
+                  <span className="text-[var(--text-muted)] font-body">- {challenge}</span>
                 </motion.li>
               ))}
             </ul>
@@ -275,7 +275,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
                   transition={{ delay: index * 0.1 }}
                   className="group flex items-start gap-3 py-2 transition-transform duration-180 hover:translate-x-[2px]"
                 >
-                  <span className="text-[var(--text-muted)] font-body">{solution}</span>
+                  <span className="text-[var(--text-muted)] font-body">- {solution}</span>
                 </motion.li>
               ))}
             </ul>
@@ -305,7 +305,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
                   transition={{ delay: index * 0.1 }}
                   className="group flex items-start gap-3 py-2 transition-transform duration-180 hover:translate-x-[2px]"
                 >
-                  <span className="text-[var(--text-muted)] font-body">{result}</span>
+                  <span className="text-[var(--text-muted)] font-body">- {result}</span>
                 </motion.li>
               ))}
             </ul>
@@ -326,7 +326,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
           <p className="text-[var(--text-muted)] font-body">Visual showcase of the project development and final results</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {project.gallery.map((image, index) => (
             <motion.div
               key={index}
@@ -336,7 +336,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
               whileHover={{ scale: 1.02 }}
               className="bg-[#1b1b1b] rounded-none overflow-hidden border border-[#3d3d3d]"
             >
-              <div className="aspect-video bg-[#262626] relative">
+              <div className="bg-[#262626] relative aspect-[3/2] md:aspect-[16/9] lg:aspect-[4/3]">
                 <div className={`absolute inset-0 bg-[#262626] opacity-10`}></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-2xl font-heading text-[var(--text-muted)]">Gallery{index + 1}</span>

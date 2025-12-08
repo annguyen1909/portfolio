@@ -164,7 +164,7 @@ const About = () => {
                     transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
                     className="text-3xl font-display font-bold text-white mb-1"
                   >
-                    10+
+                    8+
                   </motion.div>
                   <p className="text-gray-300 font-body text-sm">
                     Projects Completed
@@ -178,7 +178,7 @@ const About = () => {
                     transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
                     className="text-3xl font-display font-bold text-white mb-1"
                   >
-                    4+
+                    3+
                   </motion.div>
                   <p className="text-gray-300 font-body text-sm">
                     Years of Experience
@@ -192,24 +192,10 @@ const About = () => {
                     transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
                     className="text-3xl font-display font-bold text-white mb-1"
                   >
-                    10+
+                    8+
                   </motion.div>
                   <p className="text-gray-300 font-body text-sm">
                     Technologies Mastered
-                  </p>
-                </div>
-
-                <div className="text-center">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
-                    className="text-3xl font-display font-bold text-white mb-1"
-                  >
-                    100%
-                  </motion.div>
-                  <p className="text-gray-300 font-body text-sm">
-                    Client Satisfaction
                   </p>
                 </div>
               </div>

@@ -2,12 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { ExternalLink, Github, ArrowRight, Eye } from 'lucide-react';
+import { ExternalLink, ArrowRight, Eye } from 'lucide-react';
 import Link from 'next/link';
 import { getFeaturedProjects } from '../data/projects';
 
 const Projects = () => {
-  const projects = getFeaturedProjects(6);
+  const projects = getFeaturedProjects(12);
   const categories = ["All", "Full Stack", "Frontend", "3D/WebGL", "IoT/Interactive", "AI/ML", "Interactive Media"];
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -72,15 +72,13 @@ const Projects = () => {
               className="bg-[#1b1b1b] p-6 rounded-none overflow-hidden group flex flex-col h-full"
             >
               {/* Project Image */}
-              <div className="relative h-48 bg-[#262626] overflow-hidden">
-                <div className={`absolute inset-0 bg-[#262626] opacity-20`}></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-3xl font-heading text-[var(--text-muted)]">{project.title.split(' ')[0]}</span>
-                </div>
-                <div className="absolute top-4 right-4">
-                  <span className="px-2 py-1 bg-[var(--surface-1)] text-[var(--text-muted)] text-xs rounded-none border border-[var(--border)]">
-                    {project.category}
-                  </span>
+              <div className="relative h-72 bg-[#1b1b1b] overflow-hidden">
+                <div className="absolute inset-0 p-0 flex items-center justify-center">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="max-h-72 max-w-full object-contain"
+                  />
                 </div>
               </div>
 
@@ -136,29 +134,24 @@ const Projects = () => {
                     </motion.div>
                   </Link>
                   
-                  <motion.a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="flex items-center bg-[#131313] justify-center space-x-1 px-4 py-3 border border-[#3d3d3d] text-[var(--text-strong)] rounded-none font-body transition-colors duration-200"
-                  >
-                    <ExternalLink size={16} />
-                    <span className="hidden sm:inline">Demo</span>
-                  </motion.a>
-                  
-                  <motion.a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="flex items-center bg-[#131313] justify-center space-x-1 px-4 py-3 border border-[#3d3d3d] text-[var(--text-strong)] rounded-none font-body transition-colors duration-200"
-                  >
-                    <Github size={16} />
-                    <span className="hidden sm:inline">Code</span>
-                  </motion.a>
+                  {project.liveUrl && project.liveUrl !== '#' ? (
+                    <motion.a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="flex items-center bg-[#131313] justify-center space-x-1 px-4 py-3 border border-[#3d3d3d] text-[var(--text-strong)] rounded-none font-body transition-colors duration-200"
+                    >
+                      <ExternalLink size={16} />
+                      <span className="hidden sm:inline">Demo</span>
+                    </motion.a>
+                  ) : (
+                    <div className="flex items-center justify-center space-x-1 px-4 py-3 border border-[#3d3d3d] text-[var(--text-muted)] bg-[#131313] rounded-none font-body opacity-40 cursor-not-allowed" aria-disabled>
+                      <ExternalLink size={16} />
+                      <span className="hidden sm:inline">No Demo</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -174,16 +167,6 @@ const Projects = () => {
           className="text-center mt-16"
         >
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link href="/projects">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-[var(--surface-2)] text-[var(--text-strong)] rounded-none font-body border border-[var(--border)] transition-colors duration-200 cursor-pointer"
-              >
-                <Eye size={20} />
-                <span>View All Projects</span>
-              </motion.div>
-            </Link>
             <motion.a
               href="#contact"
               whileHover={{ scale: 1.02 }}

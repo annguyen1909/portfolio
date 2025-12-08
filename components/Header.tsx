@@ -25,10 +25,7 @@ const Header = () => {
   const navItems = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'All Projects', href: '/projects' },
+    { name: 'Features', href: '#projects' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -47,9 +44,14 @@ const Header = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
-          className="text-xl md:text-2xl font-heading font-semibold text-[var(--text-strong)] tracking-wide"
         >
-          An Nguyen
+          <Link
+            href="/"
+            aria-label="Go to homepage"
+            className="text-xl md:text-2xl font-heading font-semibold text-[var(--text-strong)] tracking-wide"
+          >
+            An Nguyen
+          </Link>
         </motion.div>
 
         {/* Desktop Navigation */}

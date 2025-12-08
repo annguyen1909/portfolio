@@ -19,11 +19,30 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [status, setStatus] = useState<'idle'|'sending'|'success'|'error'>('idle');
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    // You can integrate with a service like EmailJS or your backend API
+    try {
+      setStatus('sending');
+      setErrorMsg(null);
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        const msg = data?.error || 'Request failed';
+        throw new Error(msg);
+      }
+      setStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (err) {
+      setStatus('error');
+      setErrorMsg(err instanceof Error ? err.message : 'Unknown error');
+    }
   };
 
   const contactInfo = [
@@ -44,7 +63,7 @@ const Contact = () => {
     {
       icon: MapPin,
       label: "Location",
-      value: "District 7, Ho Chi Minh City",
+      value: "District 10, Ho Chi Minh City",
       href: "#",
       color: "from-purple-400 to-pink-400"
     }
@@ -188,6 +207,16 @@ const Contact = () => {
             className="bg-[#1b1b1b] rounded-none p-8 card-glow"
           >
             <h3 className="text-2xl font-bold mb-6 gradient-text">Send Message</h3>
+            {status === 'success' && (
+              <div className="mb-4 rounded-none border border-[#3d3d3d] bg-[#111111] px-4 py-3 text-sm text-green-400">
+                Thanks! Your message was sent.
+              </div>
+            )}
+            {status === 'error' && (
+              <div className="mb-4 rounded-none border border-[#3d3d3d] bg-[#111111] px-4 py-3 text-sm text-red-400">
+                {errorMsg || 'Sorry, something went wrong. Please try again.'}
+              </div>
+            )}
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -283,9 +312,10 @@ const Contact = () => {
                 transition={{ delay: 0.6 }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full flex items-center justify-center space-x-2 px-8 py-4 bg-[#3d3d3d] cursor-pointer text-white font-semibold rounded-none shadow-lg hover:shadow-xl transition-all duration-300"
+                disabled={status === 'sending'}
+                className="w-full flex items-center justify-center space-x-2 px-8 py-4 bg-[#3d3d3d] cursor-pointer text-white font-semibold rounded-none shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-60"
               >
-                <span>Send Message</span>
+                <span>{status === 'sending' ? 'Sending…' : 'Send Message'}</span>
               </motion.button>
             </form>
           </motion.div>
