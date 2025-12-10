@@ -99,7 +99,7 @@ export const projects: Project[] = [
     order: 1,
   },
   {
-    id: "2",
+    id: "6",
     slug: "skira-landing-page",
     title: "SKIRA Landing Page",
     shortDescription:
@@ -160,10 +160,10 @@ export const projects: Project[] = [
     githubUrl: "#",
     status: "completed",
     year: "2024",
-    order: 2,
+    order: 6,
   },
   {
-    id: "8",
+    id: "7",
     slug: "lighting-control-system",
     title: "Advanced Lighting Control System",
     shortDescription:
@@ -225,7 +225,7 @@ export const projects: Project[] = [
     status: "completed",
     year: "2023-2024",
     client: "AC3 Studio Vietnam",
-    order: 8,
+    order: 7,
   },
   {
     id: "4",
@@ -289,10 +289,10 @@ export const projects: Project[] = [
     githubUrl: "#",
     status: "completed",
     year: "2023-2024",
-    order: 3,
+    order: 4,
   },
   {
-    id: "6",
+    id: "5",
     slug: "llm-vulnerability-detection",
     title: "LLM Vulnerability Detection System",
     shortDescription:
@@ -353,10 +353,10 @@ export const projects: Project[] = [
     githubUrl: "#",
     status: "completed",
     year: "2024-2025",
-    order: 6,
+    order: 5,
   },
   {
-    id: "6",
+    id: "3",
     slug: "sutygon-order-invoicing",
     title: "SUTYGON Client — Main Webpage and Order Management",
     shortDescription:
@@ -431,10 +431,10 @@ export const projects: Project[] = [
     status: "completed",
     year: "2025",
     client: "SUTYGON",
-    order: 4,
+    order: 3,
   },
   {
-    id: "7",
+    id: "4",
     slug: "sutygon-crm",
     title: "Sutygon CRM — Order & Invoicing Platform",
     shortDescription:
@@ -510,10 +510,10 @@ export const projects: Project[] = [
     status: "in-progress",
     year: "2023–2025",
     client: "Sutygon (internal / product)",
-    order: 7,
+    order: 4,
   },
   {
-    id: "5",
+    id: "2",
     slug: "visualennode-archviz-studio",
     title: "Visual Ennode — Architectural Visualization Studio",
     shortDescription:
@@ -576,7 +576,7 @@ export const projects: Project[] = [
     status: "completed",
     year: "",
     client: "Visual Ennode (company website)",
-    order: 5,
+    order: 2,
   },
 ];
 

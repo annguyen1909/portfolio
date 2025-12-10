@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, Poppins, Source_Sans_3, Fira_Code, Playfair_Display, Space_Grotesk } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -66,6 +67,19 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable}  ${poppins.variable} ${sourceSans.variable} ${firaCode.variable} ${playfair.variable} ${spaceGrotesk.variable} antialiased bg-gray-900 text-white`}
       >
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-CDBPK401ME"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-CDBPK401ME');
+          `}
+        </Script>
         {children}
       </body>
     </html>

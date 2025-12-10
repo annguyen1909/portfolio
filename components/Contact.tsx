@@ -73,13 +73,13 @@ const Contact = () => {
     {
       icon: Github,
       label: "GitHub",
-      href: "#",
+      href: "https://github.com/annguyen1909",
       color: "hover:text-gray-300"
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
-      href: "#",
+      href: "https://www.linkedin.com/in/nguyen-truong-an-1909nta/",
       color: "hover:text-blue-400"
     }
   ];
