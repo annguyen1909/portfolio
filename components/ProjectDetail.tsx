@@ -1,383 +1,337 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowLeft, ExternalLink, Github, Calendar, Users, Clock, Award, CheckCircle, Target, Lightbulb, TrendingUp } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Github, Users, Clock, Award, CheckCircle, Target, Lightbulb, TrendingUp, Layers, Globe, Calendar } from 'lucide-react';
 import Link from 'next/link';
 import { Project } from '../data/projects';
+import { BOOK_CALL_URL } from '../data/site';
 
 interface ProjectDetailProps {
   project: Project;
 }
 
 const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
+  const liveHref = project.liveUrl && project.liveUrl !== '#'
+    ? (project.liveUrl.startsWith('http') ? project.liveUrl : `https://${project.liveUrl}`)
+    : null;
+
   return (
-    <div className="min-h-screen pt-20 bg-[var(--background)]">
-      {/* Header Navigation */}
-      <div className="container mx-auto px-6 py-8">
+    <div className="project-detail min-h-screen pt-20 bg-[var(--background)]">
+      <div className="section-container pt-10 pb-8 md:pt-12 md:pb-10">
         <Link href="/#projects">
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="inline-flex items-center space-x-2 text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors"
           >
             <ArrowLeft size={20} />
-            <span>Back to Projects</span>
+            <span>Back to Case Studies</span>
           </motion.div>
         </Link>
       </div>
 
-      {/* Hero Section */}
-      <section className="container mx-auto px-6 mb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="section-container mb-20 md:mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="flex items-center space-x-3 mb-4">
-              <span className={`px-2 py-1 rounded-none text-sm font-medium bg-[#262626] text-[var(--text-strong)] border border-[#3d3d3d]`}>
-                {project.category}
-              </span>
-              <span className="px-2 py-1 rounded-none text-sm bg-[#1d1d1d] text-[var(--text-muted)] border border-[#3d3d3d]">
-                {project.year}
-              </span>
-              <span className={`px-2 py-1 rounded-none text-sm font-medium ${
-                project.status === 'completed' ? 'bg-green-500/20 text-green-400' :
-                project.status === 'in-progress' ? 'bg-yellow-500/20 text-yellow-400' :
-                'bg-gray-500/20 text-gray-400'
+            <div className="flex flex-wrap items-center gap-2 mb-6">
+              <span className="tag tag-active">{project.category}</span>
+              <span className="tag">{project.year}</span>
+              {project.isProduction && (
+                <span className="tag flex items-center gap-1">
+                  <Globe size={12} />
+                  In Production
+                </span>
+              )}
+              <span className={`tag ${
+                project.status === 'completed' ? 'text-emerald-400 border-emerald-500/30' :
+                project.status === 'in-progress' ? 'text-yellow-400 border-yellow-500/30' :
+                ''
               }`}>
                 {project.status.charAt(0).toUpperCase() + project.status.slice(1).replace('-', ' ')}
               </span>
             </div>
 
-            <h1 className="font-heading text-4xl md:text-5xl mb-6 text-[var(--text-strong)]">
+            <h1 className="font-heading text-4xl md:text-5xl mb-6 text-[var(--text-strong)] tracking-tight leading-[0.98]">
               {project.title}
             </h1>
 
-            <p className="text-lg text-[var(--text-muted)] mb-8 leading-relaxed font-body">
+            <p className="text-lg text-[var(--text-strong)] mb-6 leading-[1.75] font-medium">
+              {project.businessImpact}
+            </p>
+
+            <div className="project-detail-metric">
+              <span className="project-detail-metric-eyebrow">Key metric</span>
+              <div className="project-detail-metric-reading">
+                <strong>{project.keyMetric.value}</strong>
+                <span>
+                  {project.keyMetric.label}
+                  {project.keyMetric.estimated && ' (estimated — to be confirmed)'}
+                </span>
+              </div>
+            </div>
+
+            <p className="text-base text-[var(--text-muted)] mb-10 leading-[1.85]">
               {project.fullDescription}
             </p>
 
             <div className="flex flex-wrap gap-4">
-              {project.liveUrl !== '#' && (
+              {liveHref && (
                 <motion.a
-                  href={project.liveUrl}
+                  href={liveHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.02 }}
-                  className="flex items-center space-x-2 px-6 py-3 bg-[#131313] text-[var(--text-strong)] rounded-none font-body border border-[#3d3d3d] transition-colors duration-200 hover:opacity-90"
+                  className="btn-primary"
                 >
-                  <ExternalLink size={20} />
-                  <span>View Live Project</span>
+                  <ExternalLink size={16} />
+                  View Live
                 </motion.a>
               )}
-              
-              {project.githubUrl !== '#' && (
+              {project.githubUrl && project.githubUrl !== '#' && (
                 <motion.a
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.02 }}
-                  className="flex items-center space-x-2 px-6 py-3 border border-[#3d3d3d] text-[var(--text-strong)] rounded-none font-body transition-colors duration-200"
+                  className="btn-secondary"
                 >
-                  <Github size={20} />
-                  <span>View Code</span>
+                  <Github size={16} />
+                  View Code
                 </motion.a>
               )}
+              <Link href={BOOK_CALL_URL}>
+                <span className="btn-secondary">
+                  <Calendar size={16} />
+                  Start a Project
+                </span>
+              </Link>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative"
+            transition={{ duration: 0.6 }}
+            className="card-glow overflow-hidden"
           >
-            <div className="bg-[#1b1b1b] rounded-none p-4 border border-[#3d3d3d]">
-              <div className="aspect-video bg-[#262626] rounded-none relative overflow-hidden">
-                <div className={`absolute inset-0 bg-[#262626] opacity-20`}></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <img src={project.image} alt={project.title} className="absolute inset-0 object-cover w-full h-full" />
-                  <span className="text-3xl font-heading text-[var(--text-muted)]">{project.title.split(' ')[0]}</span>
-                </div>
-              </div>
+            <div className="aspect-video bg-[var(--background)] relative">
+              <img src={project.image} alt={project.title} className="absolute inset-0 object-cover w-full h-full" />
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Project Info Cards */}
-      <section className="container mx-auto px-6 mb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="bg-[#1b1b1b] rounded-none p-6 border border-[#3d3d3d] text-center"
-          >
-            <Calendar className="mx-auto mb-3 text-[var(--text-strong)]" size={32} />
-            <h3 className="font-heading font-medium mb-2 text-[var(--text-strong)]">Timeline</h3>
-            <p className="text-[var(--text-muted)] text-sm font-body">{project.timeline}</p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-[#1b1b1b] rounded-none p-6 border border-[#3d3d3d] text-center"
-          >
-            <Users className="mx-auto mb-3 text-[var(--text-strong)]" size={32} />
-            <h3 className="font-heading font-medium mb-2 text-[var(--text-strong)]">Team Size</h3>
-            <p className="text-[var(--text-muted)] text-sm font-body">{project.teamSize}</p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="bg-[#1b1b1b] rounded-none p-6 border border-[#3d3d3d] text-center"
-          >
-            <Clock className="mx-auto mb-3 text-[var(--text-strong)]" size={32} />
-            <h3 className="font-heading font-medium mb-2 text-[var(--text-strong)]">Role</h3>
-            <p className="text-[var(--text-muted)] text-sm font-body">{project.role}</p>
-          </motion.div>
-
-          {project.client && (
+      <section className="section-container mb-20 md:mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            { icon: Calendar, label: 'Timeline', value: project.timeline },
+            { icon: Users, label: 'Team Size', value: project.teamSize },
+            { icon: Clock, label: 'Role', value: project.role },
+            ...(project.client ? [{ icon: Award, label: 'Client', value: project.client }] : []),
+          ].map((item, i) => (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              key={item.label}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="bg-[#1b1b1b] rounded-none p-6 border border-[#3d3d3d] text-center"
+              transition={{ delay: i * 0.08 }}
+              viewport={{ once: true }}
+              className="card-glow p-6 md:p-7 text-center"
             >
-              <Award className="mx-auto mb-3 text-[var(--text-strong)]" size={32} />
-              <h3 className="font-heading font-medium mb-2 text-[var(--text-strong)]">Client</h3>
-              <p className="text-[var(--text-muted)] text-sm font-body">{project.client}</p>
-            </motion.div>
-          )}
-        </div>
-      </section>
-
-      {/* Technologies */}
-      <section className="container mx-auto px-6 mb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="bg-[#1b1b1b] rounded-none p-8 border border-[#3d3d3d]"
-        >
-          <h2 className="text-3xl font-heading mb-6 text-[var(--text-strong)]">Technologies Used</h2>
-          <div className="flex flex-wrap gap-3">
-            {project.technologies.map((tech, index) => (
-              <motion.span
-                key={tech}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.1 }}
-                className="px-4 py-2 bg-[#1d1d1d] text-[var(--text-muted)] rounded-none border border-[#3d3d3d] transition-colors duration-200 font-body"
-              >
-                {tech}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Features & Challenges */}
-      <section className="container mx-auto px-6 mb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Features */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="bg-[#1b1b1b] rounded-none p-12 border border-[#3d3d3d] hover:border-[color:var(--accent-blue)]/30 transition-colors duration-200"
-          >
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="w-8 h-8 flex items-center justify-center border border-[#3d3d3d]"><CheckCircle className="text-[var(--text-strong)]" size={20} /></div>
-              <div>
-                <h2 className="text-2xl font-heading text-[var(--text-strong)]">Key Features</h2>
-                <div className="h-[2px] w-12 bg-[var(--accent-blue)]"></div>
-              </div>
-            </div>
-            <ul className="space-y-3 relative pl-4 before:absolute before:left-0 before:top-1 before:bottom-1 before:w-[2px] before:bg-[var(--accent-blue)]/60">
-              {project.features.map((feature, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="group flex items-start gap-3 py-2 transition-transform duration-180 hover:translate-x-[2px]"
-                >
-                  <span className="text-[var(--text-muted)] font-body">- {feature}</span>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Challenges */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="bg-[#1b1b1b] rounded-none p-12 border border-[#3d3d3d] hover:border-[color:var(--accent-blue)]/30 transition-colors duration-200"
-          >
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="w-8 h-8 flex items-center justify-center border border-[#3d3d3d]"><Target className="text-[var(--text-strong)]" size={20} /></div>
-              <div>
-                <h2 className="text-2xl font-heading text-[var(--text-strong)]">Challenges</h2>
-                <div className="h-[2px] w-12 bg-[var(--accent-blue)]"></div>
-              </div>
-            </div>
-            <ul className="space-y-3 relative pl-4 before:absolute before:left-0 before:top-1 before:bottom-1 before:w-[2px] before:bg-[var(--accent-blue)]/60">
-              {project.challenges.map((challenge, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="group flex items-start gap-3 py-2 transition-transform duration-180 hover:translate-x-[2px]"
-                >
-                  <span className="text-[var(--text-muted)] font-body">- {challenge}</span>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Solutions & Results */}
-      <section className="container mx-auto px-6 mb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Solutions */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="bg-[#1b1b1b] rounded-none p-12 border border-[#3d3d3d] hover:border-[color:var(--accent-blue)]/30 transition-colors duration-200"
-          >
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="w-8 h-8 flex items-center justify-center border border-[#3d3d3d]"><Lightbulb className="text-[var(--text-strong)]" size={20} /></div>
-              <div>
-                <h2 className="text-2xl font-heading text-[var(--text-strong)]">Solutions</h2>
-                <div className="h-[2px] w-12 bg-[var(--accent-blue)]"></div>
-              </div>
-            </div>
-            <ul className="space-y-3 grid md:grid-cols-2 gap-x-6 relative md:pl-4 md:before:absolute md:before:left-0 md:before:top-1 md:before:bottom-1 md:before:w-[2px] md:before:bg-[var(--accent-blue)]/60">
-              {project.solutions.map((solution, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="group flex items-start gap-3 py-2 transition-transform duration-180 hover:translate-x-[2px]"
-                >
-                  <span className="text-[var(--text-muted)] font-body">- {solution}</span>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Results */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="bg-[#1b1b1b] rounded-none p-12 border border-[#3d3d3d] hover:border-[color:var(--accent-blue)]/30 transition-colors duration-200"
-          >
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="w-8 h-8 flex items-center justify-center border border-[#3d3d3d]"><TrendingUp className="text-[var(--text-strong)]" size={20} /></div>
-              <div>
-                <h2 className="text-2xl font-heading text-[var(--text-strong)]">Results & Impact</h2>
-                <div className="h-[2px] w-12 bg-[var(--accent-blue)]"></div>
-              </div>
-            </div>
-            <ul className="space-y-3 grid md:grid-cols-2 gap-x-6 relative md:pl-4 md:before:absolute md:before:left-0 md:before:top-1 md:before:bottom-1 md:before:w-[2px] md:before:bg-[var(--accent-blue)]/60">
-              {project.results.map((result, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="group flex items-start gap-3 py-2 transition-transform duration-180 hover:translate-x-[2px]"
-                >
-                  <span className="text-[var(--text-muted)] font-body">- {result}</span>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Gallery Section */}
-      <section className="container mx-auto px-6 mb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl font-heading mb-4 text-[var(--text-strong)]">Project Gallery</h2>
-          <p className="text-[var(--text-muted)] font-body">Visual showcase of the project development and final results</p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-          {project.gallery.map((image, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.02 }}
-              className="bg-[#1b1b1b] rounded-none overflow-hidden border border-[#3d3d3d]"
-            >
-              <div className="bg-[#262626] relative aspect-[3/2] md:aspect-[16/9] lg:aspect-[4/3]">
-                <div className={`absolute inset-0 bg-[#262626] opacity-10`}></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-2xl font-heading text-[var(--text-muted)]">Gallery{index + 1}</span>
-                  <img src={image} alt={`Gallery ${index + 1}`} className="absolute inset-0 object-cover w-full h-full" />
-                </div>
-              </div>
+              <item.icon className="mx-auto mb-3 text-[var(--accent)]" size={24} />
+              <h3 className="font-heading text-sm mb-2 text-[var(--text-strong)]">{item.label}</h3>
+              <p className="text-[var(--text-muted)] text-sm leading-relaxed">{item.value}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="container mx-auto px-6 pb-16">
+      <section className="section-container mb-20 md:mb-24">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="bg-[#1b1b1b] rounded-none p-12 border border-[#3d3d3d] text-center"
+          className="card-glow px-0 py-10 sm:px-6 md:p-12 lg:p-14"
         >
-          <h2 className="text-3xl font-heading mb-6 text-[var(--text-strong)]">Interested in Similar Work?</h2>
-          <p className="text-[var(--text-muted)] mb-8 max-w-2xl mx-auto font-body">
-            I'm always excited to work on innovative projects that push the boundaries of web development. 
-            Let's discuss how we can bring your ideas to life.
+          <div className="flex items-center gap-3 mb-6">
+            <Target className="text-[var(--accent)]" size={22} />
+            <h2 className="text-2xl font-heading text-[var(--text-strong)]">The Problem</h2>
+          </div>
+          <p className="max-w-5xl text-base md:text-lg leading-[1.85] text-[var(--text-muted)]">{project.problem}</p>
+        </motion.div>
+      </section>
+
+      <section className="section-container mb-20 md:mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="card-glow px-0 py-10 sm:px-6 md:p-12 lg:p-14"
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <Lightbulb className="text-[var(--accent)]" size={22} />
+              <h2 className="text-2xl font-heading text-[var(--text-strong)]">The Solution</h2>
+            </div>
+            <ul className="space-y-5">
+              {project.solutions.map((solution, index) => (
+                <li key={index} className="flex items-start gap-3 text-[0.95rem] leading-[1.8] text-[var(--text-muted)]">
+                  <CheckCircle size={16} className="text-[var(--accent)] mt-1.5 shrink-0" />
+                  {solution}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="card-glow px-0 py-10 sm:px-6 md:p-12 lg:p-14"
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <Layers className="text-[var(--accent)]" size={22} />
+              <h2 className="text-2xl font-heading text-[var(--text-strong)]">Technical Implementation</h2>
+            </div>
+            <ul className="space-y-5">
+              {project.technicalImplementation.map((item, index) => (
+                <li key={index} className="flex items-start gap-3 text-[0.95rem] leading-[1.8] text-[var(--text-muted)]">
+                  <CheckCircle size={16} className="text-[var(--accent)] mt-1.5 shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="section-container mb-20 md:mb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="card-glow px-0 py-10 sm:px-6 md:p-12 lg:p-14"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <Layers className="text-[var(--accent)]" size={22} />
+            <h2 className="text-2xl font-heading text-[var(--text-strong)]">Architecture Overview</h2>
+          </div>
+          <p className="max-w-5xl text-[var(--text-muted)] leading-[1.85] mb-8">{project.architecture.overview}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {project.architecture.components.map((component, index) => (
+              <div key={index} className="flex items-start gap-3 p-4 md:p-5 rounded-lg border border-[var(--border)] bg-[var(--background)]">
+                <CheckCircle size={16} className="text-[var(--accent)] mt-1 shrink-0" />
+                <span className="text-[0.9rem] leading-[1.7] text-[var(--text-muted)]">{component}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      <section className="section-container mb-20 md:mb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="card-glow px-0 py-10 sm:px-6 md:p-12 lg:p-14"
+        >
+          <h2 className="text-2xl font-heading mb-6 text-[var(--text-strong)]">Technologies Used</h2>
+          <div className="flex flex-wrap gap-3">
+            {project.technologies.map((tech) => (
+              <span key={tech} className="tag">{tech}</span>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      <section className="section-container mb-20 md:mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="card-glow px-0 py-10 sm:px-6 md:p-12 lg:p-14"
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <CheckCircle className="text-[var(--accent)]" size={22} />
+              <h2 className="text-2xl font-heading text-[var(--text-strong)]">Key Features</h2>
+            </div>
+            <ul className="space-y-4">
+              {project.features.map((feature, index) => (
+                <li key={index} className="text-[0.95rem] leading-[1.8] text-[var(--text-muted)]">— {feature}</li>
+              ))}
+            </ul>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="card-glow px-0 py-10 sm:px-6 md:p-12 lg:p-14"
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <TrendingUp className="text-[var(--accent)]" size={22} />
+              <h2 className="text-2xl font-heading text-[var(--text-strong)]">Outcomes & Impact</h2>
+            </div>
+            <ul className="space-y-5">
+              {project.results.map((result, index) => (
+                <li key={index} className="flex items-start gap-3 text-[0.95rem] leading-[1.8] text-[var(--text-muted)]">
+                  <TrendingUp size={16} className="text-emerald-400 mt-1 shrink-0" />
+                  {result}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </section>
+
+      {project.gallery.length > 0 && (
+        <section className="section-container mb-20 md:mb-24">
+          <h2 className="text-2xl font-heading mb-10 text-[var(--text-strong)]">Project Gallery</h2>
+          <div className="space-y-12">
+            {project.gallery.map((image, index) => (
+              <motion.figure
+                key={index}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="card-glow overflow-hidden"
+              >
+                <div className="aspect-video bg-[var(--background)]">
+                  <img src={image} alt={`${project.title} screenshot ${index + 1}`} className="w-full h-full object-cover" />
+                </div>
+                <figcaption className="border-t border-[var(--border)] px-5 py-4 text-xs uppercase tracking-[0.14em] text-[var(--text-subtle)]">
+                  {String(index + 1).padStart(2, '0')} / {project.title}
+                </figcaption>
+              </motion.figure>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section className="section-container pb-20 md:pb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="card-glow px-5 py-12 md:p-14 text-center"
+        >
+          <h2 className="text-2xl md:text-3xl font-heading mb-6 text-[var(--text-strong)]">
+            Need a similar system built?
+          </h2>
+          <p className="text-[var(--text-muted)] leading-[1.8] mb-10 max-w-xl mx-auto">
+            I specialize in production-grade platforms — payment flows, complex business logic,
+            and admin dashboards. Let&apos;s discuss your project.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/#contact">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="px-6 py-3 bg-[#131313] text-[var(--text-strong)] rounded-none font-body border border-[#3d3d3d] transition-colors duration-200 cursor-pointer"
-              >
-                Get In Touch
-              </motion.div>
+            <Link href={BOOK_CALL_URL} className="btn-primary">
+              <Calendar size={15} />
+              Start a Project
             </Link>
-            <Link href="/#projects">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="px-6 py-3 border border-[#3d3d3d] text-[var(--text-strong)] rounded-none font-body transition-colors duration-200 cursor-pointer"
-              >
-                View More Projects
-              </motion.div>
+            <Link href="/#projects" className="btn-secondary">
+              More Case Studies
             </Link>
           </div>
         </motion.div>

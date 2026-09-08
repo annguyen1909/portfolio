@@ -1,120 +1,100 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 import Link from 'next/link';
+
+const navItems = [
+  { name: 'Home', href: '#home' },
+  { name: 'Work', href: '#projects' },
+  { name: 'Profile', href: '#about' },
+  { name: 'Contact', href: '#contact' },
+];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    
-    // Initial check
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     handleScroll();
-    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Features', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
-  ];
+  const resolveHref = (href: string) =>
+    href.startsWith('#') && pathname !== '/' ? `/${href}` : href;
 
   return (
-    <motion.header
-      initial={{ y: -16, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.3, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-[100] border-none ${
-        scrolled ? 'bg-[var(--surface)] border-[var(--border)] py-3' : 'bg-black border-[var(--border)] py-6'
-      }`}
-      style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100 }}
-    >
-      <div className="container mx-auto px-6 flex justify-between items-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1 }}
+    <>
+      <header className={`site-header ${scrolled ? 'site-header--scrolled' : ''}`}>
+        <div className="section-container flex items-center justify-between">
+        <Link
+          href="/"
+          aria-label="Go to homepage"
+          className="site-logo"
         >
-          <Link
-            href="/"
-            aria-label="Go to homepage"
-            className="text-xl md:text-2xl font-heading font-semibold text-[var(--text-strong)] tracking-wide"
-          >
-            An Nguyen
-          </Link>
-        </motion.div>
+          <span className="site-logo-mark">A/</span>
+          <span>AN NGUYEN</span>
+        </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6">
-          {navItems.map((item, index) => {
-            const pathname = usePathname();
-            const resolvedHref = item.href.startsWith('#') && pathname !== '/' ? `/${item.href}` : item.href;
-            return (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
-              >
+        <nav className="hidden md:flex items-center gap-10" aria-label="Primary navigation">
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              href={resolveHref(item.href)}
+              className="nav-link"
+            >
+              {item.name.toUpperCase()}
+            </Link>
+          ))}
+          <Link href={resolveHref('#contact')} className="nav-contact">
+            START A PROJECT <ArrowUpRight size={14} />
+          </Link>
+        </nav>
+
+        <button
+          className="md:hidden text-[var(--text-strong)] p-2"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+        >
+          {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+        </div>
+
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="mobile-menu md:hidden"
+          >
+            <nav className="section-container flex flex-col gap-1 py-4">
+              {navItems.map((item) => (
                 <Link
-                  href={resolvedHref}
-                  className="font-body text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors duration-200"
+                  key={item.name}
+                  href={resolveHref(item.href)}
+                className="nav-link border-b border-[var(--border)] py-4"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
-              </motion.div>
-            );
-          })}
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden text-[var(--text-strong)]"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="absolute top-full left-0 right-0 md:hidden z-[99] bg-[var(--surface)] border-b border-[var(--border)]"
-          >
-            <nav className="flex flex-col p-6 space-y-4">
-              {navItems.map((item) => {
-                const pathname = usePathname();
-                const resolvedHref = item.href.startsWith('#') && pathname !== '/' ? `/${item.href}` : item.href;
-                return (
-                  <div key={item.name}>
-                    <Link
-                      href={resolvedHref}
-                      className="font-body text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors duration-200"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  </div>
-                );
-              })}
+              ))}
+              <Link href={resolveHref('#contact')} className="nav-contact mt-4 justify-center" onClick={() => setIsMenuOpen(false)}>
+                START A PROJECT <ArrowUpRight size={14} />
+              </Link>
             </nav>
           </motion.div>
         )}
-      </div>
-    </motion.header>
+        </AnimatePresence>
+      </header>
+
+    </>
   );
 };
 

@@ -1,240 +1,88 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { User, MapPin, Calendar, Check, Phone, Mail } from "lucide-react";
+import { ArrowUpRight, Download } from "lucide-react";
 
-const About = () => {
+const technologies = [
+  "React", "TypeScript", "Next.js", "Node.js", "PostgreSQL", "Prisma",
+  "Three.js", "TailwindCSS", "Vite.js", "Python", "C++",
+];
+
+const details = [
+  ["BASED IN", "Ho Chi Minh City, Vietnam"],
+  ["EDUCATION", "B.IT, RMIT University — 2025"],
+  ["FOCUS", "Full-stack systems, operations, interactive web"],
+  ["AVAILABILITY", "Freelance and project-based"],
+];
+
+export default function About() {
   return (
-    <section id="about" className="py-20 bg-black">
-      <div className="container mx-auto px-6">
+    <section id="about" className="section-padding editorial-section editorial-section--soft">
+      <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="section-heading section-heading--row"
         >
-          <h2 className="text-5xl md:text-6xl font-creative mb-8 text-balance tracking-tight">
-            About <span className="text-[var(--text-strong)]">Me</span>
-          </h2>
-          <div className="w-24 h-1 bg-[var(--accent-blue)]/60 mx-auto"></div>
+          <div>
+            <p className="section-label">06 / Profile</p>
+            <h2 className="section-title">AN<br /><span>NGUYEN.</span></h2>
+          </div>
+          <p className="section-subtitle">
+            A full-stack engineer who stays close to the product, from the first
+            workflow sketch to the production release.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          {/* Personal Profile - Larger Column */}
+        <div className="profile-layout">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="lg:col-span-2 space-y-6"
+            className="profile-story"
           >
-            <div className="bg-[#1b1b1b] rounded-none p-8 card-glow">
-              <h3 className="text-3xl font-heading mb-6 text-[var(--text-strong)] tracking-wide">
-                Personal Profile
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <p className="text-gray-300 leading-relaxed mb-4 font-body text-lg">
-                    Full Stack Developer with a strong foundation in React,
-                    TypeScript, and C++, experienced in building scalable web
-                    applications, service websites, interactive 3D websites, and AI-integrated
-                    platforms.
-                  </p>
-                  <p className="text-gray-300 leading-relaxed font-body text-lg">
-                    Proven ability to deliver user-centric solutions using
-                    Next.js, Vite.js, TailwindCSS, RESTful APIs, and Database Integration.
-                  </p>
-                </div>
-                <div>
-                  <p className="text-gray-300 leading-relaxed font-body text-lg">
-                    Skilled in both frontend design and backend logic, with a
-                    passion for performance, automation, and immersive digital
-                    experiences. Currently focused on Web Services, AI integration, WebGL/Three.js development, and
-                    Database Management.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Info Cards Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <motion.div
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-[#1b1b1b] rounded-none p-4 card-glow text-center"
-              >
-                <User className="text-white mx-auto mb-2" size={24} />
-                <p className="text-xs text-gray-400 mb-1">Role</p>
-                <p className="text-white font-creative font-semibold text-sm">
-                  Full Stack Developer
-                </p>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-[#1b1b1b] rounded-none p-4 card-glow text-center"
-              >
-                <MapPin className="text-white mx-auto mb-2" size={24} />
-                <p className="text-xs text-gray-400 mb-1">Location</p>
-                <p className="text-white font-creative font-semibold text-sm">
-                  Ho Chi Minh City
-                </p>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-[#1b1b1b] rounded-none p-4 card-glow text-center"
-              >
-                <Calendar className="text-white mx-auto mb-2" size={24} />
-                <p className="text-xs text-gray-400 mb-1">Education</p>
-                <p className="text-white font-creative font-semibold text-sm">
-                  RMIT - IT 2025
-                </p>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-[#1b1b1b] rounded-none p-4 card-glow text-center"
-              >
-                <Check className="text-white mx-auto mb-2" size={24} />
-                <p className="text-xs text-gray-400 mb-1">Status</p>
-                <p className="text-white font-creative font-semibold text-sm">
-                  Available
-                </p>
-              </motion.div>
-            </div>
-
-            {/* Quick Connect Section */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <motion.div
-                whileHover={{ scale: 1.02, y: -5 }}
-                className="bg-[#1b1b1b] rounded-none p-6 card-glow"
-              >
-                <h4 className="text-lg font-heading mb-4 text-[var(--text-strong)]">
-                  Let's Connect
-                </h4>
-                <div className="space-y-3">
-                  <motion.a
-                    href="mailto:nguyentruongan0919@gmail.com"
-                    whileHover={{ scale: 1.05 }}
-                    className="flex items-center space-x-3 p-3 bg-[#131313] rounded-none border-none transition-all duration-300"
-                  >
-                    <div className="w-8 h-8 bg-none rounded-full flex items-center justify-center">
-                      <Mail className="text-white mx-auto" size={24} />
-                    </div>
-                    <span className="text-white font-body text-sm">
-                      Send Email
-                    </span>
-                  </motion.a>
-
-                  <motion.a
-                    href="tel:+84905941752"
-                    whileHover={{ scale: 1.05 }}
-                    className="flex items-center space-x-3 p-3 bg-[#131313] rounded-none border-none transition-all duration-300"
-                  >
-                    <div className="w-8 h-8 bg-none rounded-full flex items-center justify-center">
-                      <Phone className="text-white mx-auto" size={24} />
-                    </div>
-                    <span className="text-white font-body text-sm">
-                      Call Me
-                    </span>
-                  </motion.a>
-                </div>
-              </motion.div>
+            <p>
+              I build scalable web applications, service platforms, interactive 3D
+              experiences, and AI-integrated tools with a focus on performance and
+              clear architecture.
+            </p>
+            <p>
+              My recent work spans eVisa platforms with payment and operational
+              workflows, CRM and invoicing tools, lighting control software, and
+              WebGL experiences. I work across interface, API, data, and deployment.
+            </p>
+            <p>
+              I collaborate directly with clients and small teams, translating real
+              business constraints into software that remains understandable after launch.
+            </p>
+            <div className="profile-actions">
+              <a href="mailto:nguyentruongan0919@gmail.com" className="text-link">
+                <span>EMAIL ME</span><ArrowUpRight size={15} />
+              </a>
+              <a href="/AnNguyenResume.pdf" target="_blank" rel="noopener noreferrer" className="text-link text-link--muted">
+                <span>DOWNLOAD RESUME</span><Download size={15} />
+              </a>
             </div>
           </motion.div>
 
-          {/* Stats/Highlights - Right Column */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
+          <motion.aside
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="profile-facts"
           >
-            <div className="bg-[#1b1b1b] rounded-none p-6 card-glow">
-              <h3 className="text-2xl font-heading mb-6 text-[var(--text-strong)] text-center">
-                Highlights
-              </h3>
-              <div className="space-y-4">
-                <div className="text-center">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
-                    className="text-3xl font-display font-bold text-white mb-1"
-                  >
-                    8+
-                  </motion.div>
-                  <p className="text-gray-300 font-body text-sm">
-                    Projects Completed
-                  </p>
-                </div>
-
-                <div className="text-center">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
-                    className="text-3xl font-display font-bold text-white mb-1"
-                  >
-                    3+
-                  </motion.div>
-                  <p className="text-gray-300 font-body text-sm">
-                    Years of Experience
-                  </p>
-                </div>
-
-                <div className="text-center">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-                    className="text-3xl font-display font-bold text-white mb-1"
-                  >
-                    8+
-                  </motion.div>
-                  <p className="text-gray-300 font-body text-sm">
-                    Technologies Mastered
-                  </p>
-                </div>
-              </div>
+            {details.map(([label, value]) => (
+              <div key={label}><span>{label}</span><p>{value}</p></div>
+            ))}
+            <div className="profile-stack">
+              <span>CORE STACK</span>
+              <p>{technologies.join(" · ")}</p>
             </div>
-
-            {/* Skills Preview */}
-            <motion.div
-              whileHover={{ scale: 1.02, y: -5 }}
-              className="bg-[#1b1b1b] rounded-none p-6 card-glow"
-            >
-              <h4 className="text-lg font-heading mb-4 text-center text-[var(--text-strong)]">
-                Core Technologies
-              </h4>
-              <div className="flex flex-wrap gap-2 justify-center">
-                {[
-                  "React",
-                  "TypeScript",
-                  "Next.js",
-                  "Three.js",
-                  "Node.js",
-                  "C++",
-                ].map((tech, index) => (
-                  <motion.span
-                    key={tech}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.1 * index }}
-                    className="px-3 py-1 bg-[#131313] text-white rounded-sm text-xs border border-[#5c5a5a] hover:border-gray-400 hover:text-white transition-all duration-300"
-                  >
-                    {tech}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
+          </motion.aside>
         </div>
       </div>
     </section>
   );
-};
-
-export default About;
+}

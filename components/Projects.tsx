@@ -2,181 +2,112 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { ExternalLink, ArrowRight, Eye } from 'lucide-react';
+import { ArrowRight, Globe } from 'lucide-react';
 import Link from 'next/link';
 import { getFeaturedProjects } from '../data/projects';
+import ProjectCard from './ProjectCard';
 
 const Projects = () => {
-  const projects = getFeaturedProjects(12);
-  const categories = ["All", "Full Stack", "Frontend", "3D/WebGL", "IoT/Interactive", "AI/ML", "Interactive Media"];
+  const projects = getFeaturedProjects(8);
+  const categories = ["All", "Full Stack", "Frontend", "3D/WebGL", "IoT/Interactive", "AI/ML", "SaaS / CRM"];
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const filteredProjects = selectedCategory === "All" 
-    ? projects 
+  const filteredProjects = selectedCategory === "All"
+    ? projects
     : projects.filter(project => project.category === selectedCategory);
 
+  const flagship = projects.find(p => p.featured) ?? projects[0];
+  const flagshipSlug = flagship?.slug;
+
   return (
-    <section id="projects" className="py-20 bg-[var(--background)]">
-      <div className="container mx-auto px-6">
+    <section id="projects" className="section-padding editorial-section">
+      <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="section-heading"
         >
-          <h2 className="font-heading text-4xl md:text-5xl mb-8 tracking-tight text-[var(--text-strong)]">
-            Featured <span className="text-[var(--text-strong)]">Projects</span>
-          </h2>
-          <div className="w-24 h-1 bg-[var(--accent-blue)]/60 mx-auto mb-8"></div>
-          <p className="text-[var(--text-muted)] max-w-2xl mx-auto text-lg font-body leading-relaxed">
-            A showcase of my best work across different technologies and domains
+          <p className="section-label">02 / Selected work</p>
+          <h2 className="section-title">PRODUCTION<br /><span>WORK.</span></h2>
+          <p className="section-subtitle">
+            Selected systems designed, built, and shipped for real operations.
           </p>
         </motion.div>
 
-        {/* Category Filter */}
+        {flagship && (
+          <motion.article
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="flagship-work group"
+          >
+            <Link href={`/projects/${flagship.slug}`} className="flagship-work-media">
+                <img
+                  src={flagship.image}
+                  alt={flagship.title}
+                  className="project-card-image"
+                />
+                <div className="work-badges">
+                  <span>FEATURED</span>
+                  {flagship.isProduction && (
+                    <span className="flex items-center gap-1">
+                      <Globe size={10} />
+                      LIVE
+                    </span>
+                  )}
+                </div>
+            </Link>
+            <div className="flagship-work-copy">
+              <div><span>01</span><span>{flagship.year}</span></div>
+              <h3>{flagship.title}</h3>
+              <p>{flagship.businessImpact}</p>
+              <Link href={`/projects/${flagship.slug}`} className="text-link">
+                <span>VIEW CASE STUDY</span><ArrowRight size={16} />
+              </Link>
+            </div>
+          </motion.article>
+        )}
+
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="filter-row"
         >
           {categories.map((category) => (
-            <motion.button
+            <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className={`px-4 py-2 rounded-none border transition-colors duration-200 ${
-                selectedCategory === category
-                  ? 'bg-[var(--surface-2)] text-[var(--text-strong)] border-[var(--border)]'
-                  : 'bg-[var(--surface-1)] text-[var(--text-muted)] border-[var(--border)] hover:opacity-90'
-              }`}
+              className={selectedCategory === category ? 'is-active' : ''}
             >
               {category}
-            </motion.button>
+            </button>
           ))}
         </motion.div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {filteredProjects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -2 }}
-              className="bg-[#1b1b1b] p-6 rounded-none overflow-hidden group flex flex-col h-full"
-            >
-              {/* Project Image */}
-              <div className="relative h-72 bg-[#1b1b1b] overflow-hidden">
-                <div className="absolute inset-0 p-0 flex items-center justify-center">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="max-h-72 max-w-full object-contain"
-                  />
-                </div>
-              </div>
-
-              {/* Project Content */}
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-2xl font-heading text-[var(--text-strong)] mb-4 transition-colors tracking-wide">
-                  {project.title}
-                </h3>
-                
-                <p className="text-[var(--text-muted)] mb-5 leading-relaxed font-body line-clamp-3">
-                  {project.shortDescription}
-                </p>
-
-                {/* Features */}
-                <div className="mb-5 flex-grow">
-                  <h4 className="text-sm font-body font-medium text-[var(--text-muted)] mb-3 tracking-wide uppercase">Key Features:</h4>
-                  <ul className="space-y-2">
-                    {project.features.slice(0, 3).map((feature, i) => (
-                      <li key={i} className="flex items-start space-x-2 text-sm text-[var(--text-muted)] font-body">
-                        <ArrowRight size={12} className="text-[var(--accent-blue)] mt-1.5 flex-shrink-0" />
-                        <span className="line-clamp-1">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.technologies.slice(0, 6).map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2 py-1 bg-[#1d1d1d] text-[var(--text-muted)] rounded-none text-xs border border-[#3d3d3d] font-body"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.technologies.length > 6 && (
-                    <span className="px-2 py-1 bg-[var(--surface-2)] text-[var(--text-muted)] rounded-none text-xs font-body">
-                      +{project.technologies.length - 6} more
-                    </span>
-                  )}
-                </div>
-
-                {/* Action Buttons - Always at bottom */}
-                <div className="flex gap-2 mt-auto">
-                  <Link href={`/projects/${project.slug}`} className="flex-1">
-                    <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="flex items-center justify-center space-x-2 px-4 py-3 bg-[#131313] text-[var(--text-strong)] rounded-none font-body border-1 border-[#3d3d3d] transition-colors duration-200 cursor-pointer w-full"
-                    >
-                      <span>View Details</span>
-                    </motion.div>
-                  </Link>
-                  
-                  {project.liveUrl && project.liveUrl !== '#' ? (
-                    <motion.a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="flex items-center bg-[#131313] justify-center space-x-1 px-4 py-3 border border-[#3d3d3d] text-[var(--text-strong)] rounded-none font-body transition-colors duration-200"
-                    >
-                      <ExternalLink size={16} />
-                      <span className="hidden sm:inline">Demo</span>
-                    </motion.a>
-                  ) : (
-                    <div className="flex items-center justify-center space-x-1 px-4 py-3 border border-[#3d3d3d] text-[var(--text-muted)] bg-[#131313] rounded-none font-body opacity-40 cursor-not-allowed" aria-disabled>
-                      <ExternalLink size={16} />
-                      <span className="hidden sm:inline">No Demo</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+        <div className="project-grid">
+          {filteredProjects
+            .filter(p => p.slug !== flagshipSlug)
+            .map((project, index) => (
+              <ProjectCard key={project.slug} project={project} index={index} />
+            ))}
         </div>
 
-        {/* Call to Action */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="section-end-link"
         >
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center space-x-2 px-6 py-3 border border-[var(--border)] text-[var(--text-strong)] rounded-none font-body transition-colors duration-200"
-            >
-              <span>Interested in working together?</span>
-              <ArrowRight size={20} />
-            </motion.a>
-          </div>
+          <Link href="/projects" className="text-link">
+            <span>VIEW ALL CASE STUDIES</span>
+            <ArrowRight size={15} />
+          </Link>
         </motion.div>
       </div>
     </section>

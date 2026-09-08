@@ -1,58 +1,23 @@
 import type { Metadata } from "next";
-import { Montserrat, Poppins, Source_Sans_3, Fira_Code, Playfair_Display, Space_Grotesk } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
 const montserrat = Montserrat({
   variable: "--font-montserrat",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const sourceSans = Source_Sans_3({
-  variable: "--font-source-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
-
-const firaCode = Fira_Code({
-  variable: "--font-fira-code",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  display: "swap",
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "An Nguyen - Full Stack Developer",
-  description: "Full Stack Developer with expertise in React, TypeScript, and C++. Building scalable web applications and immersive digital experiences.",
-  keywords: ["Full Stack Developer", "React", "TypeScript", "Next.js", "Portfolio", "An Nguyen"],
+  title: "An Nguyen — Full-Stack Engineer for Production Systems",
+  description: "Full-stack engineer building production systems — eVisa platforms, CRM tooling, and client-facing web apps. Available for freelance work.",
+  keywords: ["Freelance Developer", "Full Stack Engineer", "React", "TypeScript", "Next.js", "eVisa", "CRM", "An Nguyen"],
   authors: [{ name: "An Nguyen" }],
   openGraph: {
-    title: "An Nguyen - Full Stack Developer",
-    description: "Full Stack Developer with expertise in React, TypeScript, and C++",
+    title: "An Nguyen — Full-Stack Engineer for Production Systems",
+    description: "Production systems for clients — eVisa, CRM, and business web apps.",
     type: "website",
   }
 };
@@ -65,9 +30,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${montserrat.variable}  ${poppins.variable} ${sourceSans.variable} ${firaCode.variable} ${playfair.variable} ${spaceGrotesk.variable} antialiased bg-gray-900 text-white`}
+        className={`${montserrat.variable} antialiased`}
       >
-        {/* Google tag (gtag.js) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-CDBPK401ME"
           strategy="afterInteractive"

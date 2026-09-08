@@ -1,133 +1,90 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Heart, ArrowUp } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const Footer = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 300);
-    };
+    const handleScroll = () => setShowScrollTop(window.scrollY > 400);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const quickLinks = [
+    { name: 'Case Studies', href: '#projects' },
+    { name: 'Results', href: '#proof' },
     { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Start a Project', href: '#contact' },
   ];
 
   return (
-    <footer className="relative bg-[var(--surface)] border-t border-[var(--border)]">
-      <div className="max-w-5xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Brand & Description */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="space-y-4"
-          >
-            <h3 className="text-2xl font-heading font-semibold text-[var(--text-strong)]">An Nguyen</h3>
-            <p className="font-body text-[var(--text-muted)] leading-relaxed">
-              Full Stack Developer passionate about creating innovative web applications 
-              and immersive digital experiences with modern technologies.
-            </p>
-          </motion.div>
+    <footer className="relative border-t border-[var(--border)] bg-[var(--background)]">
+      <div className="section-divider absolute top-0 left-0 right-0" />
 
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="space-y-4"
-          >
-            <h4 className="text-lg font-heading font-semibold text-[var(--text-strong)]">Quick Links</h4>
-            <ul className="space-y-2">
+      <div className="section-container py-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <span className="flex h-5 w-5 items-center justify-center rounded border border-[var(--border)]">
+                <span className="h-1.5 w-1.5 rounded-sm bg-[var(--text-strong)]" />
+              </span>
+              <span className="text-sm font-medium text-[var(--text-strong)]">An Nguyen</span>
+            </div>
+            <p className="text-sm text-[var(--text-muted)] leading-relaxed max-w-xs">
+              Full-stack engineer building production systems for clients worldwide.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider mb-4">Navigation</h4>
+            <ul className="space-y-2.5">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="font-body text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors duration-200"
-                  >
+                  <a href={link.href} className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors">
                     {link.name}
                   </a>
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="space-y-4"
-          >
-            <h4 className="text-lg font-heading font-semibold text-[var(--text-strong)]">Get In Touch</h4>
-            <div className="space-y-2 font-body text-[var(--text-muted)]">
+          <div>
+            <h4 className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider mb-4">Connect</h4>
+            <div className="space-y-2 text-sm text-[var(--text-muted)]">
               <p>nguyentruongan0919@gmail.com</p>
               <p>+84 905 941 752</p>
-              <p>District 10, Ho Chi Minh City</p>
             </div>
-            <div className="flex space-x-4 mt-4">
-              <motion.a
-                href="#"
-                whileHover={{ scale: 1.02 }}
-                className="font-body text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors duration-200"
-              >
+            <div className="flex gap-4 mt-4">
+              <a href="https://github.com/annguyen1909" target="_blank" rel="noopener noreferrer" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors">
                 GitHub
-              </motion.a>
-              <motion.a
-                href="#"
-                whileHover={{ scale: 1.02 }}
-                className="font-body text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors duration-200"
-              >
+              </a>
+              <a href="https://www.linkedin.com/in/nguyen-truong-an-1909nta/" target="_blank" rel="noopener noreferrer" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors">
                 LinkedIn
-              </motion.a>
+              </a>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Copyright */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="border-t border-[var(--border)] pt-8 mt-8 text-center"
-        >
-          <p className="font-body text-[var(--text-muted)]">
-            © {new Date().getFullYear()} An Nguyen. All rights reserved.
+        <div className="border-t border-[var(--border)] mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-[var(--text-muted)]">
+            &copy; {new Date().getFullYear()} An Nguyen. All rights reserved.
           </p>
-        </motion.div>
+          <p className="text-xs text-[var(--text-muted)]">
+            Built with Next.js
+          </p>
+        </div>
       </div>
 
-      {/* Scroll to Top Button */}
       {showScrollTop && (
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={scrollToTop}
-          className="fixed bottom-12 right-12 px-4 py-2 rounded-none border border-[var(--border)] bg-[var(--surface)] text-[var(--text-strong)] transition-colors duration-200 z-50"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed bottom-8 right-8 flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:border-[var(--border-hover)] hover:shadow-[0_0_20px_rgba(255,255,255,0.06)] transition-all z-50"
           aria-label="Scroll to top"
         >
-          <ArrowUp size={20} />
-        </motion.button>
+          <ArrowUp size={16} />
+        </button>
       )}
     </footer>
   );

@@ -3,7 +3,6 @@ import { getProjectBySlug, projects } from "../../../data/projects";
 import ProjectDetail from "../../../components/ProjectDetail";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
-import { main } from "framer-motion/client";
 export async function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
