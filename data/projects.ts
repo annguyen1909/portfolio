@@ -622,8 +622,6 @@ export const projects: Project[] = [
     gallery: [
       "/projects/united-evisa/gallery-1.jpg",
       "/projects/united-evisa/gallery-2.jpg",
-      "/projects/united-evisa/gallery-3.jpg",
-      "/projects/united-evisa/gallery-4.jpg",
     ],
     technologies: [
       "Next.js",
