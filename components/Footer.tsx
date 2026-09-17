@@ -2,9 +2,12 @@
 
 import { ArrowUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import BrandLogo from './BrandLogo';
 
 const Footer = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setShowScrollTop(window.scrollY > 400);
@@ -18,6 +21,7 @@ const Footer = () => {
     { name: 'About', href: '#about' },
     { name: 'Start a Project', href: '#contact' },
   ];
+  const resolveHref = (href: string) => pathname === '/' ? href : `/${href}`;
 
   return (
     <footer className="relative border-t border-[var(--border)] bg-[var(--background)]">
@@ -26,12 +30,7 @@ const Footer = () => {
       <div className="section-container py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="flex h-5 w-5 items-center justify-center rounded border border-[var(--border)]">
-                <span className="h-1.5 w-1.5 rounded-sm bg-[var(--text-strong)]" />
-              </span>
-              <span className="text-sm font-medium text-[var(--text-strong)]">An Nguyen</span>
-            </div>
+            <BrandLogo className="footer-brand" />
             <p className="text-sm text-[var(--text-muted)] leading-relaxed max-w-xs">
               Full-stack engineer building production systems for clients worldwide.
             </p>
@@ -42,7 +41,7 @@ const Footer = () => {
             <ul className="space-y-2.5">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors">
+                  <a href={resolveHref(link.href)} className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors">
                     {link.name}
                   </a>
                 </li>
@@ -80,7 +79,7 @@ const Footer = () => {
       {showScrollTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-8 right-8 flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:border-[var(--border-hover)] hover:shadow-[0_0_20px_rgba(255,255,255,0.06)] transition-all z-50"
+          className="fixed bottom-8 right-8 flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:border-[var(--border-hover)] hover:shadow-[0_0_20px_rgba(255,255,255,0.06)] transition-all z-50"
           aria-label="Scroll to top"
         >
           <ArrowUp size={16} />

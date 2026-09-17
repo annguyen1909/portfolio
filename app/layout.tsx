@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   description: "Full-stack engineer building production systems — eVisa platforms, CRM tooling, and client-facing web apps. Available for freelance work.",
   keywords: ["Freelance Developer", "Full Stack Engineer", "React", "TypeScript", "Next.js", "eVisa", "CRM", "An Nguyen"],
   authors: [{ name: "An Nguyen" }],
+  icons: {
+    icon: "/brand/an-monogram.png",
+  },
   openGraph: {
     title: "An Nguyen — Full-Stack Engineer for Production Systems",
     description: "Production systems for clients — eVisa, CRM, and business web apps.",

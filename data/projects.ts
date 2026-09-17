@@ -795,7 +795,7 @@ export const projects: Project[] = [
     businessImpact:
       "Achieved strong Lighthouse scores on a lightweight marketing site.",
     keyMetric: { value: "95", label: "Lighthouse performance", estimated: true },
-    isProduction: true,
+    isProduction: false,
     architecture: {
       overview:
         "Static Vite.js SPA with optimized asset pipeline, lazy-loaded images, and AI-enhanced visual assets for rapid iteration.",
@@ -863,9 +863,9 @@ export const projects: Project[] = [
     teamSize: "Solo project",
     category: "Frontend",
     color: "from-purple-400 to-pink-400",
-    liveUrl: "https://cybersentinal-six.vercel.app/",
+    liveUrl: "#",
     githubUrl: "#",
-    status: "completed",
+    status: "archived",
     year: "2024",
     order: 15,
   },
@@ -969,7 +969,7 @@ export const projects: Project[] = [
     businessImpact:
       "Delivered 60fps interactive 3D experience showcased at tech conferences.",
     keyMetric: { value: "60fps", label: "on mid-range devices", estimated: false },
-    isProduction: true,
+    isProduction: false,
     architecture: {
       overview:
         "React Three Fiber frontend with custom GLSL shaders, LOD optimization, and progressive asset loading for cross-device 3D rendering.",
@@ -1040,9 +1040,9 @@ export const projects: Project[] = [
     teamSize: "Solo project",
     category: "3D/WebGL",
     color: "from-yellow-400 to-orange-400",
-    liveUrl: "https://ennode-labs-2.vercel.app/",
+    liveUrl: "#",
     githubUrl: "#",
-    status: "completed",
+    status: "archived",
     year: "2023-2024",
     order: 13,
   },
@@ -1425,20 +1425,22 @@ export const projects: Project[] = [
     color: "from-blue-500 to-indigo-600",
     liveUrl: "https://visualennode.com/en",
     githubUrl: "",
-    status: "completed",
+    status: "archived",
     year: "",
     client: "Visual Ennode (company website)",
     order: 10,
   },
 ];
 
+export const publicProjects = projects.filter((project) => project.status !== "archived");
+
 export const getProjectBySlug = (slug: string): Project | undefined => {
-  return projects.find((project) => project.slug === slug);
+  return publicProjects.find((project) => project.slug === slug);
 };
 
 export const getProjectsByCategory = (category: string): Project[] => {
-  if (category === "All") return projects;
-  return projects.filter((project) => project.category === category);
+  if (category === "All") return publicProjects;
+  return publicProjects.filter((project) => project.category === category);
 };
 
 export type ProjectSort = "default" | "order" | "year-desc" | "year-asc";
@@ -1447,7 +1449,7 @@ export const getFeaturedProjects = (
   limit: number = 6,
   sortBy: ProjectSort = "default"
 ): Project[] => {
-  let list = [...projects];
+  let list = [...publicProjects];
 
   // If there is at least one explicit `order` field and sortBy is 'order' or 'default', sort by it
   const hasOrder = list.some((p) => typeof p.order === "number");

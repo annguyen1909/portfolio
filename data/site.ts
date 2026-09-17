@@ -11,14 +11,14 @@ export interface PortfolioStat {
 }
 
 export const portfolioStats: PortfolioStat[] = [
-  { value: "15", label: "Shipped Projects" },
-  { value: "13", label: "Live Projects" },
+  { value: "12", label: "Shipped Projects" },
+  { value: "10", label: "Live Projects" },
   { value: "7", label: "eVisa Platforms" },
 ];
 
 export const siteMetrics: SiteMetric[] = [
   {
-    value: "13",
+    value: "10",
     label: "Live Projects",
     description: "Case-study projects with a public production experience.",
   },
@@ -72,5 +72,5 @@ export const clientDeliverables = [
   },
 ];
 
-export const BOOK_CALL_URL = "#contact";
+export const BOOK_CALL_URL = "/#contact";
 export const CALENDLY_PLACEHOLDER = "https://calendly.com/your-link";

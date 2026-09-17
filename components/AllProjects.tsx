@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { ArrowRight, Search } from 'lucide-react';
 import Link from 'next/link';
-import { projects } from '../data/projects';
+import { publicProjects } from '../data/projects';
 import ProjectCard from './ProjectCard';
 
 const categories = ["All", "Full Stack", "Frontend", "3D/WebGL", "IoT/Interactive", "AI/ML", "SaaS / CRM", "SaaS / Operations"];
@@ -13,7 +13,7 @@ const AllProjects = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredProjects = projects.filter(project => {
+  const filteredProjects = publicProjects.filter(project => {
     const matchesCategory = selectedCategory === "All" || project.category === selectedCategory;
     const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       project.businessImpact.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -30,7 +30,7 @@ const AllProjects = () => {
           transition={{ duration: 0.5 }}
           className="section-heading"
         >
-          <p className="section-label">All work / {projects.length} projects</p>
+          <p className="section-label">All work / {publicProjects.length} projects</p>
           <h1 className="section-title">ALL CASE<br /><span>STUDIES.</span></h1>
           <p className="section-subtitle">
             Production systems across eVisa, CRM, IoT, 3D, and AI — each with documented
@@ -65,7 +65,7 @@ const AllProjects = () => {
         </div>
 
         <p className="text-sm text-[var(--text-muted)] mb-8">
-          Showing {filteredProjects.length} of {projects.length} case studies
+          Showing {filteredProjects.length} of {publicProjects.length} case studies
           {searchTerm && ` for "${searchTerm}"`}
         </p>
 

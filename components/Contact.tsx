@@ -42,7 +42,7 @@ export default function Contact() {
           viewport={{ once: true }}
           className="contact-heading"
         >
-          <p className="section-label">07 / Contact</p>
+          <p className="section-label">06 / Contact</p>
           <h2>
             <span>LET&apos;S MAKE</span>
             <span>SOMETHING</span>

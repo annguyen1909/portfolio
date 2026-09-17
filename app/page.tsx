@@ -4,7 +4,6 @@ import Hero from '@/components/Hero'
 import Proof from '@/components/Proof'
 import Projects from '@/components/Projects'
 import ClientValue from '@/components/ClientValue'
-import Testimonials from '@/components/Testimonials'
 import About from '@/components/About'
 import Contact from '@/components/Contact'
 
@@ -17,7 +16,6 @@ export default function Home() {
         <Projects />
         <Proof />
         <ClientValue />
-        <Testimonials />
         <About />
         <Contact />
       </main>

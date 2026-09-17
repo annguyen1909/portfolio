@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import Link from 'next/link';
+import BrandLogo from './BrandLogo';
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -37,8 +38,7 @@ const Header = () => {
           aria-label="Go to homepage"
           className="site-logo"
         >
-          <span className="site-logo-mark">A/</span>
-          <span>AN NGUYEN</span>
+          <BrandLogo />
         </Link>
 
         <nav className="hidden md:flex items-center gap-10" aria-label="Primary navigation">
@@ -57,7 +57,7 @@ const Header = () => {
         </nav>
 
         <button
-          className="md:hidden text-[var(--text-strong)] p-2"
+          className="md:hidden text-[var(--text-strong)] p-3"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         >

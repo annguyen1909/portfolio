@@ -27,7 +27,7 @@ export default function About() {
           className="section-heading section-heading--row"
         >
           <div>
-            <p className="section-label">06 / Profile</p>
+            <p className="section-label">05 / Profile</p>
             <h2 className="section-title">AN<br /><span>NGUYEN.</span></h2>
           </div>
           <p className="section-subtitle">

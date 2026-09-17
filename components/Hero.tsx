@@ -16,17 +16,13 @@ const Hero = () => {
       className="hero-editorial"
     >
       <div className="hero-media" aria-hidden="true">
-        <figure><img src="/projects/visualennode/gallery-1.jpg" alt="" /></figure>
+        <figure><img src="/hero-system-architecture.jpg" alt="" /></figure>
       </div>
       <div className="hero-scrim" />
 
       <div className="section-container hero-inner">
         <div className="hero-copy">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <div>
             <p className="hero-kicker"><span /> FULL-STACK ENGINEER · HO CHI MINH CITY</p>
 
             <h1 className="hero-title">
@@ -61,7 +57,7 @@ const Hero = () => {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
 
         <motion.button

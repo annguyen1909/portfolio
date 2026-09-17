@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
-import { getProjectBySlug, projects } from "../../../data/projects";
+import { getProjectBySlug, publicProjects } from "../../../data/projects";
 import ProjectDetail from "../../../components/ProjectDetail";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 export async function generateStaticParams() {
-  return projects.map((project) => ({
+  return publicProjects.map((project) => ({
     slug: project.slug,
   }));
 }
