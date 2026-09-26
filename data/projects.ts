@@ -463,7 +463,7 @@ export const projects: Project[] = [
     ],
     image: "/projects/uno-tech/hero.png",
     gallery: [
-      "/projects/uno-tech/services.png",
+      "/projects/uno-tech/services-grid.png",
       "/projects/uno-tech/projects.png",
     ],
     technologies: ["React Router", "React", "TypeScript", "Vite", "Tailwind CSS", "i18next", "Framer Motion", "TipTap"],
