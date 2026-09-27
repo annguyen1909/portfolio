@@ -461,7 +461,7 @@ export const projects: Project[] = [
       "Added TipTap-based content editing and authenticated admin screens",
       "Implemented an AI visibility audit endpoint and user-facing checker",
     ],
-    image: "/projects/uno-tech/home-services.png",
+    image: "/projects/uno-tech/hero-selected.png",
     gallery: [
       "/projects/uno-tech/services-grid.png",
       "/projects/uno-tech/projects.png",
