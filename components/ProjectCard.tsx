@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Globe } from "lucide-react";
 import Link from "next/link";
 import { Project } from "../data/projects";
@@ -12,6 +12,7 @@ type ProjectCardProps = {
 };
 
 const ProjectCard = ({ project, index = 0, compact = false }: ProjectCardProps) => {
+  const reduceMotion = useReducedMotion();
   const liveHref =
     project.liveUrl && project.liveUrl !== "#"
       ? project.liveUrl.startsWith("http")
@@ -21,13 +22,24 @@ const ProjectCard = ({ project, index = 0, compact = false }: ProjectCardProps) 
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 24 }}
+      layout={!reduceMotion}
+      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, delay: index * 0.05 }}
+      exit={reduceMotion ? undefined : { opacity: 0, scale: 0.985 }}
+      transition={{ duration: 0.45, delay: index * 0.05, layout: { duration: 0.35 } }}
       viewport={{ once: true }}
       className={`project-card group ${compact ? "project-card--compact" : ""}`}
     >
-      <Link href={`/projects/${project.slug}`} className="project-card-media">
+      <Link
+        href={`/projects/${project.slug}`}
+        className="project-card-media"
+        onPointerMove={event => {
+          if (reduceMotion || event.pointerType !== 'mouse') return;
+          const bounds = event.currentTarget.getBoundingClientRect();
+          event.currentTarget.style.setProperty('--pointer-x', `${event.clientX - bounds.left}px`);
+          event.currentTarget.style.setProperty('--pointer-y', `${event.clientY - bounds.top}px`);
+        }}
+      >
         {project.image ? (
           <img
             src={project.image}
@@ -48,12 +60,12 @@ const ProjectCard = ({ project, index = 0, compact = false }: ProjectCardProps) 
             </span>
           )}
         </div>
-        <span className="project-card-arrow"><ArrowUpRight size={20} /></span>
+        <span className="work-media-action" aria-hidden="true">VIEW CASE STUDY <ArrowUpRight size={17} /></span>
       </Link>
 
       <div className="project-card-body">
         <div className="project-card-index">
-          <span>{String(index + 2).padStart(2, "0")}</span>
+          <span>{String(index + (compact ? 1 : 2)).padStart(2, "0")}</span>
           <span>{project.year}</span>
         </div>
         <Link href={`/projects/${project.slug}`}><h3>{project.title}</h3></Link>

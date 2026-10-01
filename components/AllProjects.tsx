@@ -1,13 +1,13 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { ArrowRight, Search } from 'lucide-react';
 import Link from 'next/link';
 import { publicProjects } from '../data/projects';
 import ProjectCard from './ProjectCard';
 
-const categories = ["All", "Full Stack", "Frontend", "3D/WebGL", "IoT/Interactive", "AI/ML", "SaaS / CRM", "SaaS / Operations"];
+const categories = ["All", ...new Set(publicProjects.map(project => project.category))];
 
 const AllProjects = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -40,20 +40,23 @@ const AllProjects = () => {
 
         <div className="flex flex-col lg:flex-row gap-8 lg:items-end mb-10 border-b border-[var(--border)] pb-5">
           <div className="relative flex-1 max-w-md">
+            <label htmlFor="project-search" className="sr-only">Search case studies and technologies</label>
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" size={18} />
             <input
-              type="text"
+              id="project-search"
+              type="search"
               placeholder="Search case studies, technologies..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="input-field !pl-10 !pb-3"
             />
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2" role="group" aria-label="Filter case studies by category">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
+                aria-pressed={selectedCategory === category}
                 className={`tag cursor-pointer transition-colors ${
                   selectedCategory === category ? 'tag-active' : 'hover:border-[var(--border-hover)]'
                 }`}
@@ -64,15 +67,17 @@ const AllProjects = () => {
           </div>
         </div>
 
-        <p className="text-sm text-[var(--text-muted)] mb-8">
+        <p className="text-sm text-[var(--text-muted)] mb-8" role="status" aria-live="polite">
           Showing {filteredProjects.length} of {publicProjects.length} case studies
           {searchTerm && ` for "${searchTerm}"`}
         </p>
 
         <div className="project-grid">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard key={project.slug} project={project} index={index} compact />
-          ))}
+          <AnimatePresence initial={false}>
+            {filteredProjects.map((project, index) => (
+              <ProjectCard key={project.slug} project={project} index={index} compact />
+            ))}
+          </AnimatePresence>
         </div>
 
         {filteredProjects.length === 0 && (

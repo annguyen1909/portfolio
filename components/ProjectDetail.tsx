@@ -5,6 +5,8 @@ import { ArrowLeft, ExternalLink, Github, Users, Clock, Award, CheckCircle, Targ
 import Link from 'next/link';
 import { Project } from '../data/projects';
 import { BOOK_CALL_URL } from '../data/site';
+import CaseStudyNav from './CaseStudyNav';
+import ProjectGallery from './ProjectGallery';
 
 interface ProjectDetailProps {
   project: Project;
@@ -29,7 +31,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
         </Link>
       </div>
 
-      <section className="section-container mb-20 md:mb-24">
+      <section id="overview" className="section-container mb-20 md:mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -124,6 +126,8 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
         </div>
       </section>
 
+      <CaseStudyNav hasGallery={project.gallery.length > 0} />
+
       <section className="section-container mb-20 md:mb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
@@ -148,7 +152,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
         </div>
       </section>
 
-      <section className="section-container mb-20 md:mb-24">
+      <section id="problem" className="section-container mb-20 md:mb-24">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -163,7 +167,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
         </motion.div>
       </section>
 
-      <section className="section-container mb-20 md:mb-24">
+      <section id="solution" className="section-container mb-20 md:mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <motion.div
             initial={{ opacity: 0, x: -24 }}
@@ -207,7 +211,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
         </div>
       </section>
 
-      <section className="section-container mb-20 md:mb-24">
+      <section id="architecture" className="section-container mb-20 md:mb-24">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -246,7 +250,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
         </motion.div>
       </section>
 
-      <section className="section-container mb-20 md:mb-24">
+      <section id="outcomes" className="section-container mb-20 md:mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <motion.div
             initial={{ opacity: 0, x: -24 }}
@@ -288,26 +292,9 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
       </section>
 
       {project.gallery.length > 0 && (
-        <section className="section-container mb-20 md:mb-24">
+        <section id="gallery" className="section-container mb-20 md:mb-24">
           <h2 className="text-2xl font-heading mb-10 text-[var(--text-strong)]">Project Gallery</h2>
-          <div className="space-y-12">
-            {project.gallery.map((image, index) => (
-              <motion.figure
-                key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="card-glow overflow-hidden"
-              >
-                <div className="aspect-video bg-[var(--background)]">
-                  <img src={image} alt={`${project.title} screenshot ${index + 1}`} className="w-full h-full object-cover" />
-                </div>
-                <figcaption className="border-t border-[var(--border)] px-5 py-4 text-xs uppercase tracking-[0.14em] text-[var(--text-subtle)]">
-                  {String(index + 1).padStart(2, '0')} / {project.title}
-                </figcaption>
-              </motion.figure>
-            ))}
-          </div>
+          <ProjectGallery images={project.gallery} title={project.title} />
         </section>
       )}
 

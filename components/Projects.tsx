@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
 import { ArrowRight, Globe } from 'lucide-react';
 import Link from 'next/link';
 import { getFeaturedProjects } from '../data/projects';
@@ -9,15 +8,9 @@ import ProjectCard from './ProjectCard';
 
 const Projects = () => {
   const projects = getFeaturedProjects(8);
-  const categories = ["All", "Full Stack", "Frontend", "3D/WebGL", "IoT/Interactive", "AI/ML", "SaaS / CRM"];
-  const [selectedCategory, setSelectedCategory] = useState("All");
-
-  const filteredProjects = selectedCategory === "All"
-    ? projects
-    : projects.filter(project => project.category === selectedCategory);
-
   const flagship = projects.find(p => p.featured) ?? projects[0];
   const flagshipSlug = flagship?.slug;
+  const visibleProjects = projects.filter(project => project.slug !== flagshipSlug);
 
   return (
     <section id="projects" className="section-padding editorial-section">
@@ -59,6 +52,7 @@ const Projects = () => {
                     </span>
                   )}
                 </div>
+                <span className="work-media-action" aria-hidden="true">VIEW CASE STUDY <ArrowRight size={17} /></span>
             </Link>
             <div className="flagship-work-copy">
               <div><span>01</span><span>{flagship.year}</span></div>
@@ -71,30 +65,10 @@ const Projects = () => {
           </motion.article>
         )}
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          viewport={{ once: true }}
-          className="filter-row"
-        >
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={selectedCategory === category ? 'is-active' : ''}
-            >
-              {category}
-            </button>
-          ))}
-        </motion.div>
-
         <div className="project-grid">
-          {filteredProjects
-            .filter(p => p.slug !== flagshipSlug)
-            .map((project, index) => (
-              <ProjectCard key={project.slug} project={project} index={index} />
-            ))}
+          {visibleProjects.map((project, index) => (
+            <ProjectCard key={project.slug} project={project} index={index} />
+          ))}
         </div>
 
         <motion.div

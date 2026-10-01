@@ -1,16 +1,18 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ArrowUpRight, Send } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { ArrowUpRight, LoaderCircle, Send } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const reduceMotion = useReducedMotion();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (status === 'success' || status === 'error') setStatus('idle');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -66,9 +68,22 @@ export default function Contact() {
             </div>
           </motion.aside>
 
-          <motion.form initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} onSubmit={handleSubmit} className="contact-form">
-            {status === 'success' && <p className="form-status form-status--success">Thanks — your message was sent.</p>}
-            {status === 'error' && <p className="form-status form-status--error">{errorMsg || 'Something went wrong. Please try again.'}</p>}
+          <motion.form initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} onSubmit={handleSubmit} className="contact-form" aria-busy={status === 'sending'}>
+            <div aria-live="polite" aria-atomic="true">
+              <AnimatePresence mode="wait">
+                {(status === 'success' || status === 'error') && (
+                  <motion.p
+                    key={status}
+                    initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}
+                    className={`form-status form-status--${status}`}
+                  >
+                    {status === 'success' ? 'Thanks — your message was sent.' : errorMsg || 'Something went wrong. Please try again.'}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </div>
 
             <div className="form-row">
               <label><span>01 / NAME</span><input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Your name" /></label>
@@ -77,7 +92,8 @@ export default function Contact() {
             <label><span>03 / PROJECT TYPE</span><input type="text" name="subject" value={formData.subject} onChange={handleChange} required placeholder="Platform, CRM, interactive web..." /></label>
             <label><span>04 / MESSAGE</span><textarea name="message" value={formData.message} onChange={handleChange} required rows={5} placeholder="Scope, timeline, and useful context" /></label>
             <button type="submit" disabled={status === 'sending'} className="submit-link">
-              {status === 'sending' ? 'SENDING...' : 'SEND MESSAGE'} <Send size={16} />
+              <span>{status === 'sending' ? 'SENDING...' : 'SEND MESSAGE'}</span>
+              {status === 'sending' ? <LoaderCircle size={17} className="submit-spinner" aria-hidden="true" /> : <Send size={16} aria-hidden="true" />}
             </button>
           </motion.form>
         </div>
