@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, ArrowRight, Calendar } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -19,10 +19,6 @@ const Hero = () => {
   const [sceneFailed, setSceneFailed] = useState(false);
   const handleSceneReady = useCallback(() => setSceneReady(true), []);
   const handleSceneError = useCallback(() => { setSceneFailed(true); setSceneReady(false); }, []);
-  const imageX = useMotionValue(0);
-  const imageY = useMotionValue(0);
-  const smoothX = useSpring(imageX, { stiffness: 90, damping: 22 });
-  const smoothY = useSpring(imageY, { stiffness: 90, damping: 22 });
 
   useEffect(() => {
     const element = hero.current;
@@ -75,8 +71,6 @@ const Hero = () => {
     const bounds = event.currentTarget.getBoundingClientRect();
     architectureInput.current.x = ((event.clientX - bounds.left) / bounds.width - .5) * 2;
     architectureInput.current.y = ((event.clientY - bounds.top) / bounds.height - .5) * 2;
-    imageX.set(((event.clientX - bounds.left) / bounds.width - 0.5) * -24);
-    imageY.set(((event.clientY - bounds.top) / bounds.height - 0.5) * -18);
   };
 
   return (
@@ -84,15 +78,11 @@ const Hero = () => {
       ref={hero}
       id="home"
       aria-label="Hero"
-      className={`hero-editorial${showReadyScene ? " hero-editorial--3d" : ""}`}
+      className="hero-editorial"
       onPointerMove={handlePointerMove}
-      onPointerLeave={() => { imageX.set(0); imageY.set(0); architectureInput.current.x = 0; architectureInput.current.y = 0; }}
+      onPointerLeave={() => { architectureInput.current.x = 0; architectureInput.current.y = 0; }}
     >
-      <div className="hero-media" aria-hidden="true">
-        <motion.figure style={{ x: smoothX, y: smoothY }}><img src="/hero-system-architecture.jpg" alt="" /></motion.figure>
-      </div>
-      <div className="hero-scrim" />
-      <div className="hero-tech-grid" aria-hidden="true"><span /><span /><span /></div>
+      <div className="hero-tech-grid" aria-hidden="true" />
       {showScene && (
         <div className={`hero-architecture${showReadyScene ? " hero-architecture--ready" : ""}`} aria-hidden="true">
           <HeroArchitecture input={architectureInput} active={sceneActive} onReady={handleSceneReady} onError={handleSceneError} />

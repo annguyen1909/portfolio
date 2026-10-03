@@ -226,33 +226,15 @@ p, li { text-wrap: pretty; }
   background: #05080d;
 }
 
-.hero-media {
-  position: absolute;
-  inset: 0;
-  background: #05080d;
-  transition: opacity .9s ease;
-}
-
-.hero-media figure { position: absolute; inset: -1rem; overflow: hidden; }
-.hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.9) contrast(1.04); }
-.hero-media::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, rgba(5,8,13,.48), transparent 24%, transparent 68%, rgba(5,8,13,.84)); pointer-events: none; }
-
 .hero-tech-grid {
   position: absolute;
   inset: 0;
+  opacity: .4;
   background-image: linear-gradient(rgba(102, 170, 242, .09) 1px, transparent 1px), linear-gradient(90deg, rgba(102, 170, 242, .09) 1px, transparent 1px);
   background-size: 5.5rem 5.5rem;
   mask-image: linear-gradient(90deg, transparent 42%, #000 95%);
   pointer-events: none;
 }
-
-.hero-tech-grid span { position: absolute; width: 1.15rem; height: 1.15rem; border: 1px solid rgba(134, 191, 255, .4); }
-.hero-tech-grid span::before, .hero-tech-grid span::after { position: absolute; content: ""; background: rgba(134, 191, 255, .5); }
-.hero-tech-grid span::before { top: 50%; left: -.45rem; width: 2rem; height: 1px; }
-.hero-tech-grid span::after { top: -.45rem; left: 50%; width: 1px; height: 2rem; }
-.hero-tech-grid span:nth-child(1) { top: 24%; left: 69%; }
-.hero-tech-grid span:nth-child(2) { top: 56%; left: 89%; }
-.hero-tech-grid span:nth-child(3) { top: 73%; left: 58%; }
 
 .hero-architecture {
   position: absolute;
@@ -268,9 +250,6 @@ p, li { text-wrap: pretty; }
 }
 
 .hero-architecture--ready { opacity: 1; }
-.hero-editorial--3d .hero-media { opacity: .06; }
-.hero-editorial--3d .hero-tech-grid { opacity: .4; }
-.hero-editorial--3d .hero-tech-grid span { display: none; }
 
 .hero-architecture-caption {
   position: absolute;
@@ -290,14 +269,6 @@ p, li { text-wrap: pretty; }
 }
 
 .hero-architecture-caption span:first-child { color: var(--text-muted); }
-
-.hero-scrim {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, #05080d 0%, rgba(5,8,13,.98) 30%, rgba(5,8,13,.88) 46%, rgba(5,8,13,.28) 68%, rgba(5,8,13,.08) 100%),
-    linear-gradient(0deg, rgba(5,8,13,.7), transparent 48%);
-}
 
 .hero-inner {
   position: relative;
@@ -780,9 +751,6 @@ footer h4 { letter-spacing: .12em; }
 @media (max-width: 900px) {
   .section-heading--row, .profile-layout, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
   .section-heading--row .section-subtitle { margin: 0; }
-  .hero-media { opacity: .72; }
-  .hero-media img { object-position: 66% center; }
-  .hero-scrim { background: linear-gradient(90deg, rgba(5,8,13,.98) 0%, rgba(5,8,13,.82) 58%, rgba(5,8,13,.38) 100%), linear-gradient(0deg, #05080d 0%, transparent 48%); }
   .hero-copy { max-width: 46rem; }
   .hero-architecture { top: 15%; left: 35%; opacity: .55; mask-image: linear-gradient(90deg, transparent, #000 55%); }
   .hero-architecture:not(.hero-architecture--ready) { opacity: 0; }
@@ -804,11 +772,8 @@ footer h4 { letter-spacing: .12em; }
   .hero-inner { padding-top: 7rem; padding-bottom: 5rem; }
   .hero-title { max-width: 100%; font-size: clamp(3rem, 15vw, 4rem); }
   .hero-lead { max-width: 100%; font-size: .95rem; line-height: 1.65; }
-  .hero-media { display: block; opacity: .34; }
-  .hero-media img { object-position: 72% center; }
-  .hero-tech-grid { display: none; }
+  .hero-tech-grid { opacity: .25; background-size: 4rem 4rem; mask-image: linear-gradient(90deg, transparent 25%, #000); }
   .hero-architecture { display: none; }
-  .hero-scrim { background: linear-gradient(90deg, rgba(5,8,13,.99) 0%, rgba(5,8,13,.88) 68%, rgba(5,8,13,.58) 100%), linear-gradient(0deg, #05080d 0%, transparent 55%, #05080d 100%); }
   .hero-kicker { font-size: .58rem; }
   .hero-stats { gap: 1.5rem; }
   .hero-stats p { font-size: 1.35rem; }
@@ -839,7 +804,7 @@ footer h4 { letter-spacing: .12em; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-  .hero-media figure, .project-card-image, .gallery-trigger img { transform: none !important; }
+  .project-card-image, .gallery-trigger img { transform: none !important; }
   .hero-architecture { display: none; }
   .project-card-media, .flagship-work-media { transform: none !important; }
 }
