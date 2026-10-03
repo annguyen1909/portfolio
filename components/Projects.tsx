@@ -5,6 +5,7 @@ import { ArrowRight, Globe } from 'lucide-react';
 import Link from 'next/link';
 import { getFeaturedProjects } from '../data/projects';
 import ProjectCard from './ProjectCard';
+import ProjectMedia from './ProjectMedia';
 
 const Projects = () => {
   const projects = getFeaturedProjects(8);
@@ -37,7 +38,7 @@ const Projects = () => {
             viewport={{ once: true }}
             className="flagship-work group"
           >
-            <Link href={`/projects/${flagship.slug}`} className="flagship-work-media">
+            <ProjectMedia href={`/projects/${flagship.slug}`} className="flagship-work-media">
                 <img
                   src={flagship.image}
                   alt={flagship.title}
@@ -53,7 +54,7 @@ const Projects = () => {
                   )}
                 </div>
                 <span className="work-media-action" aria-hidden="true">VIEW CASE STUDY <ArrowRight size={17} /></span>
-            </Link>
+            </ProjectMedia>
             <div className="flagship-work-copy">
               <div><span>01</span><span>{flagship.year}</span></div>
               <h3>{flagship.title}</h3>

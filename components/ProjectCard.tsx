@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Globe } from "lucide-react";
 import Link from "next/link";
 import { Project } from "../data/projects";
+import ProjectMedia from "./ProjectMedia";
 
 type ProjectCardProps = {
   project: Project;
@@ -30,15 +31,9 @@ const ProjectCard = ({ project, index = 0, compact = false }: ProjectCardProps) 
       viewport={{ once: true }}
       className={`project-card group ${compact ? "project-card--compact" : ""}`}
     >
-      <Link
+      <ProjectMedia
         href={`/projects/${project.slug}`}
         className="project-card-media"
-        onPointerMove={event => {
-          if (reduceMotion || event.pointerType !== 'mouse') return;
-          const bounds = event.currentTarget.getBoundingClientRect();
-          event.currentTarget.style.setProperty('--pointer-x', `${event.clientX - bounds.left}px`);
-          event.currentTarget.style.setProperty('--pointer-y', `${event.clientY - bounds.top}px`);
-        }}
       >
         {project.image ? (
           <img
@@ -61,7 +56,7 @@ const ProjectCard = ({ project, index = 0, compact = false }: ProjectCardProps) 
           )}
         </div>
         <span className="work-media-action" aria-hidden="true">VIEW CASE STUDY <ArrowUpRight size={17} /></span>
-      </Link>
+      </ProjectMedia>
 
       <div className="project-card-body">
         <div className="project-card-index">
