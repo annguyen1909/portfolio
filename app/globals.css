@@ -507,7 +507,9 @@ p, li { text-wrap: pretty; }
 .metric-item h3 { margin-top: 2.25rem; font-size: .95rem; letter-spacing: -.02em; }
 .metric-item > p { margin-top: .7rem; color: var(--text-muted); font-size: .78rem; line-height: 1.6; }
 
-.process-list { border-top: 1px solid var(--border); }
+.process-list { --process-line-x: 2.6rem; position: relative; border-top: 1px solid var(--border); }
+.process-track { position: absolute; top: 0; bottom: 0; left: var(--process-line-x); width: 1px; background: var(--border); pointer-events: none; }
+.process-track > span { position: absolute; inset: 0; background: var(--accent); transform-origin: top; }
 .process-row {
   position: relative;
   display: grid;
@@ -518,12 +520,16 @@ p, li { text-wrap: pretty; }
   padding: 1.8rem 0;
   transition: background-color .25s ease;
 }
-.process-row::before { position: absolute; top: 20%; bottom: 20%; left: -.8rem; width: 2px; content: ""; background: var(--accent); transform: scaleY(0); transform-origin: center; transition: transform .25s ease; }
-.process-row:hover { background: rgba(37, 137, 255, .035); }
-.process-row:hover::before { transform: scaleY(1); }
-.process-row > span { color: var(--text-subtle); font-size: .65rem; letter-spacing: .1em; }
-.process-row h3 { font-size: clamp(1.15rem, 2vw, 1.65rem); font-weight: 600; letter-spacing: -.03em; }
-.process-row p { color: var(--text-muted); font-size: .88rem; line-height: 1.65; }
+.process-row--active, .process-row:hover { background: rgba(37, 137, 255, .035); }
+.process-index { position: relative; z-index: 1; color: var(--text-subtle); font-size: .65rem; letter-spacing: .1em; transition: color .25s ease; }
+.process-index::after { position: absolute; top: calc(50% - 3px); left: calc(var(--process-line-x) - 3px); width: 7px; height: 7px; border: 1px solid var(--border-hover); border-radius: 50%; background: var(--background); content: ""; transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease; }
+.process-row--read .process-index::after { border-color: #3974af; background: #1f588f; }
+.process-row--active .process-index { color: var(--accent); }
+.process-row--active .process-index::after { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.process-row h3 { color: var(--text-muted); font-size: clamp(1.15rem, 2vw, 1.65rem); font-weight: 600; letter-spacing: -.03em; transition: color .25s ease; }
+.process-row p { color: var(--text-muted); font-size: .88rem; line-height: 1.65; transition: color .25s ease; }
+.process-row--active h3, .process-row:hover h3 { color: var(--text-strong); }
+.process-row--active p { color: #c5cfdb; }
 
 /* Feedback */
 .quote-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); }
@@ -764,6 +770,9 @@ footer h4 { letter-spacing: .12em; }
   .quote-grid { grid-template-columns: 1fr; }
   .quote-item { min-height: 0; border-right: 0; border-bottom: 1px solid var(--border); padding: 2rem 0; }
   .quote-item:last-child { border-bottom: 0; }
+  .process-list { --process-line-x: 1.85rem; }
+  .process-row { grid-template-columns: 2.5rem 1fr; gap: 1rem; }
+  .process-row p { grid-column: 2; }
 }
 
 @media (max-width: 680px) {
@@ -788,8 +797,6 @@ footer h4 { letter-spacing: .12em; }
   .metric-item, .metric-item:first-child, .metric-item:nth-child(3) { border-right: 0; border-top: 1px solid var(--border); padding: 1.7rem 0; }
   .metric-item:first-child { border-top: 0; }
   .metric-item h3 { margin-top: 1.2rem; }
-  .process-row { grid-template-columns: 2.5rem 1fr; gap: 1rem; }
-  .process-row p { grid-column: 2; }
   .form-row { grid-template-columns: 1fr; gap: 2rem; }
   .contact-line { grid-template-columns: 4.5rem 1fr auto; }
   .contact-heading h2 { font-size: clamp(3rem, 15vw, 4rem); }
@@ -807,4 +814,5 @@ footer h4 { letter-spacing: .12em; }
   .project-card-image, .gallery-trigger img { transform: none !important; }
   .hero-architecture { display: none; }
   .project-card-media, .flagship-work-media { transform: none !important; }
+  .process-row h3 { color: var(--text-strong); }
 }
