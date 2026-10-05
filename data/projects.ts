@@ -44,6 +44,82 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "wildlifedb",
+    slug: "wildlifedb",
+    title: "WildlifeDB — Wildlife Encyclopedia",
+    shortDescription:
+      "An independent wildlife reference platform combining photo-led species profiles, habitat and diet discovery, animal comparisons, and an open dataset.",
+    fullDescription:
+      "WildlifeDB turns structured species data into a readable field guide. Readers can start with a photograph, search for an animal, follow habitat and diet trails, or compare two species. Each profile connects taxonomy, measurements, conservation status, long-form articles, FAQs, and attributed photography. The same underlying records power downloadable CSV and JSON data, keeping the reference pages and the open dataset connected.",
+    problem:
+      "Wildlife facts are often scattered across articles, image collections, and incompatible measurements. The project needed a consistent content model that could support readable species pages, useful discovery paths, and comparisons without maintaining separate copies of the same data.",
+    businessImpact:
+      "Built and operate an independent wildlife reference product, from content architecture to the public reading experience.",
+    keyMetric: { value: "178", label: "species in the open dataset" },
+    isProduction: true,
+    architecture: {
+      overview:
+        "Next.js App Router renders filesystem-backed JSON and MDX content. Zod validates species records, shared content utilities generate discovery hubs, and normalized measurements feed comparison views and CSV/JSON exports. Metadata, structured data, and a sitemap support public search discovery.",
+      components: [
+        "Structured species records and MDX articles",
+        "Photo-led profiles with taxonomy, facts, and FAQs",
+        "Habitat, diet, family, and conservation discovery hubs",
+        "Animal comparison and measurement ranking tools",
+        "Open dataset exports and content validation scripts",
+      ],
+    },
+    technicalImplementation: [
+      "Defined validated JSON records for taxonomy, habitats, diets, measurements, and image attribution",
+      "Combined structured facts with MDX articles in reusable species-page layouts",
+      "Built animal search and linked discovery routes from shared content records",
+      "Normalized measurement units for species comparisons, rankings, and dataset exports",
+      "Added route metadata, canonical URLs, JSON-LD, and a generated sitemap",
+      "Served local image variants with recorded source and licensing information",
+    ],
+    image: "/projects/wildlifedb/hero.png",
+    gallery: [
+      "/projects/wildlifedb/species-profile.png",
+      "/projects/wildlifedb/dataset.png",
+    ],
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "MDX", "Zod", "Vercel"],
+    features: [
+      "Animal search and photo-led species profiles",
+      "Taxonomy, conservation status, quick facts, and FAQs",
+      "Habitat, diet, and animal-category discovery trails",
+      "Side-by-side species comparisons and computed measurement rankings",
+      "Attributed photo galleries and related reading",
+      "Downloadable CSV and JSON species data under CC BY 4.0",
+    ],
+    challenges: [
+      "Keeping articles, discovery hubs, and exports consistent as the content library grows",
+      "Comparing measurements originally expressed in different units and ranges",
+      "Presenting dense reference material alongside large photographs",
+      "Keeping image provenance and content validation part of the publishing workflow",
+    ],
+    solutions: [
+      "Used a shared species model to drive profiles, discovery hubs, and data exports",
+      "Converted published measurements into common units and left missing values out of rankings",
+      "Separated quick facts, deeper reading, photographs, and related routes within each profile",
+      "Added validation scripts and explicit image source, license, and attribution fields",
+    ],
+    results: [
+      "Live wildlife reference platform at wildlifedb.com",
+      "Published CSV and JSON downloads covering 178 species",
+      "Connected species profiles, discovery hubs, comparisons, and journal articles",
+      "Reusable structured content powering both the reading experience and data downloads",
+    ],
+    timeline: "2026–present",
+    role: "Independent Developer & Product Owner",
+    teamSize: "Independent project",
+    category: "Content / Data Platform",
+    color: "from-emerald-600 to-green-800",
+    liveUrl: "https://www.wildlifedb.com",
+    githubUrl: "#",
+    status: "in-progress",
+    year: "2026",
+    order: 2,
+  },
+  {
     id: "tanzania-evisa",
     slug: "tanzania-evisa",
     title: "Tanzania eVisa Application Platform",
@@ -118,7 +194,7 @@ export const projects: Project[] = [
     status: "completed",
     year: "2026",
     client: "Tanzania eVisa Assistance",
-    order: 2,
+    order: 3,
   },
   {
     id: "indonesia-evisa",
@@ -195,7 +271,7 @@ export const projects: Project[] = [
     status: "completed",
     year: "2026",
     client: "Indonesia eVisa Assistance",
-    order: 4,
+    order: 5,
   },
   {
     id: "vietnam-evisa",
@@ -272,7 +348,7 @@ export const projects: Project[] = [
     status: "completed",
     year: "2026",
     client: "Vietnam eVisa Assistance",
-    order: 6,
+    order: 7,
   },
   {
     id: "sri-lanka-evisa",
@@ -349,7 +425,7 @@ export const projects: Project[] = [
     status: "completed",
     year: "2026",
     client: "Sri Lanka eVisa Assistance",
-    order: 7,
+    order: 8,
   },
   {
     id: "india-evisa",
@@ -426,7 +502,7 @@ export const projects: Project[] = [
     status: "completed",
     year: "2026",
     client: "India eVisa Assistance",
-    order: 8,
+    order: 9,
   },
   {
     id: "uno-tech",
@@ -504,7 +580,7 @@ export const projects: Project[] = [
     status: "completed",
     year: "2026",
     client: "UNO Tech",
-    order: 3,
+    order: 4,
   },
   {
     id: "booking-pr",
@@ -581,7 +657,7 @@ export const projects: Project[] = [
     status: "completed",
     year: "2026",
     client: "BookingPR",
-    order: 5,
+    order: 6,
   },
   {
     id: "0",
@@ -779,7 +855,7 @@ export const projects: Project[] = [
     status: "completed",
     year: "2025",
     client: "WorldMaxxing",
-    order: 9,
+    order: 10,
     featured: false,
   },
   {
@@ -865,7 +941,7 @@ export const projects: Project[] = [
     githubUrl: "#",
     status: "archived",
     year: "2024",
-    order: 15,
+    order: 16,
   },
   {
     id: "7",
@@ -954,7 +1030,7 @@ export const projects: Project[] = [
     status: "completed",
     year: "2023-2024",
     client: "AC3 Studio Vietnam",
-    order: 16,
+    order: 17,
   },
   {
     id: "4",
@@ -1042,7 +1118,7 @@ export const projects: Project[] = [
     githubUrl: "#",
     status: "archived",
     year: "2023-2024",
-    order: 13,
+    order: 14,
   },
   {
     id: "5",
@@ -1130,7 +1206,7 @@ export const projects: Project[] = [
     githubUrl: "#",
     status: "completed",
     year: "2024-2025",
-    order: 14,
+    order: 15,
   },
   {
     id: "3",
@@ -1232,7 +1308,7 @@ export const projects: Project[] = [
     status: "completed",
     year: "2025",
     client: "SUTYGON",
-    order: 11,
+    order: 12,
   },
   {
     id: "4",
@@ -1336,7 +1412,7 @@ export const projects: Project[] = [
     status: "in-progress",
     year: "2023–2025",
     client: "Sutygon (internal / product)",
-    order: 12,
+    order: 13,
   },
   {
     id: "2",
@@ -1426,7 +1502,7 @@ export const projects: Project[] = [
     status: "archived",
     year: "",
     client: "Visual Ennode (company website)",
-    order: 10,
+    order: 11,
   },
 ];
 

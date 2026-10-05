@@ -33,7 +33,7 @@ const AllProjects = () => {
           <p className="section-label">All work / {publicProjects.length} projects</p>
           <h1 className="section-title">ALL CASE<br /><span>STUDIES.</span></h1>
           <p className="section-subtitle">
-            Production systems across eVisa, CRM, IoT, 3D, and AI — each with documented
+            Production systems across eVisa, content and data, CRM, IoT, 3D, and AI — each with documented
             problem, solution, architecture, and outcomes.
           </p>
         </motion.div>
