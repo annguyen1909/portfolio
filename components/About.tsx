@@ -3,22 +3,11 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ArrowUpRight, Download } from "lucide-react";
+import TechnologyLogo from "./TechnologyLogo";
 
 const technologies = [
-  { name: "React", icon: "react" },
-  { name: "Next.js", icon: "nextjs" },
-  { name: "TypeScript", icon: "typescript" },
-  { name: "JavaScript", icon: "javascript" },
-  { name: "HTML", icon: "html5" },
-  { name: "CSS", icon: "css3" },
-  { name: "Tailwind CSS", icon: "tailwindcss" },
-  { name: "Node.js", icon: "nodejs" },
-  { name: "PostgreSQL", icon: "postgresql" },
-  { name: "Prisma", icon: "prisma", monochrome: true },
-  { name: "Three.js", icon: "threejs", monochrome: true },
-  { name: "Vite.js", icon: "vitejs" },
-  { name: "Python", icon: "python" },
-  { name: "C++", icon: "cplusplus" },
+  "React", "Next.js", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind CSS",
+  "Node.js", "PostgreSQL", "Prisma", "Three.js", "Vite.js", "Python", "C++",
 ];
 
 const details = [
@@ -114,15 +103,9 @@ export default function About() {
           <h3 id="core-stack-title" className="section-label">CORE STACK</h3>
           <ul className="technology-list">
             {technologies.map((technology) => (
-              <li key={technology.icon} className="technology-item">
-                <Image
-                  src={`/technologies/${technology.icon}.svg`}
-                  alt=""
-                  width={40}
-                  height={40}
-                  className={`technology-logo${technology.monochrome ? " technology-logo--monochrome" : ""}`}
-                />
-                <span>{technology.name}</span>
+              <li key={technology} className="technology-item">
+                <TechnologyLogo name={technology} />
+                <span>{technology}</span>
               </li>
             ))}
           </ul>

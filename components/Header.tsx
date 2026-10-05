@@ -75,7 +75,7 @@ const Header = () => {
           <BrandLogo />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-10" aria-label="Primary navigation">
+        <nav className="hidden lg:flex items-center gap-8" aria-label="Primary navigation">
           {navItems.map((item) => (
             <Link
               key={item.name}
@@ -92,7 +92,7 @@ const Header = () => {
         </nav>
 
         <button
-          className="md:hidden text-[var(--text-strong)] p-3"
+          className="lg:hidden text-[var(--text-strong)] p-3"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isMenuOpen}
@@ -109,7 +109,7 @@ const Header = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="mobile-menu md:hidden"
+            className="mobile-menu lg:hidden"
             id="mobile-site-menu"
           >
             <nav className="section-container flex flex-col gap-1 py-4">

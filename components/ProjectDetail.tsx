@@ -7,6 +7,7 @@ import { Project } from '../data/projects';
 import { BOOK_CALL_URL } from '../data/site';
 import CaseStudyNav from './CaseStudyNav';
 import ProjectGallery from './ProjectGallery';
+import TechnologyLogo from './TechnologyLogo';
 
 interface ProjectDetailProps {
   project: Project;
@@ -145,8 +146,8 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
               className="card-glow p-6 md:p-7 text-center"
             >
               <item.icon className="mx-auto mb-3 text-[var(--accent)]" size={24} />
-              <h3 className="font-heading text-sm mb-2 text-[var(--text-strong)]">{item.label}</h3>
-              <p className="text-[var(--text-muted)] text-sm leading-relaxed">{item.value}</p>
+              <h3 className="font-heading text-base mb-2 text-[var(--text-strong)]">{item.label}</h3>
+              <p className="text-[var(--text-muted)] text-base leading-relaxed">{item.value}</p>
             </motion.div>
           ))}
         </div>
@@ -181,7 +182,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
             </div>
             <ul className="space-y-5">
               {project.solutions.map((solution, index) => (
-                <li key={index} className="flex items-start gap-3 text-[0.95rem] leading-[1.8] text-[var(--text-muted)]">
+                <li key={index} className="flex items-start gap-3 text-base md:text-[1.0625rem] leading-[1.8] text-[var(--text-muted)]">
                   <CheckCircle size={16} className="text-[var(--accent)] mt-1.5 shrink-0" />
                   {solution}
                 </li>
@@ -201,7 +202,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
             </div>
             <ul className="space-y-5">
               {project.technicalImplementation.map((item, index) => (
-                <li key={index} className="flex items-start gap-3 text-[0.95rem] leading-[1.8] text-[var(--text-muted)]">
+                <li key={index} className="flex items-start gap-3 text-base md:text-[1.0625rem] leading-[1.8] text-[var(--text-muted)]">
                   <CheckCircle size={16} className="text-[var(--accent)] mt-1.5 shrink-0" />
                   {item}
                 </li>
@@ -227,14 +228,14 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
             {project.architecture.components.map((component, index) => (
               <div key={index} className="flex items-start gap-3 p-4 md:p-5 rounded-lg border border-[var(--border)] bg-[var(--background)]">
                 <CheckCircle size={16} className="text-[var(--accent)] mt-1 shrink-0" />
-                <span className="text-[0.9rem] leading-[1.7] text-[var(--text-muted)]">{component}</span>
+                <span className="text-base leading-[1.7] text-[var(--text-muted)]">{component}</span>
               </div>
             ))}
           </div>
         </motion.div>
       </section>
 
-      <section className="section-container mb-20 md:mb-24">
+      <section id="technologies" className="section-container mb-20 md:mb-24">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -242,11 +243,14 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
           className="card-glow px-0 py-10 sm:px-6 md:p-12 lg:p-14"
         >
           <h2 className="text-2xl font-heading mb-6 text-[var(--text-strong)]">Technologies Used</h2>
-          <div className="flex flex-wrap gap-3">
+          <ul className="project-technology-list">
             {project.technologies.map((tech) => (
-              <span key={tech} className="tag">{tech}</span>
+              <li key={tech} className="project-technology-item">
+                <TechnologyLogo name={tech} size={32} />
+                <span>{tech}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </motion.div>
       </section>
 
@@ -264,7 +268,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
             </div>
             <ul className="space-y-4">
               {project.features.map((feature, index) => (
-                <li key={index} className="text-[0.95rem] leading-[1.8] text-[var(--text-muted)]">— {feature}</li>
+                <li key={index} className="text-base md:text-[1.0625rem] leading-[1.8] text-[var(--text-muted)]">— {feature}</li>
               ))}
             </ul>
           </motion.div>
@@ -281,7 +285,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
             </div>
             <ul className="space-y-5">
               {project.results.map((result, index) => (
-                <li key={index} className="flex items-start gap-3 text-[0.95rem] leading-[1.8] text-[var(--text-muted)]">
+                <li key={index} className="flex items-start gap-3 text-base md:text-[1.0625rem] leading-[1.8] text-[var(--text-muted)]">
                   <TrendingUp size={16} className="text-emerald-400 mt-1 shrink-0" />
                   {result}
                 </li>
