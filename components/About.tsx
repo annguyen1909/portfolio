@@ -50,46 +50,64 @@ export default function About() {
         </motion.div>
 
         <div className="profile-layout">
-          <motion.div
+          <motion.figure
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="profile-story"
+            className="profile-portrait"
           >
-            <p>
-              I build scalable web applications, service platforms, interactive 3D
-              experiences, and AI-integrated tools with a focus on performance and
-              clear architecture.
-            </p>
-            <p>
-              My recent work spans eVisa platforms with payment and operational
-              workflows, CRM and invoicing tools, lighting control software, and
-              WebGL experiences. I work across interface, API, data, and deployment.
-            </p>
-            <p>
-              I collaborate directly with clients and small teams, translating real
-              business constraints into software that remains understandable after launch.
-            </p>
-            <div className="profile-actions">
-              <a href="mailto:nguyentruongan0919@gmail.com" className="text-link">
-                <span>EMAIL ME</span><ArrowUpRight size={15} />
-              </a>
-              <a href="/AnNguyenResume.pdf" target="_blank" rel="noopener noreferrer" className="text-link text-link--muted">
-                <span>DOWNLOAD RESUME</span><Download size={15} />
-              </a>
-            </div>
-          </motion.div>
+            <Image
+              src="/profile/an-nguyen.jpg"
+              alt="An Nguyen smiling while working at a laptop"
+              width={682}
+              height={1024}
+              sizes="(max-width: 900px) 352px, (max-width: 1440px) 40vw, 480px"
+            />
+            <figcaption><span>AN NGUYEN</span><span>FULL-STACK ENGINEER</span></figcaption>
+          </motion.figure>
 
-          <motion.aside
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="profile-facts"
-          >
-            {details.map(([label, value]) => (
-              <div key={label}><span>{label}</span><p>{value}</p></div>
-            ))}
-          </motion.aside>
+          <div className="profile-copy">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="profile-story"
+            >
+              <p>
+                I build scalable web applications, service platforms, interactive 3D
+                experiences, and AI-integrated tools with a focus on performance and
+                clear architecture.
+              </p>
+              <p>
+                My recent work spans eVisa platforms with payment and operational
+                workflows, CRM and invoicing tools, lighting control software, and
+                WebGL experiences. I work across interface, API, data, and deployment.
+              </p>
+              <p>
+                I collaborate directly with clients and small teams, translating real
+                business constraints into software that remains understandable after launch.
+              </p>
+              <div className="profile-actions">
+                <a href="mailto:nguyentruongan0919@gmail.com" className="text-link">
+                  <span>EMAIL ME</span><ArrowUpRight size={15} />
+                </a>
+                <a href="/AnNguyenResume.pdf" target="_blank" rel="noopener noreferrer" className="text-link text-link--muted">
+                  <span>DOWNLOAD RESUME</span><Download size={15} />
+                </a>
+              </div>
+            </motion.div>
+
+            <motion.aside
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="profile-facts"
+            >
+              {details.map(([label, value]) => (
+                <div key={label}><span>{label}</span><p>{value}</p></div>
+              ))}
+            </motion.aside>
+          </div>
         </div>
 
         <div className="profile-stack" aria-labelledby="core-stack-title">

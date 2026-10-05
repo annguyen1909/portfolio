@@ -32,6 +32,7 @@ export default function ProjectMedia({ href, className, children }: { href: stri
       onBlur={() => { rotateX.set(0); rotateY.set(0); }}
     >
       {children}
+      <span className="work-media-frame" aria-hidden="true" />
     </MotionLink>
   );
 }

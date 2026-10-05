@@ -445,6 +445,69 @@ p, li { text-wrap: pretty; }
 
 .work-badges span:first-child { background: var(--accent); }
 
+/* Homepage work: a quiet inspection frame with precise corner accents. */
+.work-media-frame { display: none; }
+
+#projects :is(.flagship-work-media, .project-card-media) { --frame-inset: clamp(.75rem, 1.4vw, 1.25rem); }
+#projects :is(.flagship-work-media, .project-card-media)::before {
+  inset: var(--frame-inset);
+  border-color: rgba(194, 220, 255, .22);
+  transform: scale(1.015);
+  transition: opacity .3s ease, transform .5s cubic-bezier(.2,.7,.2,1);
+}
+
+#projects .work-media-frame {
+  position: absolute;
+  z-index: 2;
+  inset: var(--frame-inset);
+  display: block;
+  color: #bddbff;
+  background:
+    linear-gradient(currentColor, currentColor) top left / 1.4rem 1px,
+    linear-gradient(currentColor, currentColor) top left / 1px 1.4rem,
+    linear-gradient(currentColor, currentColor) top right / 1.4rem 1px,
+    linear-gradient(currentColor, currentColor) top right / 1px 1.4rem,
+    linear-gradient(currentColor, currentColor) bottom left / 1.4rem 1px,
+    linear-gradient(currentColor, currentColor) bottom left / 1px 1.4rem,
+    linear-gradient(currentColor, currentColor) bottom right / 1.4rem 1px,
+    linear-gradient(currentColor, currentColor) bottom right / 1px 1.4rem;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(1.015);
+  transition: opacity .3s ease, transform .5s cubic-bezier(.2,.7,.2,1);
+  pointer-events: none;
+}
+
+#projects :is(.flagship-work-media, .project-card-media)::after {
+  background:
+    radial-gradient(circle 16rem at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(74, 151, 255, .12), transparent 80%),
+    linear-gradient(transparent 55%, rgba(5, 8, 13, .6));
+}
+
+#projects :is(.flagship-work-media, .project-card-media):is(:hover, :focus-visible)::before,
+#projects :is(.flagship-work-media, .project-card-media):is(:hover, :focus-visible) .work-media-frame {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#projects .work-badges { top: calc(var(--frame-inset) + .65rem); left: calc(var(--frame-inset) + .65rem); }
+#projects .work-media-action {
+  right: calc(var(--frame-inset) + .65rem);
+  bottom: calc(var(--frame-inset) + .65rem);
+  gap: .85rem;
+  padding: .4rem .4rem .4rem .9rem;
+  border: 1px solid rgba(194, 220, 255, .25);
+  background: rgba(7, 13, 23, .78);
+  backdrop-filter: blur(12px);
+}
+#projects .work-media-action svg {
+  width: 2rem;
+  height: 2rem;
+  padding: .45rem;
+  background: rgba(112, 177, 255, .12);
+  color: #bddbff;
+}
+
 .flagship-work-copy {
   display: flex;
   flex-direction: column;
@@ -543,7 +606,13 @@ p, li { text-wrap: pretty; }
 .quote-item figcaption span { color: var(--text-subtle); font-size: .68rem; }
 
 /* Profile */
-.profile-layout { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(20rem, .85fr); gap: clamp(4rem, 9vw, 9rem); }
+.profile-layout { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); align-items: start; gap: clamp(3rem, 6vw, 6rem); }
+.profile-portrait { margin: 0; }
+.profile-portrait img { display: block; width: 100%; height: auto; }
+.profile-portrait figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem; border-bottom: 1px solid var(--border); padding: 1rem 0; font-size: .58rem; letter-spacing: .1em; color: var(--text-subtle); }
+.profile-portrait figcaption span:first-child { color: var(--text-strong); }
+.profile-copy { min-width: 0; }
+.profile-copy .profile-facts { margin-top: 3rem; }
 .profile-story { max-width: 43rem; }
 .profile-story > p { margin-bottom: 1.6rem; color: var(--text-muted); font-size: clamp(1rem, 1.5vw, 1.18rem); line-height: 1.8; }
 .profile-story > p:first-child { color: var(--text-strong); font-size: clamp(1.3rem, 2vw, 1.75rem); line-height: 1.55; }
@@ -767,6 +836,7 @@ footer h4 { letter-spacing: .12em; }
 @media (max-width: 900px) {
   .section-heading--row, .profile-layout, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
   .section-heading--row .section-subtitle { margin: 0; }
+  .profile-portrait { width: min(100%, 22rem); }
   .hero-copy { max-width: 46rem; }
   .hero-architecture { top: 15%; left: 35%; opacity: .55; mask-image: linear-gradient(90deg, transparent, #000 55%); }
   .hero-architecture:not(.hero-architecture--ready) { opacity: 0; }
