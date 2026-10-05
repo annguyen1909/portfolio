@@ -552,7 +552,16 @@ p, li { text-wrap: pretty; }
 .profile-facts > div { border-bottom: 1px solid var(--border); padding: 1.4rem 0; }
 .profile-facts span { display: block; margin-bottom: .5rem; color: var(--text-subtle); font-size: .6rem; letter-spacing: .12em; }
 .profile-facts p { color: var(--text-strong); font-size: .85rem; line-height: 1.65; }
-.profile-stack p { color: var(--text-muted); }
+.profile-stack { margin-top: clamp(3.5rem, 6vw, 5rem); }
+.profile-stack .section-label { margin-bottom: 1.25rem; }
+.technology-list { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); list-style: none; border-top: 1px solid var(--border); }
+.technology-item { display: flex; min-width: 0; flex-direction: column; align-items: center; gap: 1rem; border-bottom: 1px solid var(--border); padding: 1.75rem .75rem; transition: background .25s ease; }
+.technology-item:hover { background: rgba(153, 184, 219, .04); }
+.technology-logo { width: 2.5rem; height: 2.5rem; object-fit: contain; transition: transform .25s ease; }
+.technology-logo--monochrome { filter: brightness(0) invert(1); }
+.technology-item:hover .technology-logo { transform: translateY(-3px); }
+.technology-item span { color: var(--text-muted); font-size: .78rem; font-weight: 500; transition: color .25s ease; }
+.technology-item:hover span { color: var(--text-strong); }
 
 /* Contact */
 .contact-section { padding-bottom: 6rem; background: #05080d; }
@@ -749,6 +758,7 @@ footer h4 { letter-spacing: .12em; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.22); }
 
 @media (max-width: 1180px) {
+  .technology-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .hero-scroll { right: 2rem; }
   .hero-architecture { left: 43%; }
   .hero-architecture-caption { right: 8%; left: 24%; }
@@ -776,6 +786,9 @@ footer h4 { letter-spacing: .12em; }
 }
 
 @media (max-width: 680px) {
+  .technology-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .technology-item { flex-direction: row; justify-content: flex-start; gap: .85rem; padding: 1.25rem .5rem; }
+  .technology-logo { width: 2rem; height: 2rem; }
   html { scroll-padding-top: 70px; }
   .site-header { padding-block: 1.2rem; }
   .hero-inner { padding-top: 7rem; padding-bottom: 5rem; }
@@ -812,6 +825,7 @@ footer h4 { letter-spacing: .12em; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .project-card-image, .gallery-trigger img { transform: none !important; }
+  .technology-item:hover .technology-logo { transform: none; }
   .hero-architecture { display: none; }
   .project-card-media, .flagship-work-media { transform: none !important; }
   .process-row h3 { color: var(--text-strong); }

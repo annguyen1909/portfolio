@@ -1,11 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ArrowUpRight, Download } from "lucide-react";
 
 const technologies = [
-  "React", "TypeScript", "Next.js", "Node.js", "PostgreSQL", "Prisma",
-  "Three.js", "TailwindCSS", "Vite.js", "Python", "C++",
+  { name: "React", icon: "react" },
+  { name: "Next.js", icon: "nextjs" },
+  { name: "TypeScript", icon: "typescript" },
+  { name: "JavaScript", icon: "javascript" },
+  { name: "HTML", icon: "html5" },
+  { name: "CSS", icon: "css3" },
+  { name: "Tailwind CSS", icon: "tailwindcss" },
+  { name: "Node.js", icon: "nodejs" },
+  { name: "PostgreSQL", icon: "postgresql" },
+  { name: "Prisma", icon: "prisma", monochrome: true },
+  { name: "Three.js", icon: "threejs", monochrome: true },
+  { name: "Vite.js", icon: "vitejs" },
+  { name: "Python", icon: "python" },
+  { name: "C++", icon: "cplusplus" },
 ];
 
 const details = [
@@ -76,11 +89,25 @@ export default function About() {
             {details.map(([label, value]) => (
               <div key={label}><span>{label}</span><p>{value}</p></div>
             ))}
-            <div className="profile-stack">
-              <span>CORE STACK</span>
-              <p>{technologies.join(" · ")}</p>
-            </div>
           </motion.aside>
+        </div>
+
+        <div className="profile-stack" aria-labelledby="core-stack-title">
+          <h3 id="core-stack-title" className="section-label">CORE STACK</h3>
+          <ul className="technology-list">
+            {technologies.map((technology) => (
+              <li key={technology.icon} className="technology-item">
+                <Image
+                  src={`/technologies/${technology.icon}.svg`}
+                  alt=""
+                  width={40}
+                  height={40}
+                  className={`technology-logo${technology.monochrome ? " technology-logo--monochrome" : ""}`}
+                />
+                <span>{technology.name}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
