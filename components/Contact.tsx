@@ -39,12 +39,12 @@ export default function Contact() {
     <section id="contact" className="section-padding editorial-section contact-section">
       <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="contact-heading"
         >
-          <p className="section-label">06 / Contact</p>
+          <p className="section-label">05 / Contact</p>
           <h2>
             <span>LET&apos;S MAKE</span>
             <span>SOMETHING</span>
@@ -53,7 +53,7 @@ export default function Contact() {
         </motion.div>
 
         <div className="contact-layout">
-          <motion.aside initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="contact-details">
+          <motion.aside initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="contact-details">
             <p>Have a product, platform, or operational problem to solve? Send the context and I&apos;ll get back to you.</p>
             <a href="mailto:nguyentruongan0919@gmail.com" className="contact-line">
               <span>EMAIL</span><strong>nguyentruongan0919@gmail.com</strong><ArrowUpRight size={16} />
@@ -68,7 +68,7 @@ export default function Contact() {
             </div>
           </motion.aside>
 
-          <motion.form initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} onSubmit={handleSubmit} className="contact-form" aria-busy={status === 'sending'}>
+          <motion.form initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} onSubmit={handleSubmit} className="contact-form" aria-busy={status === 'sending'}>
             <div aria-live="polite" aria-atomic="true">
               <AnimatePresence mode="wait">
                 {(status === 'success' || status === 'error') && (
@@ -86,11 +86,11 @@ export default function Contact() {
             </div>
 
             <div className="form-row">
-              <label><span>01 / NAME</span><input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Your name" /></label>
-              <label><span>02 / EMAIL</span><input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="you@email.com" /></label>
+              <label><span>01 / NAME</span><input type="text" name="name" autoComplete="name" maxLength={120} disabled={status === 'sending'} value={formData.name} onChange={handleChange} required placeholder="Your name" /></label>
+              <label><span>02 / EMAIL</span><input type="email" name="email" autoComplete="email" maxLength={254} disabled={status === 'sending'} value={formData.email} onChange={handleChange} required placeholder="you@email.com" /></label>
             </div>
-            <label><span>03 / PROJECT TYPE</span><input type="text" name="subject" value={formData.subject} onChange={handleChange} required placeholder="Platform, CRM, interactive web..." /></label>
-            <label><span>04 / MESSAGE</span><textarea name="message" value={formData.message} onChange={handleChange} required rows={5} placeholder="Scope, timeline, and useful context" /></label>
+            <label><span>03 / PROJECT TYPE</span><input type="text" name="subject" maxLength={200} disabled={status === 'sending'} value={formData.subject} onChange={handleChange} required placeholder="Platform, CRM, interactive web..." /></label>
+            <label><span>04 / MESSAGE</span><textarea name="message" maxLength={5000} disabled={status === 'sending'} value={formData.message} onChange={handleChange} required rows={5} placeholder="Scope, timeline, and useful context" /></label>
             <button type="submit" disabled={status === 'sending'} className="submit-link">
               <span>{status === 'sending' ? 'SENDING...' : 'SEND MESSAGE'}</span>
               {status === 'sending' ? <LoaderCircle size={17} className="submit-spinner" aria-hidden="true" /> : <Send size={16} aria-hidden="true" />}

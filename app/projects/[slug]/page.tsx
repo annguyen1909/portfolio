@@ -42,10 +42,12 @@ export default async function ProjectPage({
   }
 
   return (
-    <main className="min-h-screen">
+    <>
       <Header />
-      <ProjectDetail project={project} />
+      <main id="main-content" tabIndex={-1} className="min-h-screen">
+        <ProjectDetail project={project} />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

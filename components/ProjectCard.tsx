@@ -3,8 +3,10 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Globe } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Project } from "../data/projects";
 import ProjectMedia from "./ProjectMedia";
+import { getProjectCategory } from "../data/project-categories";
 
 type ProjectCardProps = {
   project: Project;
@@ -27,7 +29,7 @@ const ProjectCard = ({ project, index = 0, compact = false }: ProjectCardProps) 
       initial={reduceMotion ? false : { opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       exit={reduceMotion ? undefined : { opacity: 0, scale: 0.985 }}
-      transition={{ duration: 0.45, delay: index * 0.05, layout: { duration: 0.35 } }}
+      transition={{ duration: 0.45, delay: Math.min(index, 3) * 0.04, layout: { duration: 0.35 } }}
       viewport={{ once: true }}
       className={`project-card group ${compact ? "project-card--compact" : ""}`}
     >
@@ -36,10 +38,12 @@ const ProjectCard = ({ project, index = 0, compact = false }: ProjectCardProps) 
         className="project-card-media"
       >
         {project.image ? (
-          <img
+          <Image
             src={project.image}
             alt={project.title}
             className="project-card-image"
+            fill
+            sizes="(max-width: 680px) 100vw, (max-width: 1280px) 50vw, 600px"
           />
         ) : (
           <span className="text-2xl font-heading text-[var(--text-muted)]">
@@ -47,11 +51,11 @@ const ProjectCard = ({ project, index = 0, compact = false }: ProjectCardProps) 
           </span>
         )}
         <div className="work-badges">
-          <span>{project.category.toUpperCase()}</span>
+          <span>{getProjectCategory(project)}</span>
           {project.isProduction && (
             <span className="flex items-center gap-1">
               <Globe size={10} />
-              LIVE
+              PRODUCTION
             </span>
           )}
         </div>
@@ -64,14 +68,15 @@ const ProjectCard = ({ project, index = 0, compact = false }: ProjectCardProps) 
           <span>{project.year}</span>
         </div>
         <Link href={`/projects/${project.slug}`}><h3>{project.title}</h3></Link>
+        <p className="work-role">{project.role}</p>
         <p>{project.businessImpact}</p>
-        <div className="project-card-metric">
+        {project.keyMetric.value.toLowerCase() !== 'live' && <div className="project-card-metric">
           <strong>{project.keyMetric.value}</strong>
           <span>
             {project.keyMetric.label}
             {project.keyMetric.estimated && " (est.)"}
           </span>
-        </div>
+        </div>}
         <div className="project-card-actions">
           <Link href={`/projects/${project.slug}`} className="text-link"><span>CASE STUDY</span><ArrowUpRight size={14} /></Link>
           {liveHref && (

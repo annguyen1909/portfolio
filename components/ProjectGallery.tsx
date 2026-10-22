@@ -3,6 +3,16 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Maximize2, X, ZoomIn, ZoomOut } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+
+const captions: Record<string, string> = {
+  '/projects/united-evisa/gallery-1.jpg': 'Guided application with destination, traveler details, and an order summary.',
+  '/projects/united-evisa/gallery-2.jpg': 'Pricing page with a destination fee lookup and service fee breakdown.',
+  '/projects/wildlifedb/species-profile.png': 'Species profile — photography, structured facts, and reference content.',
+  '/projects/wildlifedb/dataset.png': 'Open dataset — downloadable species records in CSV and JSON.',
+  '/projects/visualennode/works.png': 'The studio portfolio, connecting still imagery and cinematic work.',
+  '/projects/visualennode/image-gallery.png': 'Still-image portfolio with architectural work as the focus.',
+};
 
 export default function ProjectGallery({ images, title }: { images: string[]; title: string }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -49,10 +59,10 @@ export default function ProjectGallery({ images, title }: { images: string[]; ti
               onClick={() => { lastTrigger.current = index; setIsZoomed(false); setActiveIndex(index); }}
               aria-label={`Open ${title} image ${index + 1} of ${images.length}`}
             >
-              <img src={image} alt={`${title} screenshot ${index + 1}`} />
+              <Image src={image} alt={captions[image] ?? `${title} screenshot ${index + 1}`} fill sizes="(max-width: 680px) 100vw, 50vw" />
               <span className="gallery-open-hint" aria-hidden="true">VIEW IMAGE <Maximize2 size={16} /></span>
             </button>
-            <figcaption>{String(index + 1).padStart(2, '0')} / {title}</figcaption>
+            <figcaption><span>{String(index + 1).padStart(2, '0')}</span>{captions[image] ?? `${title} / Screen ${index + 1}`}</figcaption>
           </motion.figure>
         ))}
       </div>

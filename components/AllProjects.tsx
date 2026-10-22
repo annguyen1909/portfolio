@@ -1,108 +1,46 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { ArrowRight, Search } from 'lucide-react';
+import { ArrowRight, Search, X } from 'lucide-react';
 import Link from 'next/link';
-import { publicProjects } from '../data/projects';
+import { orderedProjects, projectCategories } from '../data/portfolio';
 import ProjectCard from './ProjectCard';
+import { getProjectCategory } from '../data/project-categories';
 
-const categories = ["All", ...new Set(publicProjects.map(project => project.category))];
-
-const AllProjects = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const filteredProjects = publicProjects.filter(project => {
-    const matchesCategory = selectedCategory === "All" || project.category === selectedCategory;
-    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.businessImpact.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
+export default function AllProjects() {
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchTerm, setSearchTerm] = useState('');
+  const query = searchTerm.trim().toLowerCase();
+  const filteredProjects = orderedProjects.filter(project =>
+    (selectedCategory === 'All' || getProjectCategory(project) === selectedCategory) &&
+    [project.title, project.businessImpact, ...project.technologies].some(value => value.toLowerCase().includes(query))
+  );
+  const hasFilters = selectedCategory !== 'All' || searchTerm !== '';
+  const clearFilters = () => { setSelectedCategory('All'); setSearchTerm(''); };
 
   return (
-    <div className="min-h-screen pt-24 bg-[var(--background)]">
+    <div className="work-index">
       <section className="section-container section-padding !pt-12">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="section-heading"
-        >
-          <p className="section-label">All work / {publicProjects.length} projects</p>
-          <h1 className="section-title">ALL CASE<br /><span>STUDIES.</span></h1>
-          <p className="section-subtitle">
-            Production systems across eVisa, content and data, CRM, IoT, 3D, and AI — each with documented
-            problem, solution, architecture, and outcomes.
-          </p>
-        </motion.div>
-
-        <div className="flex flex-col lg:flex-row gap-8 lg:items-end mb-10 border-b border-[var(--border)] pb-5">
-          <div className="relative flex-1 max-w-md">
-            <label htmlFor="project-search" className="sr-only">Search case studies and technologies</label>
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" size={18} />
-            <input
-              id="project-search"
-              type="search"
-              placeholder="Search case studies, technologies..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="input-field !pl-10 !pb-3"
-            />
-          </div>
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Filter case studies by category">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                aria-pressed={selectedCategory === category}
-                className={`tag cursor-pointer transition-colors ${
-                  selectedCategory === category ? 'tag-active' : 'hover:border-[var(--border-hover)]'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
+        <div className="section-heading section-heading--row">
+          <div><p className="section-label">The archive / {orderedProjects.length} case studies</p><h1 className="section-title">ALL CASE<br /><span>STUDIES.</span></h1></div>
+          <p className="section-subtitle">From public platforms to the tools behind daily operations. Explore the context, decisions, and implementation behind each project.</p>
         </div>
 
-        <p className="text-sm text-[var(--text-muted)] mb-8" role="status" aria-live="polite">
-          Showing {filteredProjects.length} of {publicProjects.length} case studies
-          {searchTerm && ` for "${searchTerm}"`}
-        </p>
-
-        <div className="project-grid">
-          <AnimatePresence initial={false}>
-            {filteredProjects.map((project, index) => (
-              <ProjectCard key={project.slug} project={project} index={index} compact />
-            ))}
-          </AnimatePresence>
+        <div className="work-filters">
+          <div className="work-search">
+            <label htmlFor="project-search">Find a project</label>
+            <div><Search size={18} aria-hidden="true" /><input id="project-search" type="search" placeholder="Name or technology…" value={searchTerm} onChange={event => setSearchTerm(event.target.value)} /></div>
+          </div>
+          <div className="work-filter-select"><label htmlFor="project-category">Type of work</label><select id="project-category" value={selectedCategory} onChange={event => setSelectedCategory(event.target.value)}><option value="All">All projects ({orderedProjects.length})</option>{projectCategories.map(category => <option key={category} value={category}>{category} ({orderedProjects.filter(project => getProjectCategory(project) === category).length})</option>)}</select></div>
         </div>
-
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-20">
-            <h3 className="text-xl font-heading text-[var(--text-strong)] mb-2">No case studies found</h3>
-            <p className="text-[var(--text-muted)] mb-6">Try adjusting your search or filters.</p>
-            <button
-              onClick={() => { setSearchTerm(""); setSelectedCategory("All"); }}
-              className="btn-secondary"
-            >
-              Clear Filters
-            </button>
-          </div>
-        )}
-
-        {filteredProjects.length > 0 && (
-          <div className="section-end-link">
-            <Link href="/#contact" className="text-link">
-              <span>START A PROJECT</span><ArrowRight size={15} />
-            </Link>
-          </div>
-        )}
+        <div className="work-filter-status">
+          <p role="status" aria-live="polite">Showing {filteredProjects.length} of {orderedProjects.length} case studies{selectedCategory !== 'All' && ` · ${selectedCategory}`}{query && ` · “${searchTerm.trim()}”`}</p>
+          {hasFilters && <button type="button" onClick={clearFilters}>Clear filters <X size={16} /></button>}
+        </div>
+        <div className="project-grid work-archive-grid">{filteredProjects.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} compact />)}</div>
+        {filteredProjects.length === 0 && <div className="work-empty"><h2>No matching projects.</h2><p>Try another name, technology, or type of work.</p><button type="button" className="text-link" onClick={clearFilters}>Show all projects <ArrowRight size={16} /></button></div>}
+        <div className="section-end-link"><Link href="/#contact" className="text-link">Start a project <ArrowRight size={16} /></Link></div>
       </section>
     </div>
   );
-};
-
-export default AllProjects;
+}

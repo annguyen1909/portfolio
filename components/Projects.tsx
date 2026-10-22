@@ -1,15 +1,17 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Globe } from 'lucide-react';
 import Link from 'next/link';
-import { getFeaturedProjects } from '../data/projects';
+import Image from 'next/image';
+import { selectedProjects } from '../data/portfolio';
 import ProjectCard from './ProjectCard';
 import ProjectMedia from './ProjectMedia';
 
 const Projects = () => {
-  const projects = getFeaturedProjects(8);
-  const flagship = projects.find(p => p.featured) ?? projects[0];
+  const reduceMotion = useReducedMotion();
+  const projects = selectedProjects;
+  const flagship = projects[0];
   const flagshipSlug = flagship?.slug;
   const visibleProjects = projects.filter(project => project.slug !== flagshipSlug);
 
@@ -17,7 +19,7 @@ const Projects = () => {
     <section id="projects" className="section-padding editorial-section">
       <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
@@ -26,30 +28,33 @@ const Projects = () => {
           <p className="section-label">02 / Selected work</p>
           <h2 className="section-title">PRODUCTION<br /><span>WORK.</span></h2>
           <p className="section-subtitle">
-            Selected systems designed, built, and shipped for real operations.
+            Four perspectives on my work: production platforms, independent products,
+            studio websites, and operational tools.
           </p>
         </motion.div>
 
         {flagship && (
           <motion.article
-            initial={{ opacity: 0, y: 24 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
             className="flagship-work group"
           >
             <ProjectMedia href={`/projects/${flagship.slug}`} className="flagship-work-media">
-                <img
+                <Image
                   src={flagship.image}
                   alt={flagship.title}
                   className="project-card-image"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 65vw"
                 />
                 <div className="work-badges">
                   <span>FEATURED</span>
                   {flagship.isProduction && (
                     <span className="flex items-center gap-1">
                       <Globe size={10} />
-                      LIVE
+                      PRODUCTION
                     </span>
                   )}
                 </div>
@@ -58,6 +63,7 @@ const Projects = () => {
             <div className="flagship-work-copy">
               <div><span>01</span><span>{flagship.year}</span></div>
               <h3>{flagship.title}</h3>
+              <p className="work-role">{flagship.role}</p>
               <p>{flagship.businessImpact}</p>
               <Link href={`/projects/${flagship.slug}`} className="text-link">
                 <span>VIEW CASE STUDY</span><ArrowRight size={16} />
@@ -73,7 +79,7 @@ const Projects = () => {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}

@@ -1,13 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { ArrowUpRight, Download } from "lucide-react";
 import TechnologyLogo from "./TechnologyLogo";
 
 const technologies = [
-  "React", "Next.js", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind CSS",
-  "Node.js", "PostgreSQL", "Prisma", "Three.js", "Vite.js", "Python", "C++",
+  "React", "Next.js", "TypeScript", "Tailwind CSS",
+  "Node.js", "PostgreSQL", "Prisma", "Three.js",
 ];
 
 const details = [
@@ -18,18 +18,19 @@ const details = [
 ];
 
 export default function About() {
+  const reduceMotion = useReducedMotion();
   return (
     <section id="about" className="section-padding editorial-section editorial-section--soft">
       <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
           className="section-heading section-heading--row"
         >
           <div>
-            <p className="section-label">05 / Profile</p>
+            <p className="section-label">04 / Profile</p>
             <h2 className="section-title">AN<br /><span>NGUYEN.</span></h2>
           </div>
           <p className="section-subtitle">
@@ -40,7 +41,7 @@ export default function About() {
 
         <div className="profile-layout">
           <motion.figure
-            initial={{ opacity: 0, y: 24 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="profile-portrait"
@@ -57,24 +58,19 @@ export default function About() {
 
           <div className="profile-copy">
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="profile-story"
             >
               <p>
-                I build scalable web applications, service platforms, interactive 3D
-                experiences, and AI-integrated tools with a focus on performance and
-                clear architecture.
+                I build web platforms and operational tools, working across the
+                interface, API, data, and deployment.
               </p>
               <p>
                 My recent work spans eVisa platforms with payment and operational
                 workflows, CRM and invoicing tools, lighting control software, and
-                WebGL experiences. I work across interface, API, data, and deployment.
-              </p>
-              <p>
-                I collaborate directly with clients and small teams, translating real
-                business constraints into software that remains understandable after launch.
+                WebGL experiences.
               </p>
               <div className="profile-actions">
                 <a href="mailto:nguyentruongan0919@gmail.com" className="text-link">
@@ -87,7 +83,7 @@ export default function About() {
             </motion.div>
 
             <motion.aside
-              initial={{ opacity: 0, y: 24 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="profile-facts"

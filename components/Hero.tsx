@@ -4,7 +4,8 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, ArrowRight, Calendar } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { BOOK_CALL_URL, portfolioStats } from "../data/site";
+import { BOOK_CALL_URL } from "../data/site";
+import { portfolioStats } from "../data/portfolio";
 import type { ArchitectureInput } from "./HeroArchitecture";
 
 const HeroArchitecture = dynamic(() => import("./HeroArchitecture"), { ssr: false });

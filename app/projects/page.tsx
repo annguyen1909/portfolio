@@ -9,10 +9,12 @@ export const metadata = {
 
 export default function ProjectsPage() {
   return (
-    <main className="min-h-screen">
+    <>
       <Header />
-      <AllProjects />
+      <main id="main-content" tabIndex={-1} className="min-h-screen">
+        <AllProjects />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

@@ -17,11 +17,11 @@ const Footer = () => {
 
   const quickLinks = [
     { name: 'Case Studies', href: '#projects' },
-    { name: 'Results', href: '#proof' },
+    { name: 'All Projects', href: '/projects' },
     { name: 'About', href: '#about' },
     { name: 'Start a Project', href: '#contact' },
   ];
-  const resolveHref = (href: string) => pathname === '/' ? href : `/${href}`;
+  const resolveHref = (href: string) => href.startsWith('#') && pathname !== '/' ? `/${href}` : href;
 
   return (
     <footer className="relative border-t border-[var(--border)] bg-[var(--background)]">
@@ -78,7 +78,7 @@ const Footer = () => {
 
       {showScrollTop && (
         <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })}
           className="fixed bottom-8 right-8 flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:border-[var(--border-hover)] hover:shadow-[0_0_20px_rgba(255,255,255,0.06)] transition-all z-50"
           aria-label="Scroll to top"
         >

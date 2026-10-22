@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import Link from 'next/link';
@@ -18,6 +18,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const menuButton = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
@@ -54,7 +55,10 @@ const Header = () => {
   useEffect(() => {
     if (!isMenuOpen) return;
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setIsMenuOpen(false);
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false);
+        menuButton.current?.focus();
+      }
     };
     window.addEventListener('keydown', closeOnEscape);
     return () => window.removeEventListener('keydown', closeOnEscape);
@@ -65,6 +69,7 @@ const Header = () => {
 
   return (
     <>
+      <a href="#main-content" className="skip-link">Skip to content</a>
       <header className={`site-header ${scrolled ? 'site-header--scrolled' : ''}`}>
         <div className="section-container flex items-center justify-between">
         <Link
@@ -92,6 +97,7 @@ const Header = () => {
         </nav>
 
         <button
+          ref={menuButton}
           className="lg:hidden text-[var(--text-strong)] p-3"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
@@ -105,10 +111,10 @@ const Header = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
+            initial={reduceMotion ? false : { opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
+            transition={{ duration: reduceMotion ? 0 : 0.25, ease: 'easeOut' }}
             className="mobile-menu lg:hidden"
             id="mobile-site-menu"
           >

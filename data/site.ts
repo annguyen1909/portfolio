@@ -1,74 +1,19 @@
-export interface SiteMetric {
-  value: string;
-  label: string;
-  description: string;
-  estimated?: boolean;
-}
-
-export interface PortfolioStat {
-  value: string;
-  label: string;
-}
-
-export const portfolioStats: PortfolioStat[] = [
-  { value: "12", label: "Shipped Projects" },
-  { value: "10", label: "Live Projects" },
-  { value: "7", label: "eVisa Platforms" },
-];
-
-export const siteMetrics: SiteMetric[] = [
-  {
-    value: "10",
-    label: "Live Projects",
-    description: "Case-study projects with a public production experience.",
-  },
-  {
-    value: "7",
-    label: "eVisa Platforms",
-    description: "Full-stack visa systems with payments, admin tools, and application workflows.",
-  },
-  {
-    value: "3",
-    label: "Venue Installations",
-    description: "Lighting control systems built for restaurant and resort venues.",
-  },
-  {
-    value: "2",
-    label: "Ops / CRM Builds",
-    description: "Order, inventory, and invoicing systems for rental and retail workflows.",
-  },
-];
-
 export const clientDeliverables = [
   {
-    title: "Production-Ready Systems",
-    description:
-      "Deployed platforms with real users — payment flows, admin dashboards, and day-to-day operations.",
+    title: "Define the scope",
+    description: "Start with the workflow, constraints, and the people using the product. Agree on what the first release needs to do.",
   },
   {
-    title: "End-to-End Ownership",
-    description:
-      "Architecture, frontend, backend, integrations, and deployment handled by one engineer.",
+    title: "Shape the experience",
+    description: "Map the key journeys and data, then work through the interface before committing to the implementation.",
   },
   {
-    title: "Business-First Engineering",
-    description:
-      "Technical decisions tied to reliability, clarity, and what the product actually needs to do.",
+    title: "Build and review",
+    description: "Develop in working increments. Review the actual product together, from the interface to integrations and edge cases.",
   },
   {
-    title: "Clear Communication",
-    description:
-      "Regular updates, documented decisions, and no surprises at launch.",
-  },
-  {
-    title: "Scalable Architecture",
-    description:
-      "Systems structured to grow with the product — not throwaway MVPs.",
-  },
-  {
-    title: "Direct Collaboration",
-    description:
-      "Work directly with me — no agency layers or handoffs between teams.",
+    title: "Launch and hand over",
+    description: "Check the production flows, document the decisions, and hand over a system the team can operate after launch.",
   },
 ];
 

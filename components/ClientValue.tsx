@@ -33,7 +33,7 @@ const ClientValue = () => {
           className="section-heading section-heading--row"
         >
           <div>
-            <p className="section-label">04 / Working together</p>
+            <p className="section-label">03 / Working together</p>
             <h2 className="section-title">HOW I<br /><span>WORK.</span></h2>
           </div>
           <p className="section-subtitle">

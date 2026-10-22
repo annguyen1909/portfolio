@@ -6,9 +6,9 @@ const sections = [
   { id: 'overview', label: 'Overview' },
   { id: 'problem', label: 'Problem' },
   { id: 'solution', label: 'Solution' },
+  { id: 'gallery', label: 'Screens' },
   { id: 'architecture', label: 'Architecture' },
   { id: 'outcomes', label: 'Outcomes' },
-  { id: 'gallery', label: 'Gallery' },
 ];
 
 export default function CaseStudyNav({ hasGallery }: { hasGallery: boolean }) {
@@ -27,7 +27,7 @@ export default function CaseStudyNav({ hasGallery }: { hasGallery: boolean }) {
         const current = [...items].reverse().find(item => visibleSections.has(item.id));
         if (current) setActiveSection(current.id);
       },
-      { rootMargin: '-120px 0px -260px 0px' }
+      { rootMargin: '-160px 0px -25% 0px' }
     );
     items.forEach(item => {
       const section = document.getElementById(item.id);
